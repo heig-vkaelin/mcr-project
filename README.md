@@ -1,10 +1,10 @@
 # Donini is stuck in traffic
 
-## Autheurs
-- Maxime Schwarath
+## Auteurs
+- Maxime Scharwath
 - Nicolas Crausaz
 - Valentin Kaelin
-- Lazar Pizzaceivc
+- Lazar Pavicevic
 - Jonathan Friedli
 
 ## Contexte
