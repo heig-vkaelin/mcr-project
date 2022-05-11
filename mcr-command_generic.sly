@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
+<classDiagram>
+  <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="MCR - Command">
+    <dependency id="2461" label="instancie et lie une commande">
+      <source>2460</source>
+      <target>2435</target>
+    </dependency>
+    <dependency id="2462" label="instancie">
+      <source>2460</source>
+      <target>2438</target>
+    </dependency>
+    <dependency id="2693" label="interagit avec">
+      <source>2460</source>
+      <target>2437</target>
+    </dependency>
+    <inheritance id="2449">
+      <child>2438</child>
+      <parent>2436</parent>
+    </inheritance>
+    <association aggregation="AGGREGATE" direction="FIRST_TO_SECOND" id="2440" name="">
+      <role componentId="2435" name="" visibility="PRIVATE">
+        <multiplicity>
+          <min>2147483647</min>
+          <max>2147483647</max>
+        </multiplicity>
+      </role>
+      <role componentId="2436" name="" visibility="PRIVATE">
+        <multiplicity>
+          <min>1</min>
+          <max>1</max>
+        </multiplicity>
+      </role>
+    </association>
+    <association aggregation="NONE" direction="FIRST_TO_SECOND" id="2492" name="">
+      <role componentId="2438" name="" visibility="PRIVATE">
+        <multiplicity>
+          <min>2147483647</min>
+          <max>2147483647</max>
+        </multiplicity>
+      </role>
+      <role componentId="2437" name="receiver" visibility="PRIVATE">
+        <multiplicity>
+          <min>1</min>
+          <max>1</max>
+        </multiplicity>
+      </role>
+    </association>
+    <entity entityType="CLASS" id="2435" isAbstract="false" name="Invoker" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="setCommand" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="command" type="Command"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="executeCommand" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="2436" isAbstract="true" name="Command" visibility="PUBLIC">
+      <method isAbstract="true" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="2437" isAbstract="false" name="Receiver" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="action" returnType="void" view="NAME" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="2438" isAbstract="false" name="CommandA" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="etat" type="..." visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="2460" isAbstract="false" name="&quot;Client&quot;" visibility="PUBLIC"/>
+  </diagramElements>
+  <umlView grid="10" name="Main view" open="true">
+    <relationView color="-12566464" relationId="2492">
+      <line>
+        <point>
+          <x>741</x>
+          <y>271</y>
+        </point>
+        <point>
+          <x>531</x>
+          <y>271</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>640</x>
+        <y>275</y>
+        <w>0</w>
+        <h>16</h>
+      </labelAssociation>
+      <roleAssociation>
+        <x>735</x>
+        <y>275</y>
+        <w>0</w>
+        <h>16</h>
+      </roleAssociation>
+      <roleAssociation>
+        <x>588</x>
+        <y>250</y>
+        <w>56</w>
+        <h>16</h>
+      </roleAssociation>
+      <multipliciteAssociation>
+        <x>727</x>
+        <y>249</y>
+        <w>7</w>
+        <h>16</h>
+      </multipliciteAssociation>
+      <multipliciteAssociation>
+        <x>535</x>
+        <y>249</y>
+        <w>8</w>
+        <h>16</h>
+      </multipliciteAssociation>
+    </relationView>
+    <relationView color="-12566464" relationId="2440">
+      <line>
+        <point>
+          <x>611</x>
+          <y>101</y>
+        </point>
+        <point>
+          <x>741</x>
+          <y>101</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>680</x>
+        <y>105</y>
+        <w>0</w>
+        <h>16</h>
+      </labelAssociation>
+      <roleAssociation>
+        <x>615</x>
+        <y>105</y>
+        <w>0</w>
+        <h>16</h>
+      </roleAssociation>
+      <roleAssociation>
+        <x>705</x>
+        <y>105</y>
+        <w>0</w>
+        <h>16</h>
+      </roleAssociation>
+      <multipliciteAssociation>
+        <x>618</x>
+        <y>79</y>
+        <w>7</w>
+        <h>16</h>
+      </multipliciteAssociation>
+      <multipliciteAssociation>
+        <x>727</x>
+        <y>79</y>
+        <w>8</w>
+        <h>16</h>
+      </multipliciteAssociation>
+    </relationView>
+    <relationView color="-12566464" relationId="2449">
+      <line>
+        <point>
+          <x>821</x>
+          <y>251</y>
+        </point>
+        <point>
+          <x>821</x>
+          <y>151</y>
+        </point>
+      </line>
+    </relationView>
+    <relationView color="-12566464" relationId="2693">
+      <line>
+        <point>
+          <x>161</x>
+          <y>226</y>
+        </point>
+        <point>
+          <x>161</x>
+          <y>301</y>
+        </point>
+        <point>
+          <x>381</x>
+          <y>301</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>236</x>
+        <y>307</y>
+        <w>87</w>
+        <h>16</h>
+      </labelAssociation>
+    </relationView>
+    <relationView color="-12566464" relationId="2462">
+      <line>
+        <point>
+          <x>141</x>
+          <y>226</y>
+        </point>
+        <point>
+          <x>141</x>
+          <y>391</y>
+        </point>
+        <point>
+          <x>801</x>
+          <y>391</y>
+        </point>
+        <point>
+          <x>801</x>
+          <y>336</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>224</x>
+        <y>367</y>
+        <w>57</w>
+        <h>16</h>
+      </labelAssociation>
+    </relationView>
+    <relationView color="-12566464" relationId="2461">
+      <line>
+        <point>
+          <x>181</x>
+          <y>181</y>
+        </point>
+        <point>
+          <x>321</x>
+          <y>111</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>79</x>
+        <y>115</y>
+        <w>192</w>
+        <h>16</h>
+      </labelAssociation>
+    </relationView>
+    <componentView color="-2079" componentID="2460" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>30</x>
+        <y>170</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="2438" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>740</x>
+        <y>250</y>
+        <w>150</w>
+        <h>85</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="2437" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>380</x>
+        <y>250</y>
+        <w>150</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="2436" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>740</x>
+        <y>80</y>
+        <w>150</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="2435" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>320</x>
+        <y>80</y>
+        <w>290</w>
+        <h>85</h>
+      </geometry>
+    </componentView>
+    <note color="-2079" content="Par exemple, un bouton">
+      <noteGeometry>
+        <x>260</x>
+        <y>20</y>
+        <w>100</w>
+        <h>45</h>
+      </noteGeometry>
+      <noteLine color="-12566464" relationId="2435">
+        <point>
+          <x>311</x>
+          <y>66</y>
+        </point>
+        <point>
+          <x>321</x>
+          <y>81</y>
+        </point>
+      </noteLine>
+    </note>
+    <note color="-2079" content="Interface ou classe abstraite">
+      <noteGeometry>
+        <x>1020</x>
+        <y>90</y>
+        <w>100</w>
+        <h>60</h>
+      </noteGeometry>
+      <noteLine color="-12566464" relationId="2436">
+        <point>
+          <x>1021</x>
+          <y>91</y>
+        </point>
+        <point>
+          <x>891</x>
+          <y>91</y>
+        </point>
+      </noteLine>
+    </note>
+    <note color="-2079" content="Commandes concrètes, recoivent leur etat lors de la construction">
+      <noteGeometry>
+        <x>950</x>
+        <y>280</y>
+        <w>100</w>
+        <h>90</h>
+      </noteGeometry>
+      <noteLine color="-12566464" relationId="2438">
+        <point>
+          <x>951</x>
+          <y>291</y>
+        </point>
+        <point>
+          <x>891</x>
+          <y>271</y>
+        </point>
+      </noteLine>
+    </note>
+    <note color="-2079" content="action() appelée par command.execute(), contient la logique du traitement">
+      <noteGeometry>
+        <x>220</x>
+        <y>190</y>
+        <w>251</w>
+        <h>45</h>
+      </noteGeometry>
+      <noteLine color="-12566464" relationId="2437">
+        <point>
+          <x>341</x>
+          <y>236</y>
+        </point>
+        <point>
+          <x>381</x>
+          <y>251</y>
+        </point>
+      </noteLine>
+    </note>
+  </umlView>
+</classDiagram>
