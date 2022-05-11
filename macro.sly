@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
+<classDiagram>
+  <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="Macro">
+    <inheritance id="15986">
+      <child>15793</child>
+      <parent>15896</parent>
+    </inheritance>
+    <association aggregation="COMPOSE" direction="FIRST_TO_SECOND" id="15954" name="">
+      <role componentId="15793" name="" visibility="PRIVATE">
+        <multiplicity>
+          <min>2147483647</min>
+          <max>2147483647</max>
+        </multiplicity>
+      </role>
+      <role componentId="15896" name="" visibility="PRIVATE">
+        <multiplicity>
+          <min>2</min>
+          <max>2147483647</max>
+        </multiplicity>
+      </role>
+    </association>
+    <inheritance id="15906">
+      <child>15795</child>
+      <parent>15896</parent>
+    </inheritance>
+    <entity entityType="INTERFACE" id="15896" isAbstract="true" name="Command" visibility="PUBLIC">
+      <method isAbstract="true" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="15795" isAbstract="false" name="CommandA" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="state" type="..." visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="15793" isAbstract="false" name="MacroCommand" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+  </diagramElements>
+  <umlView grid="10" name="Main view" open="true">
+    <relationView color="-12566464" relationId="15906">
+      <line>
+        <point>
+          <x>151</x>
+          <y>211</y>
+        </point>
+        <point>
+          <x>151</x>
+          <y>145</y>
+        </point>
+      </line>
+    </relationView>
+    <relationView color="-12566464" relationId="15954">
+      <line>
+        <point>
+          <x>421</x>
+          <y>221</y>
+        </point>
+        <point>
+          <x>421</x>
+          <y>101</y>
+        </point>
+        <point>
+          <x>231</x>
+          <y>101</y>
+        </point>
+      </line>
+      <labelAssociation>
+        <x>425</x>
+        <y>165</y>
+        <w>0</w>
+        <h>16</h>
+      </labelAssociation>
+      <roleAssociation>
+        <x>425</x>
+        <y>199</y>
+        <w>0</w>
+        <h>16</h>
+      </roleAssociation>
+      <roleAssociation>
+        <x>235</x>
+        <y>105</y>
+        <w>0</w>
+        <h>16</h>
+      </roleAssociation>
+      <multipliciteAssociation>
+        <x>427</x>
+        <y>174</y>
+        <w>7</w>
+        <h>16</h>
+      </multipliciteAssociation>
+      <multipliciteAssociation>
+        <x>261</x>
+        <y>81</y>
+        <w>21</w>
+        <h>16</h>
+      </multipliciteAssociation>
+    </relationView>
+    <relationView color="-12566464" relationId="15986">
+      <line>
+        <point>
+          <x>371</x>
+          <y>221</y>
+        </point>
+        <point>
+          <x>371</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>151</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>151</x>
+          <y>145</y>
+        </point>
+      </line>
+    </relationView>
+    <componentView color="-2079" componentID="15793" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>300</x>
+        <y>220</y>
+        <w>150</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="15795" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>80</x>
+        <y>210</y>
+        <w>150</w>
+        <h>85</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="15896" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>80</x>
+        <y>60</y>
+        <w>150</w>
+        <h>84</h>
+      </geometry>
+    </componentView>
+    <note color="-2079" content="for all c in commands c.execute();">
+      <noteGeometry>
+        <x>310</x>
+        <y>320</y>
+        <w>140</w>
+        <h>45</h>
+      </noteGeometry>
+      <noteLine color="-12566464" relationId="15793">
+        <point>
+          <x>361</x>
+          <y>321</y>
+        </point>
+        <point>
+          <x>361</x>
+          <y>291</y>
+        </point>
+      </noteLine>
+    </note>
+  </umlView>
+</classDiagram>
