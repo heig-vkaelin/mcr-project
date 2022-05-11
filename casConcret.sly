@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
 <classDiagram>
   <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="Pattern Command - Google Home">
-    <association aggregation="COMPOSE" direction="BIDIRECTIONAL" id="68511" name="">
+    <association aggregation="COMPOSE" direction="FIRST_TO_SECOND" id="68511" name="">
       <role componentId="66831" name="" visibility="PRIVATE">
         <multiplicity>
           <min>2147483647</min>
@@ -327,7 +327,9 @@
     <entity entityType="CLASS" id="66618" isAbstract="false" name="UndoButton" visibility="PUBLIC"/>
     <entity entityType="CLASS" id="66619" isAbstract="false" name="RestartButton" visibility="PUBLIC"/>
     <entity entityType="CLASS" id="66830" isAbstract="false" name="Pedestrian" visibility="PUBLIC"/>
-    <entity entityType="CLASS" id="66831" isAbstract="false" name="MacroCommand" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="66831" isAbstract="false" name="MacroCommand" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="execute" returnType="boolean" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
   </diagramElements>
   <umlView grid="10" name="Main view" open="true">
     <relationView color="-12566464" relationId="66494">
@@ -1192,7 +1194,7 @@
       <line>
         <point>
           <x>1241</x>
-          <y>256</y>
+          <y>271</y>
         </point>
         <point>
           <x>1241</x>
@@ -1211,7 +1213,7 @@
       </labelAssociation>
       <roleAssociation>
         <x>1245</x>
-        <y>260</y>
+        <y>275</y>
         <w>0</w>
         <h>16</h>
       </roleAssociation>
@@ -1223,7 +1225,7 @@
       </roleAssociation>
       <multipliciteAssociation>
         <x>1249</x>
-        <y>257</y>
+        <y>272</y>
         <w>7</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -1285,7 +1287,7 @@
         <x>1170</x>
         <y>200</y>
         <w>150</w>
-        <h>55</h>
+        <h>70</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="66619" displayAttributes="true" displayDefault="true" displayMethods="true">
