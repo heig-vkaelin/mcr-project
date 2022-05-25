@@ -6,5 +6,11 @@ package entities;
  * @author Lazar Pavicevic
  */
 public enum Direction {
-    UP, DOWN, LEFT, RIGHT
-}
+    UP('u'), DOWN('d'), LEFT('l'), RIGHT('r');
+
+    private final char key;
+
+    Direction(char key) {
+        this.key = key;
+    }
+    }
