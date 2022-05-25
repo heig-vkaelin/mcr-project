@@ -1,4 +1,4 @@
-package levels;
+package ch.heigvd.mcr.levels;
 
 public enum Difficulty {
     EASY,
