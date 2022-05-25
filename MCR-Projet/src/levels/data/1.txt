@@ -1,0 +1,11 @@
+6
+1
+2 4 u a
+t 2 0 l b
+c 4 1 u c
+t 5 3 u d
+t 3 2 l e
+c 0 5 u f
+t 3 5 l g
+c 5 5 l g
+p 0 1
