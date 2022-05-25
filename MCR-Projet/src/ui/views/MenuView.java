@@ -24,7 +24,7 @@ public class MenuView implements View {
     private final JPanel panel;
     private final JPanel cards;
     
-    private final List<LevelButton> levelButtons;
+    private final List<JButton> levelButtons;
     
     /**
      * Constructeur privé pour construire la vue
@@ -53,6 +53,7 @@ public class MenuView implements View {
             btn.addActionListener(e -> {
                 System.out.println("Click on level " + currentId);
             });
+            levelButtons.add(btn);
             cards.add(btn);
         }
         
