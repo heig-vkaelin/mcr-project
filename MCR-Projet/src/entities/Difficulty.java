@@ -1,4 +1,4 @@
-package levels;
+package entities;
 
 public enum Difficulty {
     EASY,

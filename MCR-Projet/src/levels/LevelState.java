@@ -1,12 +1,14 @@
 package levels;
 
-import entities.Direction;
+import entities.Difficulty;
 import entities.Entity;
 
 import java.util.LinkedList;
 
 /**
  * Classe représentant l'état d'un niveau
+ *
+ * @author Nicolas Crausaz
  */
 public class LevelState {
 

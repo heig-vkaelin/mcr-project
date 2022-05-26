@@ -8,23 +8,30 @@ import java.io.FileReader;
 
 /**
  * Classe permettant de lire et sérialiser des fichiers de niveau du jeu
+ *
+ * @author Nicolas Crausaz
  */
 public class LevelParser {
 
-    private final static String LEVELS_DIR = "./src/levels/data/";
+    // TODO: faire des validations plus strictes
+    // TODO: Gérer toutes les exceptions
 
-    public static void parseLevelFile(String filename) {
-        // TODO: gerer le pieton
-        // TODO: faire des validations strictes
-        // TODO: direction & couleurs
+    private final static String LEVELS_DIR = new File("").getAbsolutePath().concat("/src/levels/data/");
+
+    public static LevelState parseLevelFile(String filename) {
+        LevelState state = new LevelState();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR, filename)))) {
             String line;
             int count = 0;
-            LevelState state = new LevelState();
 
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(" ");
+
+                // Ignore si ligne vide
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
 
                 if (values.length < 1) {
                     throw new RuntimeException("Malformed file");
@@ -47,8 +54,7 @@ public class LevelParser {
                         state.addEntity(new Car(
                                 Integer.parseInt(values[0]),
                                 Integer.parseInt(values[1]),
-                                //Direction.valueOf(values[2]),
-                                Direction.UP,
+                                Direction.getFromKey(values[2]),
                                 Color.RED
                         ));
                         break;
@@ -59,20 +65,23 @@ public class LevelParser {
                                 state.addEntity(new Car(
                                         Integer.parseInt(values[1]),
                                         Integer.parseInt(values[2]),
-                                        Direction.UP,
-                                        Color.RED
+                                        Direction.getFromKey(values[3]),
+                                        Color.getFromKey(values[4])
                                 ));
                                 break;
                             case "t":
                                 state.addEntity(new Truck(
                                         Integer.parseInt(values[1]),
                                         Integer.parseInt(values[2]),
-                                        Direction.UP,
-                                        Color.RED
+                                        Direction.getFromKey(values[3]),
+                                        Color.getFromKey(values[4])
                                 ));
                                 break;
+                            case "o":
+                                state.addEntity(new Cone(Integer.parseInt(values[1]), Integer.parseInt(values[2]), Direction.UP, Color.ORANGE));
+                                break;
                             case "p":
-                                // state.addEntity(new Pedestrian());
+                                state.addEntity(new Pedestrian(Integer.parseInt(values[1]), Integer.parseInt(values[2]), Direction.UP, Color.ORANGE));
                                 break;
                             default:
                                 throw new RuntimeException("Invalid entity type");
@@ -80,21 +89,9 @@ public class LevelParser {
                 }
                 ++count;
             }
-
-            System.out.println(state.getSideSize());
-            System.out.println(state.getDifficulty());
-            for (Entity e: state.getEntities()) {
-                System.out.println(e.getDirection());
-            }
-
-            // Taille grille
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        // Difficulté
+        return state;
     }
-
 }
