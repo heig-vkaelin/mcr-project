@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
+					"name": "main.java.ch.heigvd.mcr.Main",
 					"defaultDiagram": true
 				}
 			]

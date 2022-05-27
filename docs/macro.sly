@@ -34,7 +34,7 @@
       <method isAbstract="false" isStatic="false" name="execute" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
     </entity>
   </diagramElements>
-  <umlView grid="10" name="Main view" open="true">
+  <umlView grid="10" name="main.java.ch.heigvd.mcr.Main view" open="true">
     <relationView color="-12566464" relationId="15906">
       <line>
         <point>
@@ -137,7 +137,7 @@
         <h>84</h>
       </geometry>
     </componentView>
-    <note color="-2079" content="for all c in commands c.execute();">
+    <note color="-2079" content="for all c in main.java.ch.heigvd.mcr.commands c.execute();">
       <noteGeometry>
         <x>310</x>
         <y>320</y>
