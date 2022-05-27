@@ -1,4 +1,4 @@
-package commands;
+import ch.heigvd.mcr.commands.Command;
 
 import java.util.LinkedList;
 

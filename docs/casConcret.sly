@@ -331,7 +331,7 @@
       <method isAbstract="false" isStatic="false" name="execute" returnType="boolean" view="DEFAULT" visibility="PUBLIC"/>
     </entity>
   </diagramElements>
-  <umlView grid="10" name="Main view" open="true">
+  <umlView grid="10" name="main.java.ch.heigvd.mcr.Main view" open="true">
     <relationView color="-12566464" relationId="66494">
       <line>
         <point>
