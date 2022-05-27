@@ -1,4 +1,4 @@
-package ui.views;
+package ch.heigvd.mcr.ui.views;
 
 /**
  * Interface utilisée pour les différentes vues de l'application

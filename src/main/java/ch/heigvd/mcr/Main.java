@@ -1,17 +1,19 @@
 package ch.heigvd.mcr;
 
-import javax.swing.*;
+import ch.heigvd.mcr.ui.GameController;
 
+/**
+ * Classe principale du jeu
+ */
 public class Main {
+    /**
+     * Point d'entrée du programme
+     *
+     * @param args : arguments passés en ligne de commande
+     */
     public static void main(String[] args) {
-        // FOR TESTING PURPOSES ONLY !!! REMOVE THIS WHEN MERGING
-        JFrame frame = new JFrame("MCR");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        JLabel label = new JLabel(new ImageIcon(ClassLoader.getSystemResource("images/logo.png")));
-        frame.add(label);
+        final int DELTA_MS = 20;
+        GameController controller = new GameController();
+        controller.run(DELTA_MS);
     }
 }

@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.ui;
 
-import ui.views.MenuView;
+
+import ch.heigvd.mcr.ui.views.MenuView;
 
 /**
  * Controller qui s'occupe des interactions entre l'utilisateur et le jeu ainsi
@@ -18,7 +19,7 @@ public class GameController {
 //        new Timer(delta, e -> {
 //            MenuView.getInstance().repaint()
 //        }).start();
-        
+
         MenuView.getInstance().repaint();
     }
 }

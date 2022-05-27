@@ -1,7 +1,7 @@
-package ui.views;
+package ch.heigvd.mcr.ui.views;
 
-import levels.Difficulty;
-import ui.components.LevelButton;
+import ch.heigvd.mcr.levels.Difficulty;
+import ch.heigvd.mcr.ui.components.LevelButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,13 +19,13 @@ public class MenuView implements View {
     private static final int COLUMNS = 4;
     private static final int PADDING = 20;
     private static MenuView instance;
-    
+
     public final JFrame frame;
     private final JPanel panel;
     private final JPanel cards;
-    
+
     private final List<JButton> levelButtons;
-    
+
     /**
      * Constructeur privé pour construire la vue
      */
@@ -34,10 +34,10 @@ public class MenuView implements View {
         frame.setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Menu - sélectionnez un niveau");
-        
+
         panel = new JPanel();
         panel.setBackground(Color.WHITE);
-        
+
         // TODO: load levels from config
         levelButtons = new LinkedList<>();
         cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
@@ -56,13 +56,13 @@ public class MenuView implements View {
             levelButtons.add(btn);
             cards.add(btn);
         }
-        
+
         panel.add(cards);
         frame.setContentPane(panel);
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     /**
      * @return l'instance de la vue
      */
@@ -71,9 +71,9 @@ public class MenuView implements View {
             instance = new MenuView();
         return instance;
     }
-    
+
     @Override
     public void repaint() {
-    
+
     }
 }

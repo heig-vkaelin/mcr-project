@@ -1,4 +1,4 @@
-package levels;
+package ch.heigvd.mcr.levels;
 
 /**
  * Enumération des différentes difficultés possibles pour les niveaux du jeu
