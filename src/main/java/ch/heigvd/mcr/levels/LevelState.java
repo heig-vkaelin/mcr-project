@@ -1,7 +1,7 @@
-package levels;
+package ch.heigvd.mcr.levels;
 
-import entities.Difficulty;
-import entities.Entity;
+import ch.heigvd.mcr.entities.Difficulty;
+import ch.heigvd.mcr.entities.Entity;
 
 import java.util.LinkedList;
 

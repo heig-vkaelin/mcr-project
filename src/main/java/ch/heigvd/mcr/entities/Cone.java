@@ -1,4 +1,4 @@
-package entities;
+package ch.heigvd.mcr.entities;
 
 /**
  * Classe représentant un cône de signalisation qui est une pièce immobile dans le jeu

@@ -1,4 +1,4 @@
-package entities;
+package ch.heigvd.mcr.entities;
 
 /**
  * Classe représentant un piéton pouvant se déplacer de manière autonome sur le board

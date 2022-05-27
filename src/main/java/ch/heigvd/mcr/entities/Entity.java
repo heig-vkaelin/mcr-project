@@ -1,4 +1,4 @@
-package entities;
+package ch.heigvd.mcr.entities;
 
 /**
  * Classe représentant une entité affichable sur la grille

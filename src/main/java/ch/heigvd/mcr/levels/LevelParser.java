@@ -1,10 +1,11 @@
-package levels;
+package ch.heigvd.mcr.levels;
 
-import entities.*;
+import ch.heigvd.mcr.entities.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 
 /**
  * Classe permettant de lire et sérialiser des fichiers de niveau du jeu
@@ -16,12 +17,12 @@ public class LevelParser {
     // TODO: faire des validations plus strictes
     // TODO: Gérer toutes les exceptions
 
-    private final static String LEVELS_DIR = new File("").getAbsolutePath().concat("/src/levels/data/");
+    private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
 
     public static LevelState parseLevelFile(String filename) {
         LevelState state = new LevelState();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR, filename)))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
             String line;
             int count = 0;
 

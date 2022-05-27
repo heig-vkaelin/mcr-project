@@ -1,4 +1,4 @@
-package entities;
+package ch.heigvd.mcr.entities;
 
 /**
  * Classe abstraite représentant une entité déplaçable

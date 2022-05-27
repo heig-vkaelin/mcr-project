@@ -1,4 +1,4 @@
-package entities;
+package ch.heigvd.mcr.entities;
 
 public enum Difficulty {
     EASY,
