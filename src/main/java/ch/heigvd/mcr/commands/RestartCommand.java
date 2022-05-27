@@ -1,4 +1,4 @@
-package commands;
+package ch.heigvd.mcr.commands;
 
 public class RestartCommand implements Command {
     @Override
