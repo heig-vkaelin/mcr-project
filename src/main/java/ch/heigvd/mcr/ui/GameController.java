@@ -18,7 +18,7 @@ public class GameController {
 //        new Timer(delta, e -> {
 //            MenuView.getInstance().repaint()
 //        }).start();
-
-        MenuView.getInstance().repaint();
+        
+        new MenuView().repaint();
     }
 }
