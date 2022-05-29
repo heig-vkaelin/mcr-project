@@ -8,13 +8,13 @@ package ch.heigvd.mcr.entities;
 public abstract class Entity {
     protected int coordX, coordY;
     private Direction direction;
-    private Color color;
+    private EntityType type;
 
-    public Entity(int originX, int originY, Direction direction, Color color) {
+    public Entity(int originX, int originY, Direction direction, EntityType type) {
         coordX = originX;
         coordY = originY;
         this.direction = direction;
-        this.color = color;
+        this.type = type;
     }
 
     public int getX() {
@@ -29,7 +29,7 @@ public abstract class Entity {
         return direction;
     }
 
-    public Color getColor() {
-        return color;
+    public EntityType getType() {
+        return type;
     }
 }

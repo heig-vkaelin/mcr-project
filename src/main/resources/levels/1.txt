@@ -1,12 +1,12 @@
 6
 1
 2 4 u red
-t 2 0 l blue
-c 4 1 u yellow
-t 5 3 u brown
-t 3 2 l green
-c 0 5 u black
-t 3 5 l black
-c 5 5 l white
-o 0 2
-p 0 1
+v 2 0 l truck
+v 4 1 u yellow
+v 5 3 u truck
+v 3 2 l truck
+v 0 5 u police
+v 3 5 l truck
+v 5 5 l gray
+o 0 2 d cone
+p 0 1 d boy

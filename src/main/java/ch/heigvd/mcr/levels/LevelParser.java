@@ -52,40 +52,33 @@ public class LevelParser {
 
                     case 2:
                         // Voiture du joueur
-                        state.addEntity(new Car(
+                        state.addEntity(new Vehicle(
                                 Integer.parseInt(values[0]),
                                 Integer.parseInt(values[1]),
                                 Direction.getFromKey(values[2]),
-                                Color.RED
+                                VehicleType.RED_CAR
                         ));
                         break;
 
                     default:
                         switch (values[0]) {
-                            case "c":
-                                state.addEntity(new Car(
-                                        Integer.parseInt(values[1]),
-                                        Integer.parseInt(values[2]),
-                                        Direction.getFromKey(values[3]),
-                                        Color.getFromKey(values[4])
-                                ));
-                                break;
-                            case "t":
-                                state.addEntity(new Truck(
-                                        Integer.parseInt(values[1]),
-                                        Integer.parseInt(values[2]),
-                                        Direction.getFromKey(values[3]),
-                                        Color.getFromKey(values[4])
-                                ));
-                                break;
-                            case "o":
-                                state.addEntity(new Cone(Integer.parseInt(values[1]), Integer.parseInt(values[2]), Direction.UP, Color.ORANGE));
-                                break;
-                            case "p":
-                                state.addEntity(new Pedestrian(Integer.parseInt(values[1]), Integer.parseInt(values[2]), Direction.UP, Color.ORANGE));
-                                break;
-                            default:
-                                throw new RuntimeException("Invalid entity type");
+                            case "v" -> state.addEntity(new Vehicle(
+                                    Integer.parseInt(values[1]),
+                                    Integer.parseInt(values[2]),
+                                    Direction.getFromKey(values[3]),
+                                    VehicleType.getFromKey(values[4])
+                            ));
+                            case "o" -> state.addEntity(new Obstacle(
+                                    Integer.parseInt(values[1]),
+                                    Integer.parseInt(values[2]),
+                                    Direction.getFromKey(values[3]),
+                                    ObstacleType.getFromKey(values[4])));
+                            case "p" -> state.addEntity(new Pedestrian(
+                                    Integer.parseInt(values[1]),
+                                    Integer.parseInt(values[2]),
+                                    Direction.getFromKey(values[3]),
+                                    PedestrianType.getFromKey(values[4])));
+                            default -> throw new RuntimeException("Invalid entity type");
                         }
                 }
                 ++count;
