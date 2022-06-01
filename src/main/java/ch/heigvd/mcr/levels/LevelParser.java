@@ -22,7 +22,9 @@ public class LevelParser {
     // TODO: Gérer toutes les exceptions
 
     private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
-    
+
+    private final static int MIN_LEVEL_SIZE = 6;
+
     /**
      * Charge tous les niveaux du jeu
      *
@@ -32,17 +34,17 @@ public class LevelParser {
         LinkedList<LevelState> levels = new LinkedList<>();
         File folder = new File(LEVELS_DIR.getFile());
         File[] levelNames = folder.listFiles();
-        
+
         if (levelNames != null) {
             Arrays.sort(levelNames, Comparator.comparing(File::getName));
             for (File levelName : levelNames) {
                 levels.add(parseLevelFile(levelName.getName()));
             }
         }
-        
+
         return levels;
     }
-    
+
     public static LevelState parseLevelFile(String filename) {
         int id;
         try {
@@ -50,9 +52,9 @@ public class LevelParser {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid level file name");
         }
-        
+
         LevelState state = new LevelState(id);
-        
+
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
             String line;
             int count = 0;
@@ -72,7 +74,11 @@ public class LevelParser {
                 switch (count) {
                     case 0:
                         // Taille grille
-                        state.setSideSize(Integer.parseInt(values[0]));
+                        final int size = Integer.parseInt(values[0]);
+                        if (size < MIN_LEVEL_SIZE) {
+                            throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE);
+                        }
+                        state.setSideSize(size);
                         break;
 
                     case 1:
@@ -113,10 +119,23 @@ public class LevelParser {
                         }
                 }
                 ++count;
+
+                if (!validateLevelCoherence(state)) {
+                    return null;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return state;
+    }
+
+    private static boolean validateLevelCoherence(LevelState currentState) {
+        for (Entity e : currentState.getEntities()) {
+            System.out.printf("%s %s: (%d,%d) (%d,%d)%n", e.getType().toString(), e.getDirection(), e.getX(), e.getY(), e.getHeadX(), e.getHeadY());
+        }
+
+        return true;
     }
 }
