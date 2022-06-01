@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.levels.LevelState;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,14 +29,11 @@ public class PlayView implements View {
      *
      * @param level : le niveau à afficher
      */
-    public PlayView(int level) {
-        // TODO: passer la structure complète du level et pas que son numéro une fois
-        // la classe terminée (PR #7)
-        
+    public PlayView(LevelState level) {
         frame = new JFrame();
         frame.setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("DISIT - Niveau " + level);
+        frame.setTitle("DISIT - Niveau " + level.getId());
         
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
