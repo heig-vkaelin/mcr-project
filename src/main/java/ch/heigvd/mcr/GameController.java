@@ -10,6 +10,13 @@ import ch.heigvd.mcr.ui.views.MenuView;
  */
 public class GameController {
     /**
+     * Constructeur du contrôleur du jeu
+     */
+    public GameController() {
+        LevelController.getInstance();
+    }
+    
+    /**
      * Démarre le jeu
      *
      * @param delta : ms entre les deux rafraichissements de la vue
