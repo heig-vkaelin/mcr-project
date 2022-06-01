@@ -2,10 +2,16 @@ package ch.heigvd.mcr.levels;
 
 import ch.heigvd.mcr.entities.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,17 +33,21 @@ public class LevelParser {
      * @return la liste des niveaux
      */
     public static List<LevelState> loadAllLevels() {
-        LinkedList<LevelState> levels = new LinkedList<>();
-        File folder = new File(LEVELS_DIR.getFile());
-        File[] levelNames = folder.listFiles();
-
-        if (levelNames != null) {
-            Arrays.sort(levelNames, Comparator.comparing(File::getName));
-            for (File levelName : levelNames) {
-                levels.add(parseLevelFile(levelName.getName()));
+        //liste des niveaux
+        List<LevelState> levels = new LinkedList<>();
+        try {
+            URI uri = ClassLoader.getSystemResource("levels").toURI();
+            if (uri.getScheme().equals("jar")) {//si on est dans un jar
+                FileSystems.newFileSystem(uri, new HashMap<>());
             }
+            Files.walk(Paths.get(uri)).filter(path -> !Files.isDirectory(path)).sorted().forEach(path -> {
+                LevelState l = parseLevelFile(path.getFileName().toString());
+                levels.add(l);
+                System.out.println("Loaded level " + l.getId());
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return levels;
     }
 
@@ -51,11 +61,11 @@ public class LevelParser {
 
         LevelState state = new LevelState(id);
         //need to use ClassLoader.getSystemResourceAsStream...
-        InputStream stream = ClassLoader.getSystemResourceAsStream("levels/"+filename);
-        if(stream == null) {
+        InputStream stream = ClassLoader.getSystemResourceAsStream("levels/" + filename);
+        if (stream == null) {
             throw new RuntimeException("Level file not found");
         }
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
             String line;
             int count = 0;
 
