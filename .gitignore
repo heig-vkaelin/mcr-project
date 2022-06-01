@@ -1,7 +1,7 @@
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/test/**/build/
+!**/src/main/**/build/
 
 ### IntelliJ IDEA ###
 .idea
