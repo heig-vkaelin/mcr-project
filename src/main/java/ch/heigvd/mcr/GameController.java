@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.ui;
+package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.ui.views.MenuView;
 
@@ -10,6 +10,13 @@ import ch.heigvd.mcr.ui.views.MenuView;
  */
 public class GameController {
     /**
+     * Constructeur du contrôleur du jeu
+     */
+    public GameController() {
+        LevelController.getInstance();
+    }
+    
+    /**
      * Démarre le jeu
      *
      * @param delta : ms entre les deux rafraichissements de la vue
@@ -19,6 +26,6 @@ public class GameController {
 //            MenuView.getInstance().repaint()
 //        }).start();
         
-        new MenuView().repaint();
+        new MenuView().show();
     }
 }
