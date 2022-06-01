@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.assets;
 
+import ch.heigvd.mcr.levels.LevelState;
+
 import java.awt.*;
 import java.util.List;
 import java.util.*;
@@ -15,6 +17,8 @@ public class Asset<A> {
 
     public static Asset<Image> IMAGE_ASSET = createAsset();
     public static Asset<Audio> AUDIO_ASSET = createAsset();
+
+    public static Asset<LevelState> LEVEL_ASSET = createAsset();
 
     private final HashMap<String, AssetLoader<A>> assets = new HashMap<>();
 
@@ -57,6 +61,14 @@ public class Asset<A> {
             throw new IllegalStateException("Asset " + key + " is not loaded");
         }
         return assets.get(key).get();
+    }
+
+    public Collection<A> getAll() {
+        Collection<A> assets = new LinkedList<>();
+        for (AssetLoader<A> asset : this.assets.values()) {
+            assets.add(asset.get());
+        }
+        return assets;
     }
 
     public interface ProgressListener extends EventListener {

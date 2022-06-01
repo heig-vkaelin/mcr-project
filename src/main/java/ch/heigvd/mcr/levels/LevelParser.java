@@ -2,9 +2,7 @@ package ch.heigvd.mcr.levels;
 
 import ch.heigvd.mcr.entities.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -52,8 +50,12 @@ public class LevelParser {
         }
 
         LevelState state = new LevelState(id);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
+        //need to use ClassLoader.getSystemResourceAsStream...
+        InputStream stream = ClassLoader.getSystemResourceAsStream("levels/"+filename);
+        if(stream == null) {
+            throw new RuntimeException("Level file not found");
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))){
             String line;
             int count = 0;
 
