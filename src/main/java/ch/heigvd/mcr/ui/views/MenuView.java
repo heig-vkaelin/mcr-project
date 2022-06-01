@@ -1,6 +1,8 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.LevelController;
 import ch.heigvd.mcr.entities.Difficulty;
+import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.components.LevelButton;
 
 import javax.swing.*;
@@ -37,21 +39,18 @@ public class MenuView implements View {
         panel = new JPanel();
         panel.setBackground(Color.WHITE);
         
-        // TODO: load levels from config
         levelButtons = new LinkedList<>();
         cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
         cards.setBackground(Color.white);
-        Difficulty[] difficulties = new Difficulty[]{
-                Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD
-        };
-        for (int id = 0; id < 10; id++) {
+        for (LevelState level : LevelController.getInstance().getLevels()) {
             JButton btn = new LevelButton(
-                    "Niveau", id, difficulties[(int) (Math.random() * difficulties.length)]);
-            int currentId = id;
-            // TODO: redirect to PlayView on click -> Command?
+                    "Niveau",
+                    level.getId(),
+                    level.getDifficulty()
+            );
             btn.addActionListener(e -> {
-                System.out.println("Click on level " + currentId);
-                new PlayView(currentId).show();
+                System.out.println("Click on level " + level.getId());
+                new PlayView(level).show();
                 close();
             });
             levelButtons.add(btn);

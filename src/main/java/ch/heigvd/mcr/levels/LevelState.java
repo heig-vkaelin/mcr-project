@@ -11,12 +11,14 @@ import java.util.LinkedList;
  * @author Nicolas Crausaz
  */
 public class LevelState {
-
+    
+    private int id;
     private int sideSize;
     private Difficulty difficulty;
     private final LinkedList<Entity> entities;
 
-    public LevelState() {
+    public LevelState(int id) {
+        this.id = id;
         this.entities = new LinkedList<>();
     }
 
@@ -32,6 +34,10 @@ public class LevelState {
 
     public void addEntity(Entity entity) {
         this.entities.add(entity);
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public int getSideSize() {
