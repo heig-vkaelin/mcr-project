@@ -3,6 +3,7 @@ package ch.heigvd.mcr.levels;
 import ch.heigvd.mcr.entities.Difficulty;
 import ch.heigvd.mcr.entities.Entity;
 
+import java.awt.*;
 import java.util.LinkedList;
 
 /**
@@ -33,7 +34,12 @@ public class LevelState {
     }
 
     public void addEntity(Entity entity) {
-        this.entities.add(entity);
+        if (validateLevelCoherence(entity)) {
+            this.entities.add(entity);
+        } else {
+            throw new RuntimeException("Invalid entity configuration for this level state");
+        }
+
     }
     
     public int getId() {
@@ -50,5 +56,23 @@ public class LevelState {
 
     public LinkedList<Entity> getEntities() {
         return entities;
+    }
+
+    /**
+     * Valide si l'ajout d'une nouvelle entité dans le jeu
+     * @param newEntity entité à valider
+     * @return vrai si les contraintes sont respectées, sinon faux
+     */
+    private boolean validateLevelCoherence(Entity newEntity) {
+        final Rectangle bounds = newEntity.getBounds();
+        System.out.println(newEntity.getType() + " " + newEntity.getDirection() + " " + newEntity.getBounds());
+
+        for (Entity e : getEntities()) {
+
+            if (bounds.contains(e.getBounds()) || bounds.intersects(e.getBounds())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

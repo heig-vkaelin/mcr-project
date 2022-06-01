@@ -119,23 +119,10 @@ public class LevelParser {
                         }
                 }
                 ++count;
-
-                if (!validateLevelCoherence(state)) {
-                    return null;
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return state;
-    }
-
-    private static boolean validateLevelCoherence(LevelState currentState) {
-        for (Entity e : currentState.getEntities()) {
-            System.out.printf("%s %s: (%d,%d) (%d,%d)%n", e.getType().toString(), e.getDirection(), e.getX(), e.getY(), e.getHeadX(), e.getHeadY());
-        }
-
-        return true;
     }
 }

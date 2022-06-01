@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.entities;
 
+import java.awt.*;
+
 /**
  * Classe représentant une entité affichable sur la grille
  *
@@ -34,47 +36,24 @@ public abstract class Entity {
         return type;
     }
 
-    public int getHeadX() {
-        switch (direction) {
-            case UP, DOWN -> {
-                return coordX + type.getWidth() - 1;
-            }
-/*
-            case DOWN -> {
-                return coordX + type.getWidth() + 1;
-            }
- */
-
-            case LEFT -> {
-                return coordX - type.getLength() + type.getWidth() + 1;
-            }
-
-            case RIGHT -> {
-                return coordX + type.getLength() + type.getWidth() - 1;
-            }
-            default -> throw new RuntimeException("Invalid direction");
-        }
-    }
-
-    public int getHeadY() {
+    public Rectangle getBounds() {
         switch (direction) {
             case UP -> {
-                return coordY - type.getLength() + 1;
-            }
-
-            case LEFT -> {
-                return coordY - type.getWidth() + 1;
-            }
-
-            case RIGHT -> {
-                return coordY + type.getWidth() - 1;
+                return new Rectangle(coordX, coordY, -type.getWidth() + 1, -type.getLength() + 1);
             }
 
             case DOWN -> {
-                return coordY + type.getLength() - 1;
+                return new Rectangle(coordX, coordY, type.getWidth() - 1, type.getLength() - 1);
             }
 
-            default -> throw new RuntimeException("Invalid direction");
+            case LEFT -> {
+                return new Rectangle(coordX, coordY, -type.getLength() + 1, type.getWidth() - 1);
+            }
+
+            case RIGHT -> {
+                return new Rectangle(coordX, coordY, type.getLength() - 1, type.getWidth() - 1);
+            }
         }
+        return null;
     }
 }
