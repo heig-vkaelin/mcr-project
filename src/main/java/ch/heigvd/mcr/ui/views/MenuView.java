@@ -1,6 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
-import ch.heigvd.mcr.levels.Difficulty;
+import ch.heigvd.mcr.entities.Difficulty;
 import ch.heigvd.mcr.ui.components.LevelButton;
 
 import javax.swing.*;
