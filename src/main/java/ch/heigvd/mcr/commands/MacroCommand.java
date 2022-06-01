@@ -1,10 +1,18 @@
-import ch.heigvd.mcr.commands.Command;
+package ch.heigvd.mcr.commands;
+
+import ch.heigvd.mcr.GameController;
 
 import java.util.LinkedList;
+import java.util.List;
 
-public class MacroCommand implements Command {
+public class MacroCommand extends ControllerCommand implements Command {
 
-    private LinkedList<Command> subCommands;
+    private List<Command> subCommands;
+
+    public MacroCommand(GameController controller) {
+        super(controller);
+        subCommands = new LinkedList<>();
+    }
 
     @Override
     public boolean execute() {

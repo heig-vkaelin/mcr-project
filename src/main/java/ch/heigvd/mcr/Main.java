@@ -5,7 +5,7 @@ import ch.heigvd.mcr.levels.LevelParser;
 import ch.heigvd.mcr.levels.LevelState;
 
 import ch.heigvd.mcr.ui.ImageManager;
-import ch.heigvd.mcr.ui.GameController;
+import ch.heigvd.mcr.GameController;
 
 /**
  * Classe principale du jeu

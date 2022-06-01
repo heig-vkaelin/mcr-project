@@ -1,8 +1,15 @@
 package ch.heigvd.mcr.commands;
 
-public class RestartCommand implements Command {
+import ch.heigvd.mcr.GameController;
+
+public class RestartCommand extends ControllerCommand implements Command {
+    public RestartCommand(GameController controller) {
+        super(controller);
+    }
+
     @Override
     public boolean execute() {
-        return false;
+        // appel getController().restart(); ?
+        return true;
     }
 }
