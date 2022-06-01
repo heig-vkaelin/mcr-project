@@ -4,20 +4,20 @@ import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelParser;
 import ch.heigvd.mcr.levels.LevelState;
 
-import javax.swing.*;
+import ch.heigvd.mcr.ui.ImageManager;
+import ch.heigvd.mcr.ui.GameController;
 
+/**
+ * Classe principale du jeu
+ */
 public class Main {
-    public static void main(String[] args) {
-        // FOR TESTING PURPOSES ONLY !!! REMOVE THIS WHEN MERGING
-        JFrame frame = new JFrame("MCR");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        JLabel label = new JLabel(new ImageIcon(ClassLoader.getSystemResource("images/logo.png")));
-        frame.add(label);
-
+    /**
+     * Point d'entrée du programme
+     *
+     * @param args : arguments passés en ligne de commande
+     */
+    public static void main(String[] args) {       
+        final int DELTA_MS = 20;
         LevelState state = LevelParser.parseLevelFile("1.txt");
 
         System.out.println(state.getDifficulty());
@@ -25,5 +25,12 @@ public class Main {
         for (Entity e: state.getEntities()) {
             System.out.println(e);
         }
+        GameController controller = new GameController();
+        ImageManager.loadImages((progress, finished) -> {
+            System.out.println("Progress: " + progress*100.0 + "%");
+            if (finished) {
+              controller.run(DELTA_MS);
+            }
+        });
     }
 }
