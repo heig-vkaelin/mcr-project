@@ -1,0 +1,10 @@
+7
+1
+2 2 r red
+v 1 1 r truck
+v 1 3 d bus
+v 0 5 u bus
+v 0 0 r bus
+v 3 6 u police
+v 5 5 l taxi
+p 6 6 r boy
