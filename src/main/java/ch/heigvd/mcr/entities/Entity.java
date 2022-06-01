@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public abstract class Entity {
     protected int coordX, coordY;
-    private Direction direction;
-    private EntityType type;
+    private final Direction direction;
+    private final EntityType type;
 
     public Entity(int originX, int originY, Direction direction, EntityType type) {
         coordX = originX;
@@ -38,20 +38,12 @@ public abstract class Entity {
 
     public Rectangle getBounds() {
         switch (direction) {
-            case UP -> {
-                return new Rectangle(coordX, coordY, -type.getWidth() + 1, -type.getLength() + 1);
+            case UP, DOWN -> {
+                return new Rectangle(coordX, coordY, type.getWidth(), type.getLength());
             }
 
-            case DOWN -> {
-                return new Rectangle(coordX, coordY, type.getWidth() - 1, type.getLength() - 1);
-            }
-
-            case LEFT -> {
-                return new Rectangle(coordX, coordY, -type.getLength() + 1, type.getWidth() - 1);
-            }
-
-            case RIGHT -> {
-                return new Rectangle(coordX, coordY, type.getLength() - 1, type.getWidth() - 1);
+            case LEFT, RIGHT -> {
+                return new Rectangle(coordX, coordY, type.getLength(), type.getWidth());
             }
         }
         return null;

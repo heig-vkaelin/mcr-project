@@ -12,8 +12,8 @@ import java.util.LinkedList;
  * @author Nicolas Crausaz
  */
 public class LevelState {
-    
-    private int id;
+
+    private final int id;
     private int sideSize;
     private Difficulty difficulty;
     private final LinkedList<Entity> entities;
@@ -39,9 +39,8 @@ public class LevelState {
         } else {
             throw new RuntimeException("Invalid entity configuration for this level state");
         }
-
     }
-    
+
     public int getId() {
         return id;
     }
@@ -59,16 +58,15 @@ public class LevelState {
     }
 
     /**
-     * Valide si l'ajout d'une nouvelle entité dans le jeu
+     * Valide si l'ajout d'une nouvelle entité dans le jeu est cohérent
+     *
      * @param newEntity entité à valider
      * @return vrai si les contraintes sont respectées, sinon faux
      */
     private boolean validateLevelCoherence(Entity newEntity) {
         final Rectangle bounds = newEntity.getBounds();
-        System.out.println(newEntity.getType() + " " + newEntity.getDirection() + " " + newEntity.getBounds());
 
         for (Entity e : getEntities()) {
-
             if (bounds.contains(e.getBounds()) || bounds.intersects(e.getBounds())) {
                 return false;
             }
