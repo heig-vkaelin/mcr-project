@@ -9,11 +9,23 @@ import ch.heigvd.mcr.ui.views.MenuView;
  * @author Valentin Kaelin
  */
 public class GameController {
+
+    private static GameController instance;
+
     /**
      * Constructeur du contrôleur du jeu
      */
-    public GameController() {
+    private GameController() {
         LevelController.getInstance();
+    }
+
+    /**
+     * @return l'instance du controller
+     */
+    public static GameController getInstance() {
+        if (instance == null)
+            instance = new GameController();
+        return instance;
     }
     
     /**

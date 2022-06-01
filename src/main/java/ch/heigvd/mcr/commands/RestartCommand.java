@@ -9,7 +9,7 @@ public class RestartCommand extends ControllerCommand implements Command {
 
     @Override
     public boolean execute() {
-        // appel getController().restart(); ?
+        // TODO appel getController().restart(); ?
         return true;
     }
 }
