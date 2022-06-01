@@ -11,31 +11,21 @@ import java.util.LinkedList;
  * @author Nicolas Crausaz
  */
 public class LevelState {
-    
-    private int id;
+
+    private final LinkedList<Entity> entities;
+    private final int id;
     private int sideSize;
     private Difficulty difficulty;
-    private final LinkedList<Entity> entities;
 
     public LevelState(int id) {
         this.id = id;
         this.entities = new LinkedList<>();
     }
 
-    public void setSideSize(int sideSize) {
-        if (sideSize < 1) throw new RuntimeException("Invalid size");
-
-        this.sideSize = sideSize;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
     public void addEntity(Entity entity) {
         this.entities.add(entity);
     }
-    
+
     public int getId() {
         return id;
     }
@@ -44,8 +34,18 @@ public class LevelState {
         return sideSize;
     }
 
+    public void setSideSize(int sideSize) {
+        if (sideSize < 1) throw new RuntimeException("Invalid size");
+
+        this.sideSize = sideSize;
+    }
+
     public Difficulty getDifficulty() {
         return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public LinkedList<Entity> getEntities() {

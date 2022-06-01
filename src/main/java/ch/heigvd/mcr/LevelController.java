@@ -14,14 +14,14 @@ import java.util.List;
 public class LevelController {
     private static LevelController instance;
     private final List<LevelState> levels;
-    
+
     /**
      * Charge tous les niveaux du jeu
      */
     private LevelController() {
         levels = new LinkedList<>(LevelParser.loadAllLevels());
     }
-    
+
     /**
      * @return l'instance du controller
      */
@@ -30,7 +30,7 @@ public class LevelController {
             instance = new LevelController();
         return instance;
     }
-    
+
     /**
      * Ajoute un niveau au jeu
      *
@@ -39,7 +39,7 @@ public class LevelController {
     public void addLevel(LevelState level) {
         levels.add(level);
     }
-    
+
     /**
      * @return la liste des niveaux du jeu
      */

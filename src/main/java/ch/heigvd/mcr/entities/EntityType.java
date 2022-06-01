@@ -7,6 +7,8 @@ package ch.heigvd.mcr.entities;
  */
 public interface EntityType {
     String getKey();
+
     int getWidth();
+
     int getLength();
 }

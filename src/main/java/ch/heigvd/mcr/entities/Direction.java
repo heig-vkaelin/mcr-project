@@ -13,7 +13,7 @@ public enum Direction {
 
     private final String key;
 
-    private Direction(String key) {
+    Direction(String key) {
         this.key = key;
     }
 
