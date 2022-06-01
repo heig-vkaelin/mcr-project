@@ -19,6 +19,6 @@ public class GameController {
 //            MenuView.getInstance().repaint()
 //        }).start();
         
-        new MenuView().repaint();
+        new MenuView().show();
     }
 }

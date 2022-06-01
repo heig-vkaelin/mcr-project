@@ -51,9 +51,8 @@ public class MenuView implements View {
             // TODO: redirect to PlayView on click -> Command?
             btn.addActionListener(e -> {
                 System.out.println("Click on level " + currentId);
-                new PlayView(currentId).repaint();
-                frame.setVisible(false);
-                frame.dispose();
+                new PlayView(currentId).show();
+                close();
             });
             levelButtons.add(btn);
             cards.add(btn);
@@ -68,5 +67,16 @@ public class MenuView implements View {
     @Override
     public void repaint() {
     
+    }
+    
+    @Override
+    public void close() {
+        frame.setVisible(false);
+        frame.dispose();
+    }
+    
+    @Override
+    public void show() {
+        frame.setVisible(true);
     }
 }

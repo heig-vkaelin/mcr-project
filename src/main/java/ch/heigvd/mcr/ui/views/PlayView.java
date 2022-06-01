@@ -50,9 +50,8 @@ public class PlayView implements View {
         btnUndo = new JButton("Annuler");
         btnMenu = new JButton("Menu");
         btnMenu.addActionListener(e -> {
-            new MenuView().repaint();
-            frame.setVisible(false);
-            frame.dispose();
+            new MenuView().show();
+            close();
         });
         btnRestart = new JButton("Recommencer");
         btnCheat = new JButton("Cheat");
@@ -73,5 +72,16 @@ public class PlayView implements View {
     @Override
     public void repaint() {
     
+    }
+    
+    @Override
+    public void close() {
+        frame.setVisible(false);
+        frame.dispose();
+    }
+    
+    @Override
+    public void show() {
+        frame.setVisible(true);
     }
 }
