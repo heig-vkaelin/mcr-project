@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class LevelParser {
 
-    // TODO: faire des validations plus strictes
+    // TODO: peut etre bouger les vérif dans LevelState avec le reste
     // TODO: Gérer toutes les exceptions
 
     private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
@@ -72,51 +72,59 @@ public class LevelParser {
                 }
 
                 switch (count) {
-                    case 0:
+                    case 0 -> {
                         // Taille grille
                         final int size = Integer.parseInt(values[0]);
                         if (size < MIN_LEVEL_SIZE) {
                             throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE);
                         }
                         state.setSideSize(size);
-                        break;
-
-                    case 1:
+                    }
+                    case 1 -> {
                         // Difficulté:
                         int enumIndex = Integer.parseInt(values[0]) - 1;
                         state.setDifficulty(Difficulty.values()[enumIndex]);
-                        break;
-
-                    case 2:
+                    }
+                    case 2 -> {
                         // Voiture du joueur
+                        final int x = Integer.parseInt(values[0]);
+                        final int y = Integer.parseInt(values[1]);
+                        if (!validateCoordinates(x, y, state.getSideSize())) {
+                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
+                        }
                         state.addEntity(new Vehicle(
-                                Integer.parseInt(values[0]),
-                                Integer.parseInt(values[1]),
+                                x,
+                                y,
                                 Direction.getFromKey(values[2]),
                                 VehicleType.RED_CAR
                         ));
-                        break;
-
-                    default:
+                    }
+                    default -> {
+                        final int x = Integer.parseInt(values[1]);
+                        final int y = Integer.parseInt(values[2]);
+                        if (!validateCoordinates(x, y, state.getSideSize())) {
+                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
+                        }
                         switch (values[0]) {
                             case "v" -> state.addEntity(new Vehicle(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
+                                    x,
+                                    y,
                                     Direction.getFromKey(values[3]),
                                     VehicleType.getFromKey(values[4])
                             ));
                             case "o" -> state.addEntity(new Obstacle(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
+                                    x,
+                                    y,
                                     Direction.getFromKey(values[3]),
                                     ObstacleType.getFromKey(values[4])));
                             case "p" -> state.addEntity(new Pedestrian(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
+                                    x,
+                                    y,
                                     Direction.getFromKey(values[3]),
                                     PedestrianType.getFromKey(values[4])));
                             default -> throw new RuntimeException("Invalid entity type");
                         }
+                    }
                 }
                 ++count;
             }
@@ -124,5 +132,9 @@ public class LevelParser {
             e.printStackTrace();
         }
         return state;
+    }
+
+    private static boolean validateCoordinates(int x, int y, int max) {
+        return !(x < 0 || y < 0 || x >= max || y >= max);
     }
 }

@@ -6,5 +6,5 @@ v 0 2 d yellow
 v 1 5 r police
 v 3 1 d truck
 v 3 5 r truck
-v 6 5 d taxi
+v 0 4 d taxi
 o 4 0 d cone
