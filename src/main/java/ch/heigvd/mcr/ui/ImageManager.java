@@ -18,31 +18,12 @@ public enum ImageManager {
 
 
     private final String path;
-    private BufferedImage image;
-
     boolean loaded = false;
+    private BufferedImage image;
 
     ImageManager(String path) {
         this.path = path;
         this.image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    private void load() {
-        if (loaded) return;
-        try {
-            image = ImageIO.read(ClassLoader.getSystemResource(path));
-            loaded = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public interface ImageManagerListener extends EventListener {
-        void imageProgress(double progress, boolean finished);
     }
 
     static public void loadImages(ImageManagerListener listener) {
@@ -63,5 +44,23 @@ public enum ImageManager {
                 listener.imageProgress(current / total, current == total);
             }
         }).start();
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    private void load() {
+        if (loaded) return;
+        try {
+            image = ImageIO.read(ClassLoader.getSystemResource(path));
+            loaded = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public interface ImageManagerListener extends EventListener {
+        void imageProgress(double progress, boolean finished);
     }
 }

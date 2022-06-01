@@ -15,7 +15,7 @@ public class GameController {
     public GameController() {
         LevelController.getInstance();
     }
-    
+
     /**
      * Démarre le jeu
      *
@@ -25,7 +25,7 @@ public class GameController {
 //        new Timer(delta, e -> {
 //            MenuView.getInstance().repaint()
 //        }).start();
-        
+
         new MenuView().show();
     }
 }

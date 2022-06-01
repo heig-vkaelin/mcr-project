@@ -1,6 +1,8 @@
 package ch.heigvd.mcr;
 
-import ch.heigvd.mcr.ui.ImageManager;
+import ch.heigvd.mcr.assets.Asset;
+import ch.heigvd.mcr.assets.AudioAssetLoader;
+import ch.heigvd.mcr.assets.ImageAssetLoader;
 
 /**
  * Classe principale du jeu
@@ -13,11 +15,15 @@ public class Main {
      */
     public static void main(String[] args) {
         final int DELTA_MS = 20;
-        
-        GameController controller = new GameController();
-        ImageManager.loadImages((progress, finished) -> {
-            System.out.println("Progress: " + progress * 100.0 + "%");
-            if (finished) {
+
+        Asset.IMAGE_ASSET.register("logo", new ImageAssetLoader("images/logo.png"));
+        Asset.AUDIO_ASSET.register("death", new AudioAssetLoader("audio/death.wav"));
+
+        Asset.loadAll((progress, done) -> {
+            System.out.println("Loading assets: " + (int) (progress * 100) + "%");
+            if (done) {
+                Asset.AUDIO_ASSET.get("death").play();
+                GameController controller = new GameController();
                 controller.run(DELTA_MS);
             }
         });

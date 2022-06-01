@@ -10,12 +10,12 @@ public interface View {
      * Redessine la vue
      */
     void repaint();
-    
+
     /**
      * Ferme la vue
      */
     void close();
-    
+
     /**
      * Affiche la vue
      */

@@ -22,7 +22,7 @@ public class LevelParser {
     // TODO: Gérer toutes les exceptions
 
     private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
-    
+
     /**
      * Charge tous les niveaux du jeu
      *
@@ -32,17 +32,17 @@ public class LevelParser {
         LinkedList<LevelState> levels = new LinkedList<>();
         File folder = new File(LEVELS_DIR.getFile());
         File[] levelNames = folder.listFiles();
-        
+
         if (levelNames != null) {
             Arrays.sort(levelNames, Comparator.comparing(File::getName));
             for (File levelName : levelNames) {
                 levels.add(parseLevelFile(levelName.getName()));
             }
         }
-        
+
         return levels;
     }
-    
+
     public static LevelState parseLevelFile(String filename) {
         int id;
         try {
@@ -50,9 +50,9 @@ public class LevelParser {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid level file name");
         }
-        
+
         LevelState state = new LevelState(id);
-        
+
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
             String line;
             int count = 0;

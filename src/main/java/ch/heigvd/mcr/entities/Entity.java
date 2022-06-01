@@ -6,9 +6,9 @@ package ch.heigvd.mcr.entities;
  * @author Lazar Pavicevic
  */
 public abstract class Entity {
+    private final Direction direction;
+    private final EntityType type;
     protected int coordX, coordY;
-    private Direction direction;
-    private EntityType type;
 
     public Entity(int originX, int originY, Direction direction, EntityType type) {
         coordX = originX;
