@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.ui;
+package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.ui.views.MenuView;
 
