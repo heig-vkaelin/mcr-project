@@ -14,7 +14,7 @@ import java.net.URL;
 public class Audio {
     private final Clip clip;
 
-    Audio(URL file) throws IOException {
+    public Audio(URL file) throws IOException {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
@@ -28,6 +28,8 @@ public class Audio {
      * Plays the audio file.
      */
     public void play() {
+        System.out.println("Playing audio");
+        clip.setFramePosition(0);
         clip.start();
     }
 }

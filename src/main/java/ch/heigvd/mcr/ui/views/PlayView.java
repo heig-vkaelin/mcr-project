@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.assets.Asset;
 import ch.heigvd.mcr.levels.LevelState;
 
 import javax.swing.*;
@@ -54,6 +55,9 @@ public class PlayView implements View {
         });
         btnRestart = new JButton("Recommencer");
         btnCheat = new JButton("Cheat");
+        btnCheat.addActionListener(e -> {
+            Asset.AUDIO_ASSET.get("death").play();
+        });
 
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);

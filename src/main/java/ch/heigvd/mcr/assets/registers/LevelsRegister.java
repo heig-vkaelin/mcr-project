@@ -1,0 +1,29 @@
+package ch.heigvd.mcr.assets.registers;
+
+import ch.heigvd.mcr.assets.Asset;
+import ch.heigvd.mcr.assets.loaders.LevelAssetLoader;
+import ch.heigvd.mcr.levels.LevelState;
+
+import java.net.URI;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+
+public class LevelsRegister implements Register<LevelState> {
+    @Override
+    public void register(Asset<LevelState> asset) {
+        try {
+            URI uri = ClassLoader.getSystemResource("levels").toURI();
+            if (uri.getScheme().equals("jar")) {//si on est dans un jar
+                FileSystems.newFileSystem(uri, new HashMap<>());
+            }
+            Files.walk(Paths.get(uri)).filter(path -> !Files.isDirectory(path)).sorted().forEach(path -> {
+                int id = Integer.parseInt(path.getFileName().toString().split("\\.")[0]);
+                asset.register("level" + id, new LevelAssetLoader(path.getFileName().toString()));
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

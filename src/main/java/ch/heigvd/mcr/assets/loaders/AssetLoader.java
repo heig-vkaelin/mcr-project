@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.assets;
+package ch.heigvd.mcr.assets.loaders;
 
 /**
  * Interface for asset loaders.
@@ -6,7 +6,7 @@ package ch.heigvd.mcr.assets;
  * @param <T> The type of asset to load.
  * @author Maxime Scharwath
  */
-interface AssetLoader<T> {
+public interface AssetLoader<T> {
     /**
      * Returns whether the asset has been loaded.
      *

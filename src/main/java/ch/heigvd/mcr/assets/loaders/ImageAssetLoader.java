@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.assets;
+package ch.heigvd.mcr.assets.loaders;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

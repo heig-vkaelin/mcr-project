@@ -1,4 +1,6 @@
-package ch.heigvd.mcr.assets;
+package ch.heigvd.mcr.assets.loaders;
+
+import ch.heigvd.mcr.assets.Audio;
 
 import java.io.IOException;
 import java.net.URL;

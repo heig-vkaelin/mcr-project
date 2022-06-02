@@ -1,9 +1,10 @@
 package ch.heigvd.mcr;
 
-import ch.heigvd.mcr.assets.Asset;
-import ch.heigvd.mcr.assets.AudioAssetLoader;
-import ch.heigvd.mcr.assets.ImageAssetLoader;
-import ch.heigvd.mcr.assets.LevelAssetLoader;
+import ch.heigvd.mcr.assets.*;
+import ch.heigvd.mcr.assets.loaders.AudioAssetLoader;
+import ch.heigvd.mcr.assets.loaders.ImageAssetLoader;
+import ch.heigvd.mcr.assets.loaders.LevelAssetLoader;
+import ch.heigvd.mcr.assets.registers.LevelsRegister;
 
 /**
  * Classe principale du jeu
@@ -19,11 +20,7 @@ public class Main {
 
         Asset.IMAGE_ASSET.register("logo", new ImageAssetLoader("images/logo.png"));
         Asset.AUDIO_ASSET.register("death", new AudioAssetLoader("audio/death.wav"));
-
-        Asset.LEVEL_ASSET.register("level1", new LevelAssetLoader("1.txt"));
-        Asset.LEVEL_ASSET.register("level2", new LevelAssetLoader("2.txt"));
-        Asset.LEVEL_ASSET.register("level3", new LevelAssetLoader("3.txt"));
-        Asset.LEVEL_ASSET.register("level4", new LevelAssetLoader("4.txt"));
+        Asset.LEVEL_ASSET.register(new LevelsRegister());
 
         Asset.loadAll((progress, done) -> {
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");

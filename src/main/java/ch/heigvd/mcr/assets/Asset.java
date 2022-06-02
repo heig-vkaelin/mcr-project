@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.assets;
 
+import ch.heigvd.mcr.assets.loaders.AssetLoader;
+import ch.heigvd.mcr.assets.registers.Register;
 import ch.heigvd.mcr.levels.LevelState;
 
 import java.awt.*;
@@ -15,15 +17,20 @@ public class Asset<A> {
     private static final List<Asset<?>> ASSETS = new LinkedList<>();
 
 
-    public static Asset<Image> IMAGE_ASSET = createAsset();
-    public static Asset<Audio> AUDIO_ASSET = createAsset();
+    public static Asset<Image> IMAGE_ASSET = createAsset("image");
+    public static Asset<Audio> AUDIO_ASSET = createAsset("audio");
 
-    public static Asset<LevelState> LEVEL_ASSET = createAsset();
+    public static Asset<LevelState> LEVEL_ASSET = createAsset("level");
 
     private final HashMap<String, AssetLoader<A>> assets = new HashMap<>();
+    private final String name;
 
-    private static <A> Asset<A> createAsset() {
-        Asset<A> asset = new Asset<>();
+    private Asset(String name) {
+        this.name = name;
+    }
+
+    private static <A> Asset<A> createAsset(String name) {
+        Asset<A> asset = new Asset<>(name);
         ASSETS.add(asset);
         return asset;
     }
@@ -50,7 +57,12 @@ public class Asset<A> {
     }
 
     public void register(String key, AssetLoader<A> asset) {
+        System.out.println("Registering in " + name + ": " + key);
         assets.put(key, asset);
+    }
+
+    public void register(Register<A> register) {
+        register.register(this);
     }
 
     public A get(String key) {

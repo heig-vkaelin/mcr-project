@@ -1,10 +1,7 @@
-package ch.heigvd.mcr.assets;
+package ch.heigvd.mcr.assets.loaders;
 
 import ch.heigvd.mcr.levels.LevelParser;
 import ch.heigvd.mcr.levels.LevelState;
-
-import java.awt.*;
-import java.net.URL;
 
 /**
  * A class that loads levels from the file system from resources.
