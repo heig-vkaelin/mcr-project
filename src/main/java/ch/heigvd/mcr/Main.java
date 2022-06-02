@@ -1,9 +1,8 @@
 package ch.heigvd.mcr;
 
-import ch.heigvd.mcr.assets.*;
+import ch.heigvd.mcr.assets.Asset;
 import ch.heigvd.mcr.assets.loaders.AudioAssetLoader;
 import ch.heigvd.mcr.assets.loaders.ImageAssetLoader;
-import ch.heigvd.mcr.assets.loaders.LevelAssetLoader;
 import ch.heigvd.mcr.assets.registers.LevelsRegister;
 
 /**

@@ -1,6 +1,5 @@
 package ch.heigvd.mcr.ui.views;
 
-import ch.heigvd.mcr.LevelController;
 import ch.heigvd.mcr.assets.Asset;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.components.LevelButton;

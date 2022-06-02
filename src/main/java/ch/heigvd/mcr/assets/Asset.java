@@ -35,6 +35,11 @@ public class Asset<A> {
         return asset;
     }
 
+    /**
+     * Load all assets.
+     *
+     * @param listener The listener to notify when the assets are loaded.
+     */
     public static void loadAll(ProgressListener listener) {
         new Thread(() -> {
             Collection<AssetLoader<?>> assets = getAllLoaders();
@@ -56,15 +61,32 @@ public class Asset<A> {
         return loaders;
     }
 
+    /**
+     * Register an asset loader.
+     *
+     * @param key   The key to register the loader with.
+     * @param asset The asset to load.
+     */
     public void register(String key, AssetLoader<A> asset) {
         System.out.println("Registering in " + name + ": " + key);
         assets.put(key, asset);
     }
 
+    /**
+     * Register an asset with Register interface.
+     *
+     * @param register The register to register the asset with.
+     */
     public void register(Register<A> register) {
         register.register(this);
     }
 
+    /**
+     * Get the asset with the given key.
+     *
+     * @param key The key of the asset to get.
+     * @return The asset with the given key.
+     */
     public A get(String key) {
         if (!assets.containsKey(key)) {
             throw new IllegalArgumentException("No asset registered with key " + key);
@@ -75,14 +97,28 @@ public class Asset<A> {
         return assets.get(key).get();
     }
 
+    /**
+     * Get all the assets registered in this asset manager.
+     * Order by key.
+     * Get only the loaded assets.
+     *
+     * @return A list of assets.
+     */
     public Collection<A> getAll() {
         Collection<A> assets = new LinkedList<>();
-        for (AssetLoader<A> asset : this.assets.values()) {
-            assets.add(asset.get());
+        List<Map.Entry<String, AssetLoader<A>>> list = new ArrayList<>(this.assets.entrySet());
+        list.sort(Map.Entry.comparingByKey());
+        for (Map.Entry<String, AssetLoader<A>> entry : list) {
+            if (entry.getValue().isLoaded()) {
+                assets.add(entry.getValue().get());
+            }
         }
         return assets;
     }
 
+    /**
+     * Progress listener for the AssetManager.
+     */
     public interface ProgressListener extends EventListener {
         void onProgress(double progress, boolean done);
     }
