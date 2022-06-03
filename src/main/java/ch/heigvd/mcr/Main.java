@@ -20,6 +20,10 @@ public class Main {
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
         AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
+        AssetManager.sprites.register("cars", new SpriteSheetAssetLoader("sprites/cars.sheet"));
+        AssetManager.sprites.register("obstacles", new SpriteSheetAssetLoader("sprites/obstacles.sheet"));
+        AssetManager.sprites.register("pedestrians", new SpriteSheetAssetLoader("sprites/pedestrians.sheet"));
+
         AssetManager.levels.register(new LevelsRegister());
 
         AssetManager.loadAll((progress, done) -> {

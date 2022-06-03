@@ -1,0 +1,28 @@
+# SpriteSheet for the board
+board.png
+# Borders
+TL 0 0 16 16
+T 16 0 16 16
+TR 32 0 16 16
+L 0 16 16 16
+C 16 16 16 16
+R 32 16 16 16
+BL 0 32 16 16
+B 16 32 16 16
+BR 32 32 16 16
+# Hole Top
+TH0 0 48 16 16
+TH1 16 48 16 16
+TH2 32 48 16 16
+# Hole Bottom
+TB0 0 64 16 16
+TB1 16 64 16 16
+TB2 32 64 16 16
+# Hole Left
+TL0 0 80 16 16
+TL1 16 80 16 16
+TL2 32 80 16 16
+# Hole Right
+TR0 0 96 16 16
+TR1 16 96 16 16
+TR2 32 96 16 16
