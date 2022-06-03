@@ -13,26 +13,27 @@ import java.util.*;
  *
  * @author Maxime Scharwath
  */
-public class Asset<A> {
-    private static final List<Asset<?>> ASSETS = new LinkedList<>();
+public class AssetManager<A> {
+    private static final List<AssetManager<?>> ASSET_MANAGERS = new LinkedList<>();
 
 
-    public static Asset<Image> IMAGE_ASSET = createAsset("image");
-    public static Asset<Audio> AUDIO_ASSET = createAsset("audio");
+    public static AssetManager<Image> images = createAsset("image");
 
-    public static Asset<LevelState> LEVEL_ASSET = createAsset("level");
+    public static AssetManager<SpriteSheet> sprites = createAsset("sprite");
+    public static AssetManager<Audio> audios = createAsset("audio");
+    public static AssetManager<LevelState> levels = createAsset("level");
 
     private final HashMap<String, AssetLoader<A>> assets = new HashMap<>();
     private final String name;
 
-    private Asset(String name) {
+    private AssetManager(String name) {
         this.name = name;
     }
 
-    private static <A> Asset<A> createAsset(String name) {
-        Asset<A> asset = new Asset<>(name);
-        ASSETS.add(asset);
-        return asset;
+    private static <A> AssetManager<A> createAsset(String name) {
+        AssetManager<A> assetManager = new AssetManager<>(name);
+        ASSET_MANAGERS.add(assetManager);
+        return assetManager;
     }
 
     /**
@@ -55,8 +56,8 @@ public class Asset<A> {
 
     private static Collection<AssetLoader<?>> getAllLoaders() {
         Collection<AssetLoader<?>> loaders = new LinkedList<>();
-        for (Asset<?> asset : ASSETS) {
-            loaders.addAll(asset.assets.values());
+        for (AssetManager<?> assetManager : ASSET_MANAGERS) {
+            loaders.addAll(assetManager.assets.values());
         }
         return loaders;
     }

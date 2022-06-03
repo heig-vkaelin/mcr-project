@@ -1,6 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
-import ch.heigvd.mcr.assets.Asset;
+import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.components.LevelButton;
 
@@ -41,7 +41,7 @@ public class MenuView implements View {
         levelButtons = new LinkedList<>();
         cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
         cards.setBackground(Color.white);
-        for (LevelState level : Asset.LEVEL_ASSET.getAll()) {
+        for (LevelState level : AssetManager.levels.getAll()) {
             JButton btn = new LevelButton(
                     "Niveau",
                     level.getId(),
