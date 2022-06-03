@@ -1,9 +1,9 @@
 package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.assets.SpriteSheet;
 import ch.heigvd.mcr.assets.loaders.AudioAssetLoader;
 import ch.heigvd.mcr.assets.loaders.ImageAssetLoader;
+import ch.heigvd.mcr.assets.loaders.SpriteSheetAssetLoader;
 import ch.heigvd.mcr.assets.registers.LevelsRegister;
 
 /**
@@ -17,9 +17,9 @@ public class Main {
      */
     public static void main(String[] args) {
         final int DELTA_MS = 20;
-        new SpriteSheet(ClassLoader.getSystemResource("sprite.sheet"));
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
+        AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
         AssetManager.levels.register(new LevelsRegister());
 
         AssetManager.loadAll((progress, done) -> {
