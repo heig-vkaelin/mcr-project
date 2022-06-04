@@ -18,9 +18,6 @@ import java.util.List;
  */
 public class LevelParser {
 
-    // TODO: peut etre bouger les vérif dans LevelState avec le reste
-    // TODO: Gérer toutes les exceptions
-
     private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
 
     private final static int MIN_LEVEL_SIZE = 6;
@@ -42,18 +39,20 @@ public class LevelParser {
             }
         }
 
+
         return levels;
     }
 
-    public static LevelState parseLevelFile(String filename) {
-        int id;
-        try {
-            id = Integer.parseInt(filename.split("\\.")[0]);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Invalid level file name");
-        }
+    /**
+     * Récupère la configuration d'un niveau depuis un fichier
+     *
+     * @param filename nom du fichier de niveau
+     * @return l'état du niveau valide
+     * @throws RuntimeException en cas de fichier non conforme
+     */
+    public static LevelState parseLevelFile(String filename) throws RuntimeException {
 
-        LevelState state = new LevelState(id);
+        LevelState state = new LevelState(getIdFromFilename(filename));
 
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
             String line;
@@ -81,7 +80,7 @@ public class LevelParser {
                         state.setSideSize(size);
                     }
                     case 1 -> {
-                        // Difficulté:
+                        // Difficulté
                         int enumIndex = Integer.parseInt(values[0]) - 1;
                         state.setDifficulty(Difficulty.values()[enumIndex]);
                     }
@@ -89,39 +88,27 @@ public class LevelParser {
                         // Voiture du joueur
                         final int x = Integer.parseInt(values[0]);
                         final int y = Integer.parseInt(values[1]);
-                        if (!validateCoordinates(x, y, state.getSideSize())) {
+
+                        if (isOutOfBounds(x, y, state.getSideSize())) {
                             throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
                         }
-                        state.addEntity(new Vehicle(
-                                x,
-                                y,
-                                Direction.getFromKey(values[2]),
-                                VehicleType.RED_CAR
-                        ));
+                        state.addVehicle(x, y, Direction.getFromKey(values[2]), VehicleType.getFromKey(values[3]));
                     }
                     default -> {
                         final int x = Integer.parseInt(values[1]);
                         final int y = Integer.parseInt(values[2]);
-                        if (!validateCoordinates(x, y, state.getSideSize())) {
+
+                        if (isOutOfBounds(x, y, state.getSideSize())) {
                             throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
                         }
+
+                        final Direction direction = Direction.getFromKey(values[3]);
+
+                        // Type d'entité
                         switch (values[0]) {
-                            case "v" -> state.addEntity(new Vehicle(
-                                    x,
-                                    y,
-                                    Direction.getFromKey(values[3]),
-                                    VehicleType.getFromKey(values[4])
-                            ));
-                            case "o" -> state.addEntity(new Obstacle(
-                                    x,
-                                    y,
-                                    Direction.getFromKey(values[3]),
-                                    ObstacleType.getFromKey(values[4])));
-                            case "p" -> state.addEntity(new Pedestrian(
-                                    x,
-                                    y,
-                                    Direction.getFromKey(values[3]),
-                                    PedestrianType.getFromKey(values[4])));
+                            case "v" -> state.addVehicle(x, y, direction, VehicleType.getFromKey(values[4]));
+                            case "o" -> state.addObstacle(x, y, direction, ObstacleType.getFromKey(values[4]));
+                            case "p" -> state.addPedestrian(x, y, direction, PedestrianType.getFromKey(values[4]));
                             default -> throw new RuntimeException("Invalid entity type");
                         }
                     }
@@ -134,7 +121,30 @@ public class LevelParser {
         return state;
     }
 
-    private static boolean validateCoordinates(int x, int y, int max) {
-        return !(x < 0 || y < 0 || x >= max || y >= max);
+    /**
+     * Vérifie si les coordonnées sont valides pour la taille du plateau
+     *
+     * @param x    Coordonnée axe x
+     * @param y    Coordonnée axe y
+     * @param size la taille du plateau de jeu
+     * @return vrai si valide, sinon faux
+     */
+    private static boolean isOutOfBounds(int x, int y, int size) {
+        return x < 0 || y < 0 || x >= size || y >= size;
+    }
+
+    /**
+     * Récupère l'id du niveau depuis le nom du fichier
+     *
+     * @param filename nom du fichier de niveau
+     * @return id du niveau
+     * @throws RuntimeException si le nom du fichier n'est pas dans le format attentu
+     */
+    private static int getIdFromFilename(String filename) throws RuntimeException {
+        try {
+            return Integer.parseInt(filename.split("\\.")[0]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid level file name");
+        }
     }
 }
