@@ -59,7 +59,6 @@ public class MenuView implements View {
         panel.add(cards);
         frame.setContentPane(panel);
         frame.pack();
-        frame.setVisible(true);
     }
 
     @Override
