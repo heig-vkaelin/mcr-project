@@ -1,0 +1,23 @@
+# SpriteSheet for pedestrians
+pedestrians.png
+boy 0 0 16 16
+girl 16 0 16 16
+dog 32 0 16 16
+cat 48 0 16 16
+bird 64 0 16 16
+man 80 0 16 16
+man2 96 0 16 16
+man3 0 16 16 16
+grandpa 16 16 16 16
+bigman 32 16 16 16
+woman 48 16 16 16
+man4 64 16 16 16
+weirdman 80 16 16 16
+man5 96 16 16 16
+fatdog 0 32 16 16
+gandalf 16 32 16 16
+girl2 32 32 16 16
+grandma 48 32 16 16
+grandma2 64 32 16 16
+grandma3 80 32 16 16
+fitgirl 96 32 16 16

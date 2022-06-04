@@ -1,6 +1,6 @@
 package ch.heigvd.mcr.assets.registers;
 
-import ch.heigvd.mcr.assets.Asset;
+import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.loaders.LevelAssetLoader;
 import ch.heigvd.mcr.levels.LevelState;
 
@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class LevelsRegister implements Register<LevelState> {
     @Override
-    public void register(Asset<LevelState> asset) {
+    public void register(AssetManager<LevelState> assetManager) {
         try {
             URI uri = ClassLoader.getSystemResource("levels").toURI();
             if (uri.getScheme().equals("jar")) {//si on est dans un jar
@@ -20,7 +20,7 @@ public class LevelsRegister implements Register<LevelState> {
             }
             Files.walk(Paths.get(uri)).filter(path -> !Files.isDirectory(path)).sorted().forEach(path -> {
                 int id = Integer.parseInt(path.getFileName().toString().split("\\.")[0]);
-                asset.register("level" + id, new LevelAssetLoader(path.getFileName().toString()));
+                assetManager.register("level" + id, new LevelAssetLoader(path.getFileName().toString()));
             });
         } catch (Exception e) {
             e.printStackTrace();

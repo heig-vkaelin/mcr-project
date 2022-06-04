@@ -1,7 +1,7 @@
 package ch.heigvd.mcr.assets.registers;
 
-import ch.heigvd.mcr.assets.Asset;
+import ch.heigvd.mcr.assets.AssetManager;
 
 public interface Register<A> {
-    void register(Asset<A> asset);
+    void register(AssetManager<A> assetManager);
 }
