@@ -3,13 +3,12 @@ package ch.heigvd.mcr.levels;
 import ch.heigvd.mcr.entities.*;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Classe permettant de lire et sérialiser des fichiers de niveau du jeu
@@ -18,43 +17,20 @@ import java.util.List;
  */
 public class LevelParser {
 
-    private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
-
     private final static int MIN_LEVEL_SIZE = 6;
-
-    /**
-     * Charge tous les niveaux du jeu
-     *
-     * @return la liste des niveaux
-     */
-    public static List<LevelState> loadAllLevels() {
-        LinkedList<LevelState> levels = new LinkedList<>();
-        File folder = new File(LEVELS_DIR.getFile());
-        File[] levelNames = folder.listFiles();
-
-        if (levelNames != null) {
-            Arrays.sort(levelNames, Comparator.comparing(File::getName));
-            for (File levelName : levelNames) {
-                levels.add(parseLevelFile(levelName.getName()));
-            }
-        }
-
-
-        return levels;
-    }
 
     /**
      * Récupère la configuration d'un niveau depuis un fichier
      *
-     * @param filename nom du fichier de niveau
+     * @param levelPath : chemin du fichier de niveau
      * @return l'état du niveau valide
      * @throws RuntimeException en cas de fichier non conforme
      */
-    public static LevelState parseLevelFile(String filename) throws RuntimeException {
+    public static LevelState parseLevelFile(URL levelPath) throws RuntimeException {
 
-        LevelState state = new LevelState(getIdFromFilename(filename));
+        LevelState state = new LevelState(getIdFromFilename(levelPath));
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(LEVELS_DIR.getFile(), filename)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(levelPath.openStream()))) {
             String line;
             int count = 0;
 
@@ -136,14 +112,15 @@ public class LevelParser {
     /**
      * Récupère l'id du niveau depuis le nom du fichier
      *
-     * @param filename nom du fichier de niveau
+     * @param levelPath : chemin du fichier de niveau
      * @return id du niveau
      * @throws RuntimeException si le nom du fichier n'est pas dans le format attentu
      */
-    private static int getIdFromFilename(String filename) throws RuntimeException {
+    private static int getIdFromFilename(URL levelPath) throws RuntimeException {
         try {
-            return Integer.parseInt(filename.split("\\.")[0]);
-        } catch (NumberFormatException e) {
+            Path path = Paths.get(levelPath.toURI());
+            return Integer.parseInt(path.getFileName().toString().split("\\.")[0]);
+        } catch (Exception e) {
             throw new RuntimeException("Invalid level file name");
         }
     }
