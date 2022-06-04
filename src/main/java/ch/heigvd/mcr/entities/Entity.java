@@ -9,9 +9,9 @@ import java.awt.*;
  * @author Nicolas Crausaz
  */
 public abstract class Entity {
-    protected int coordX, coordY;
     private final Direction direction;
     private final EntityType type;
+    protected int coordX, coordY;
 
     public Entity(int originX, int originY, Direction direction, EntityType type) {
         coordX = originX;

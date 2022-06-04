@@ -1,0 +1,14 @@
+# SpriteSheet for cars
+cars.png
+red 0 0 16 32
+blue 16 0 16 32
+striped 32 0 16 32
+yellow 48 0 16 32
+gray 64 0 16 32
+taxi 80 0 16 32
+police 96 0 16 32
+bus 112 0 16 64
+truck 144 0 16 48
+school_bus 160 0 16 48
+van 112 64 16 32
+exploded_car 80 64 16 32
