@@ -20,7 +20,8 @@ public class LevelsRegister implements Register<LevelState> {
             }
             Files.walk(Paths.get(uri)).filter(path -> !Files.isDirectory(path)).sorted().forEach(path -> {
                 int id = Integer.parseInt(path.getFileName().toString().split("\\.")[0]);
-                assetManager.register("level" + id, new LevelAssetLoader(path.getFileName().toString()));
+                String relativePath = Paths.get(uri).getParent().relativize(path).toString();
+                assetManager.register("level" + id, new LevelAssetLoader(relativePath));
             });
         } catch (Exception e) {
             e.printStackTrace();

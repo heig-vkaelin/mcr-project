@@ -13,7 +13,6 @@ public class GameController {
      * Constructeur du contrôleur du jeu
      */
     public GameController() {
-        LevelController.getInstance();
     }
 
     /**

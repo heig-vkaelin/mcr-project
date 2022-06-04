@@ -3,16 +3,12 @@ package ch.heigvd.mcr.levels;
 import ch.heigvd.mcr.entities.*;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Classe permettant de lire et sérialiser des fichiers de niveau du jeu
@@ -21,50 +17,20 @@ import java.util.List;
  */
 public class LevelParser {
 
-    // TODO: faire des validations plus strictes
-    // TODO: Gérer toutes les exceptions
-
-    private final static URL LEVELS_DIR = ClassLoader.getSystemResource("levels");
+    private final static int MIN_LEVEL_SIZE = 6;
 
     /**
-     * Charge tous les niveaux du jeu
+     * Récupère la configuration d'un niveau depuis un fichier
      *
-     * @return la liste des niveaux
+     * @param levelPath : chemin du fichier de niveau
+     * @return l'état du niveau valide
+     * @throws RuntimeException en cas de fichier non conforme
      */
-    public static List<LevelState> loadAllLevels() {
-        //liste des niveaux
-        List<LevelState> levels = new LinkedList<>();
-        try {
-            URI uri = ClassLoader.getSystemResource("levels").toURI();
-            if (uri.getScheme().equals("jar")) {//si on est dans un jar
-                FileSystems.newFileSystem(uri, new HashMap<>());
-            }
-            Files.walk(Paths.get(uri)).filter(path -> !Files.isDirectory(path)).sorted().forEach(path -> {
-                LevelState l = parseLevelFile(path.getFileName().toString());
-                levels.add(l);
-                System.out.println("Loaded level " + l.getId());
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return levels;
-    }
+    public static LevelState parseLevelFile(URL levelPath) throws RuntimeException {
 
-    public static LevelState parseLevelFile(String filename) {
-        int id;
-        try {
-            id = Integer.parseInt(filename.split("\\.")[0]);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Invalid level file name");
-        }
+        LevelState state = new LevelState(getIdFromFilename(levelPath));
 
-        LevelState state = new LevelState(id);
-        //need to use ClassLoader.getSystemResourceAsStream...
-        InputStream stream = ClassLoader.getSystemResourceAsStream("levels/" + filename);
-        if (stream == null) {
-            throw new RuntimeException("Level file not found");
-        }
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(levelPath.openStream()))) {
             String line;
             int count = 0;
 
@@ -81,47 +47,47 @@ public class LevelParser {
                 }
 
                 switch (count) {
-                    case 0:
+                    case 0 -> {
                         // Taille grille
-                        state.setSideSize(Integer.parseInt(values[0]));
-                        break;
-
-                    case 1:
-                        // Difficulté:
+                        final int size = Integer.parseInt(values[0]);
+                        if (size < MIN_LEVEL_SIZE) {
+                            throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE);
+                        }
+                        state.setSideSize(size);
+                    }
+                    case 1 -> {
+                        // Difficulté
                         int enumIndex = Integer.parseInt(values[0]) - 1;
                         state.setDifficulty(Difficulty.values()[enumIndex]);
-                        break;
-
-                    case 2:
+                    }
+                    case 2 -> {
                         // Voiture du joueur
-                        state.addEntity(new Vehicle(
-                                Integer.parseInt(values[0]),
-                                Integer.parseInt(values[1]),
-                                Direction.getFromKey(values[2]),
-                                VehicleType.RED_CAR
-                        ));
-                        break;
+                        final int x = Integer.parseInt(values[0]);
+                        final int y = Integer.parseInt(values[1]);
 
-                    default:
+                        if (isOutOfBounds(x, y, state.getSideSize())) {
+                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
+                        }
+                        state.addVehicle(x, y, Direction.getFromKey(values[2]), VehicleType.getFromKey(values[3]));
+                    }
+                    default -> {
+                        final int x = Integer.parseInt(values[1]);
+                        final int y = Integer.parseInt(values[2]);
+
+                        if (isOutOfBounds(x, y, state.getSideSize())) {
+                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
+                        }
+
+                        final Direction direction = Direction.getFromKey(values[3]);
+
+                        // Type d'entité
                         switch (values[0]) {
-                            case "v" -> state.addEntity(new Vehicle(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
-                                    Direction.getFromKey(values[3]),
-                                    VehicleType.getFromKey(values[4])
-                            ));
-                            case "o" -> state.addEntity(new Obstacle(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
-                                    Direction.getFromKey(values[3]),
-                                    ObstacleType.getFromKey(values[4])));
-                            case "p" -> state.addEntity(new Pedestrian(
-                                    Integer.parseInt(values[1]),
-                                    Integer.parseInt(values[2]),
-                                    Direction.getFromKey(values[3]),
-                                    PedestrianType.getFromKey(values[4])));
+                            case "v" -> state.addVehicle(x, y, direction, VehicleType.getFromKey(values[4]));
+                            case "o" -> state.addObstacle(x, y, direction, ObstacleType.getFromKey(values[4]));
+                            case "p" -> state.addPedestrian(x, y, direction, PedestrianType.getFromKey(values[4]));
                             default -> throw new RuntimeException("Invalid entity type");
                         }
+                    }
                 }
                 ++count;
             }
@@ -129,5 +95,33 @@ public class LevelParser {
             e.printStackTrace();
         }
         return state;
+    }
+
+    /**
+     * Vérifie si les coordonnées sont valides pour la taille du plateau
+     *
+     * @param x    Coordonnée axe x
+     * @param y    Coordonnée axe y
+     * @param size la taille du plateau de jeu
+     * @return vrai si valide, sinon faux
+     */
+    private static boolean isOutOfBounds(int x, int y, int size) {
+        return x < 0 || y < 0 || x >= size || y >= size;
+    }
+
+    /**
+     * Récupère l'id du niveau depuis le nom du fichier
+     *
+     * @param levelPath : chemin du fichier de niveau
+     * @return id du niveau
+     * @throws RuntimeException si le nom du fichier n'est pas dans le format attentu
+     */
+    private static int getIdFromFilename(URL levelPath) throws RuntimeException {
+        try {
+            Path path = Paths.get(levelPath.toURI());
+            return Integer.parseInt(path.getFileName().toString().split("\\.")[0]);
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid level file name");
+        }
     }
 }
