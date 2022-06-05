@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
+import ch.heigvd.mcr.ui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +12,8 @@ import java.awt.*;
  *
  * @author Valentin Kaelin
  */
-public class PlayView implements View {
-    private static final int INITIAL_WIDTH = 640;
-    private static final int INITIAL_HEIGHT = 480;
+public class PlayView extends JPanel {
 
-    public final JFrame frame;
     private final JPanel mainPanel;
     private final JPanel gamePanel;
     private final JPanel btnsPanel;
@@ -30,11 +28,10 @@ public class PlayView implements View {
      *
      * @param level : le niveau à afficher
      */
-    public PlayView(LevelState level) {
-        frame = new JFrame();
-        frame.setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("DISIT - Niveau " + level.getId());
+    public PlayView(MainFrame parent, LevelState level) {
+        // super(parent);
+
+        // setTitle("DISIT - Niveau " + level.getId());
 
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
@@ -49,42 +46,30 @@ public class PlayView implements View {
 
         btnUndo = new JButton("Annuler");
         btnMenu = new JButton("Menu");
-        btnMenu.addActionListener(e -> {
-            new MenuView().show();
-            close();
-        });
+
         btnRestart = new JButton("Recommencer");
         btnCheat = new JButton("Cheat");
-        btnCheat.addActionListener(e -> {
-            AssetManager.audios.get("death").play();
-        });
+
+        registerHandlers();
 
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
-
         mainPanel.add(gamePanel);
         mainPanel.add(btnsPanel);
-
-        frame.setContentPane(mainPanel);
-//        frame.pack();
-        frame.setVisible(true);
     }
 
-    @Override
-    public void repaint() {
+    private void registerHandlers() {
+        btnMenu.addActionListener(e -> {
+            // getParent().openMenuView();
+        });
 
+        btnCheat.addActionListener(e -> {
+            AssetManager.audios.get("death").play();
+        });
+
+        // ... add more handlers
     }
 
-    @Override
-    public void close() {
-        frame.setVisible(false);
-        frame.dispose();
-    }
-
-    @Override
-    public void show() {
-        frame.setVisible(true);
-    }
 }

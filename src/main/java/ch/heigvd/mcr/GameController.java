@@ -1,5 +1,6 @@
 package ch.heigvd.mcr;
 
+import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.ui.views.MenuView;
 
@@ -26,6 +27,6 @@ public class GameController {
 //            MenuView.getInstance().repaint()
 //        }).start();
 
-        new HomeView().show();
+        new MainFrame();
     }
 }

@@ -1,23 +1,36 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.ui.MainFrame;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
- * Interface utilisée pour les différentes vues de l'application
- *
- * @author Valentin Kaelin
+ * @author Nicolas Crausaz
  */
-public interface View {
-    /**
-     * Redessine la vue
-     */
-    void repaint();
+public abstract class View extends JPanel {
 
-    /**
-     * Ferme la vue
-     */
-    void close();
+    private static final int INITIAL_WIDTH = 640;
+    private static final int INITIAL_HEIGHT = 480;
 
-    /**
-     * Affiche la vue
-     */
-    void show();
+    private final MainFrame parent;
+
+    protected View(MainFrame parent) {
+        this(parent, new BorderLayout());
+    }
+
+    protected View(MainFrame parent, LayoutManager layout) {
+        super(layout);
+        this.parent = parent;
+        // setPreferredSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
+        revalidate();
+    }
+
+    public void setTitle(String title) {
+        parent.setTitle(title);
+    }
+
+    public MainFrame getParent() {
+        return parent;
+    }
 }
