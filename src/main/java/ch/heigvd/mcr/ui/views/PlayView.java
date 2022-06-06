@@ -3,6 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ import java.awt.*;
  */
 public class PlayView extends JPanel {
 
-    private final JPanel mainPanel;
+    // private final JPanel mainPanel;
     private final JPanel gamePanel;
     private final JPanel btnsPanel;
 
@@ -22,6 +23,7 @@ public class PlayView extends JPanel {
     private final JButton btnMenu;
     private final JButton btnRestart;
     private final JButton btnCheat;
+    private final MainFrame parent;
 
     /**
      * Constructeur permettant de pour construire la vue
@@ -29,26 +31,27 @@ public class PlayView extends JPanel {
      * @param level : le niveau à afficher
      */
     public PlayView(MainFrame parent, LevelState level) {
-        // super(parent);
+        super(new BorderLayout());
+        this.parent = parent;
 
-        // setTitle("DISIT - Niveau " + level.getId());
+        parent.setTitle("DISIT - Niveau " + level.getId());
 
-        mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        setBackground(Color.WHITE);
+        // setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         gamePanel = new JPanel();
         gamePanel.setBackground(Color.GRAY);
 
         btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
-        btnsPanel.setLayout(new BoxLayout(btnsPanel, BoxLayout.X_AXIS));
 
-        btnUndo = new JButton("Annuler");
-        btnMenu = new JButton("Menu");
+        btnUndo = new FlatButton("Annuler", new Color(180, 32, 42), Color.WHITE);
+        btnMenu = new FlatButton("Menu", new Color(180, 32, 42), Color.WHITE);
 
-        btnRestart = new JButton("Recommencer");
-        btnCheat = new JButton("Cheat");
+        btnRestart = new FlatButton("Recommencer", new Color(180, 32, 42), Color.WHITE);
+        btnCheat = new FlatButton("Cheat", new Color(180, 32, 42), Color.WHITE);
+
+        buildGrid();
 
         registerHandlers();
 
@@ -56,13 +59,17 @@ public class PlayView extends JPanel {
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
-        mainPanel.add(gamePanel);
-        mainPanel.add(btnsPanel);
+        add(gamePanel, BorderLayout.CENTER);
+        add(btnsPanel, BorderLayout.PAGE_END);
+    }
+
+    private void buildGrid() {
+        gamePanel.add(new JLabel(new ImageIcon(AssetManager.sprites.get("board").get("C"))));
     }
 
     private void registerHandlers() {
         btnMenu.addActionListener(e -> {
-            // getParent().openMenuView();
+            parent.openMenuView();
         });
 
         btnCheat.addActionListener(e -> {

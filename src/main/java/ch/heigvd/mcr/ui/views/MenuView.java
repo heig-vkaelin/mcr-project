@@ -3,6 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.components.FlatButton;
 import ch.heigvd.mcr.ui.components.LevelButton;
 
 import javax.swing.*;
@@ -23,19 +24,21 @@ public class MenuView extends JPanel {
 
     private final List<JButton> levelButtons;
 
+    private final MainFrame parent;
+
+
     /**
      * Constructeur permettant de construire la vue
      */
     public MenuView(MainFrame parent) {
-        // super(parent);
+        this.parent = parent;
 
-        // setTitle("DISIT - Select level");
-
-        setBackground(Color.WHITE);
+        parent.setTitle("DISIT - Select level");
 
         levelButtons = new LinkedList<>();
         cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
-        cards.setBackground(Color.white);
+
+        cards.setOpaque(false);
         for (LevelState level : AssetManager.levels.getAll()) {
             JButton btn = new LevelButton(
                     "Niveau",
@@ -43,14 +46,24 @@ public class MenuView extends JPanel {
                     level.getDifficulty()
             );
             btn.addActionListener(e -> {
-                System.out.println("Click on level " + level.getId());
-                // getParent().openLevelView(level);
-                // close();
+                parent.openLevelView(level);
             });
             levelButtons.add(btn);
             cards.add(btn);
         }
 
+//        FlatButton goBack = new FlatButton("Home", new Color(180, 32, 42), Color.WHITE);
+//        JPanel btnPanel = new JPanel();
+//        btnPanel.add(goBack);
+
         add(cards);
+//        add(btnPanel, BorderLayout.PAGE_END);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.drawImage(AssetManager.images.get("menu_background").getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT), 0, 0, null);
     }
 }

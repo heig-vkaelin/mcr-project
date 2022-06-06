@@ -30,10 +30,7 @@ public class MainFrame extends JFrame {
         mainPanel.add(new HomeView(this), "home");
         mainPanel.add(new MenuView(this), "menu");
 
-
         add(mainPanel);
-
-        // showHomeView();
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -41,33 +38,15 @@ public class MainFrame extends JFrame {
     }
 
     public void showHomeView() {
-        System.out.println("home view called");
-//        mainPanel.add(new HomeView(this));
-//        getContentPane().revalidate();
-//        getContentPane().repaint();
-
-
         currentView.show(mainPanel, "home");
-        repaint();
     }
 
     public void openMenuView() {
-        System.out.println("menu view called");
-//        mainPanel.add(new MenuView(this));
-//        getContentPane().revalidate();
-//        getContentPane().repaint();
-
         currentView.show(mainPanel, "menu");
-
-        repaint();
     }
 
     public void openLevelView(LevelState level) {
-
-
-        System.out.println("play view called");
-        mainPanel.add(new PlayView(this, level));
-        getContentPane().revalidate();
-        getContentPane().repaint();
+        mainPanel.add(new PlayView(this, level), "level");
+        currentView.show(mainPanel, "level");
     }
 }

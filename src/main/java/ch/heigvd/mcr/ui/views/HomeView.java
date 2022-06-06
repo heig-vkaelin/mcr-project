@@ -7,16 +7,23 @@ import ch.heigvd.mcr.ui.components.FlatButton;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Vue de la page d'accueil
+ *
+ * @author Nicolas Crausaz
+ */
 public class HomeView extends JPanel {
 
     private final JButton play;
     private final JButton quit;
+    private final MainFrame parent;
 
     public HomeView(MainFrame parent) {
-        // super(parent, new BorderLayout());
         super(new BorderLayout());
+        this.parent = parent;
 
         setBackground(Color.BLACK);
+
         JLabel picLabel = new JLabel(new ImageIcon(AssetManager.images.get("logo")));
         JPanel btnPanel = new JPanel();
 
@@ -40,8 +47,7 @@ public class HomeView extends JPanel {
     }
 
     private void registerHandlers() {
-        play.addActionListener(e -> { // getParent().openMenuView();
-            System.out.println("click"); });
+        play.addActionListener(e -> parent.openMenuView());
 
         quit.addActionListener(e -> System.exit(0));
     }
