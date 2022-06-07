@@ -3,7 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
-import ch.heigvd.mcr.ui.components.BoardCanvas;
+import ch.heigvd.mcr.ui.components.BoardPanel;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
@@ -16,8 +16,7 @@ import java.awt.*;
  */
 public class PlayView extends JPanel {
 
-    // private final JPanel mainPanel;
-    // private final JPanel gamePanel;
+    private final BoardPanel boardPanel;
     private final JPanel btnsPanel;
 
     private final JButton btnUndo;
@@ -54,11 +53,14 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
+        boardPanel = new BoardPanel(level.getSideSize());
+        boardPanel.setBackground(Color.GRAY);
+
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
-        add(new BoardCanvas(level.getSideSize()), BorderLayout.CENTER);
+        add(boardPanel, BorderLayout.CENTER);
         add(btnsPanel, BorderLayout.PAGE_END);
     }
 

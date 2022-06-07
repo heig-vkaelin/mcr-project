@@ -2,20 +2,22 @@ package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.assets.AssetManager;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class BoardCanvas extends Canvas {
+public class BoardPanel extends JPanel {
 
     private final int size;
 
-    // private final int exit; // Position & direction ?
-
-    public BoardCanvas(int size) {
+    public BoardPanel(int size) {
         this.size = size;
     }
 
     @Override
     public void paint(Graphics g) {
+
+        // TODO: Ajouter la sortie selon position et orientation de la voiture
+        // TODO: Refactor
 
         final int side = Math.min(getWidth(), getHeight()) / (size + 2);
         final int offset = (getWidth() - side * (size + 2)) / 2;
@@ -56,17 +58,5 @@ public class BoardCanvas extends Canvas {
 
 
         g.drawImage(AssetManager.sprites.get("board").get("BR"), offset + (size + 1) * side, (size + 1) * side, side, side, null);
-
-
-
-
-
-
-//        for (int i = 1; i < size + 1; ++i) {
-//            g.drawImage(AssetManager.sprites.get("board").get("L"), (size - 1) * side, i * side, side, side, null);
-//        }
-
-
-        // g.drawImage(AssetManager.sprites.get("board").get("C"), 0, 0, 50, 50, null);
     }
 }
