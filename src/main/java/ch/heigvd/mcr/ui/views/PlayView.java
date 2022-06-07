@@ -3,6 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.components.BoardCanvas;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.awt.*;
 public class PlayView extends JPanel {
 
     // private final JPanel mainPanel;
-    private final JPanel gamePanel;
+    // private final JPanel gamePanel;
     private final JPanel btnsPanel;
 
     private final JButton btnUndo;
@@ -39,8 +40,8 @@ public class PlayView extends JPanel {
         setBackground(Color.WHITE);
         // setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        gamePanel = new JPanel();
-        gamePanel.setBackground(Color.GRAY);
+        //gamePanel = new JPanel();
+        // gamePanel.setBackground(Color.GRAY);
 
         btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
@@ -51,20 +52,14 @@ public class PlayView extends JPanel {
         btnRestart = new FlatButton("Recommencer", new Color(180, 32, 42), Color.WHITE);
         btnCheat = new FlatButton("Cheat", new Color(180, 32, 42), Color.WHITE);
 
-        buildGrid();
-
         registerHandlers();
 
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
-        add(gamePanel, BorderLayout.CENTER);
+        add(new BoardCanvas(level.getSideSize()), BorderLayout.CENTER);
         add(btnsPanel, BorderLayout.PAGE_END);
-    }
-
-    private void buildGrid() {
-        gamePanel.add(new JLabel(new ImageIcon(AssetManager.sprites.get("board").get("C"))));
     }
 
     private void registerHandlers() {
