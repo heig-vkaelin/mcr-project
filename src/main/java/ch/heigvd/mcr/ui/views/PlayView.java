@@ -4,6 +4,7 @@ import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.BoardPanel;
+import ch.heigvd.mcr.ui.components.DraggableEntity;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.*;
  * Classe représentant la vue de jeu dans un niveau spécifique
  *
  * @author Valentin Kaelin
+ * @author Nicolas Crausaz
  */
 public class PlayView extends JPanel {
 
@@ -37,10 +39,6 @@ public class PlayView extends JPanel {
         parent.setTitle("DISIT - Niveau " + level.getId());
 
         setBackground(Color.WHITE);
-        // setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
-        //gamePanel = new JPanel();
-        // gamePanel.setBackground(Color.GRAY);
 
         btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
@@ -55,6 +53,10 @@ public class PlayView extends JPanel {
 
         boardPanel = new BoardPanel(level.getSideSize());
         boardPanel.setBackground(Color.GRAY);
+
+        boardPanel.setLayout(new FlowLayout());
+
+        boardPanel.add(new DraggableEntity(level.getEntities().get(0)));
 
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
@@ -73,7 +75,10 @@ public class PlayView extends JPanel {
             AssetManager.audios.get("death").play();
         });
 
-        // ... add more handlers
-    }
+        btnUndo.addActionListener(e -> {
+        });
 
+        btnRestart.addActionListener(e -> {
+        });
+    }
 }

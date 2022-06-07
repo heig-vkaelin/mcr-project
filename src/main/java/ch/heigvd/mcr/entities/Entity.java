@@ -28,6 +28,14 @@ public abstract class Entity {
         return coordY;
     }
 
+    public void setX(int x) {
+        this.coordX = x;
+    }
+
+    public void setY(int y) {
+        this.coordY = y;
+    }
+
     public Direction getDirection() {
         return direction;
     }

@@ -11,10 +11,14 @@ public class BoardPanel extends JPanel {
 
     public BoardPanel(int size) {
         this.size = size;
+
+        // setLayout(new FlowLayout());
+        //setOpaque(false);
     }
 
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
 
         // TODO: Ajouter la sortie selon position et orientation de la voiture
         // TODO: Refactor
@@ -29,12 +33,10 @@ public class BoardPanel extends JPanel {
         }
         g.drawImage(AssetManager.sprites.get("board").get("TR"), offset + (size + 1) * side, 0, side, side, null);
 
-
         // Left borders
         for (int i = 1; i <= size; ++i) {
             g.drawImage(AssetManager.sprites.get("board").get("L"), offset, i * side, side, side, null);
         }
-
 
         // Center
         for (int i = 1; i <= size; ++i) {
@@ -48,14 +50,12 @@ public class BoardPanel extends JPanel {
             g.drawImage(AssetManager.sprites.get("board").get("R"), offset + (size + 1) * side, i * side, side, side, null);
         }
 
-
         // Last row
         g.drawImage(AssetManager.sprites.get("board").get("BL"), offset, (size + 1) * side, side, side, null);
 
         for (int i = 1; i <= size; ++i) {
             g.drawImage(AssetManager.sprites.get("board").get("B"), offset + i * side, (size + 1) * side, side, side, null);
         }
-
 
         g.drawImage(AssetManager.sprites.get("board").get("BR"), offset + (size + 1) * side, (size + 1) * side, side, side, null);
     }
