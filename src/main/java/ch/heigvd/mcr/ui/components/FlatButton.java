@@ -24,6 +24,7 @@ public class FlatButton extends JButton {
         setForeground(txtColor);
         setBorderPainted(false);
         setFocusPainted(false);
+        setOpaque(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 }
