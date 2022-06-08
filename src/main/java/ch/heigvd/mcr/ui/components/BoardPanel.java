@@ -1,12 +1,18 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ * Classe permettant d'afficher la grille de jeu
+ *
+ * @author Nicolas Crausaz
+ */
 public class BoardPanel extends JPanel {
 
     private final int size;
@@ -16,13 +22,28 @@ public class BoardPanel extends JPanel {
 
     private int offset;
 
-    public BoardPanel(int size, LinkedList<Entity> entities) {
+    private final int exitPos;
+
+    private final Direction exitSide;
+
+    /**
+     * Construit une nouvelle grille
+     *
+     * @param size     taille du coté de la grille (carrée)
+     * @param entities entités à afficher sur la grille
+     * @param exitPos  position de la sortie de la grille
+     * @param exitSide coté de la sortie de la grille
+     */
+    public BoardPanel(int size, LinkedList<Entity> entities, int exitPos, Direction exitSide) {
         this.size = size;
         this.draggables = new LinkedList<>();
         this.offset = 1;
         this.ratio = 1;
 
-        for (Entity e: entities) {
+        this.exitPos = exitPos;
+        this.exitSide = exitSide;
+
+        for (Entity e : entities) {
             DraggableEntity de = new DraggableEntity(e, ratio);
             this.draggables.add(de);
             add(de);
@@ -31,51 +52,103 @@ public class BoardPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        // TODO: Ajouter la sortie selon position et orientation de la voiture
-        // TODO: Refactor
         super.paintComponent(g);
 
         ratio = Math.min(getWidth(), getHeight()) / (size + 2);
         offset = (getWidth() - ratio * (size + 2)) / 2;
 
-        // Display first row
-        g.drawImage(AssetManager.sprites.get("board").get("TL"), offset, 0, ratio, ratio, null);
-        for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("T"), offset + i * ratio, 0, ratio, ratio, null);
-        }
-        g.drawImage(AssetManager.sprites.get("board").get("TR"), offset + (size + 1) * ratio, 0, ratio, ratio, null);
+        // Affiche les bords
+        drawHSide(g, Direction.UP, "T", 0);
+        drawVSide(g, Direction.LEFT, "L", 0);
+        drawVSide(g, Direction.RIGHT, "R", size + 1);
+        drawHSide(g, Direction.DOWN, "B", size + 1);
 
-        // Left borders
-        for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("L"), offset, i * ratio, ratio, ratio, null);
-        }
-
-        // Center
+        // Affiche les cases normales
         for (int i = 1; i <= size; ++i) {
             for (int j = 1; j <= size; ++j) {
-                g.drawImage(AssetManager.sprites.get("board").get("C"), offset + i * ratio, j * ratio, ratio, ratio, null);
+                drawSprite(g, "C", i, j);
             }
         }
 
-        // Right borders
-        for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("R"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
-        }
-
-        // Last row
-        g.drawImage(AssetManager.sprites.get("board").get("BL"), offset, (size + 1) * ratio, ratio, ratio, null);
-
-        for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("B"), offset + i * ratio, (size + 1) * ratio, ratio, ratio, null);
-        }
-
-        g.drawImage(AssetManager.sprites.get("board").get("BR"), offset + (size + 1) * ratio, (size + 1) * ratio, ratio, ratio, null);
-
-
-        // update the scale of entities
+        // Met à jour les dimensions des entités
         for (DraggableEntity e : draggables) {
             e.setRatio(ratio);
             e.setOffset(offset + ratio);
         }
+    }
+
+    /**
+     * Affiche un bord horizontal de la grille, affiche également les coins
+     *
+     * @param g               utilitaire d'affichage
+     * @param side            coté à afficher (haut ou bas)
+     * @param assetKey        clé pour l'affichage d'assets
+     * @param fixedCoordinate valeur de la coordonnée fixe (ici y)
+     */
+    private void drawHSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
+        drawSprite(g, assetKey + "L", 0, fixedCoordinate);
+        for (int i = 1; i <= size; ++i) {
+            drawBorders(g, side, assetKey, i, fixedCoordinate, i);
+        }
+        drawSprite(g, assetKey + "R", (size + 1), fixedCoordinate);
+    }
+
+    /**
+     * Affiche un bord vertical de la grille, n'affiche pas les coins
+     *
+     * @param g               utilitaire d'affichage
+     * @param side            coté à afficher (gauche ou droite)
+     * @param assetKey        clé pour l'affichage de sprites
+     * @param fixedCoordinate valeur de la coordonnée fixe (ici x)
+     */
+    private void drawVSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
+        for (int i = 1; i <= size; ++i) {
+            drawBorders(g, side, assetKey, fixedCoordinate, i, i);
+        }
+    }
+
+    /**
+     * Affiche un bord ou une sortie sur les coordonnées souhaitées
+     *
+     * @param g        utilitaire d'affichage
+     * @param side     coté du bord
+     * @param assetKey clé pour l'affichage de sprites
+     * @param x        position x
+     * @param y        position y
+     * @param exit     position à vérifier pour placer une sortie
+     */
+    private void drawBorders(Graphics g, Direction side, String assetKey, int x, int y, int exit) {
+        if (exitSide == side) {
+            if (exit == exitPos) {
+                drawSprite(g, assetKey + "H0", x, y);
+            } else if (exit == exitPos + 1) {
+                drawSprite(g, assetKey + "H1", x, y);
+            } else if (exit == exitPos + 2) {
+                drawSprite(g, assetKey + "H2", x, y);
+            } else {
+                drawSprite(g, assetKey, x, y);
+            }
+        } else {
+            drawSprite(g, assetKey, x, y);
+        }
+    }
+
+    /**
+     * Affiche un sprite de case selon la clé
+     *
+     * @param g   utilitaire d'affichage
+     * @param key clé du sprite
+     * @param x   position x d'affichage
+     * @param y   position y d'affichage
+     */
+    private void drawSprite(Graphics g, String key, int x, int y) {
+        g.drawImage(
+                AssetManager.sprites.get("board").get(key),
+                offset + x * ratio,
+                y * ratio,
+                ratio,
+                ratio,
+                null
+        );
     }
 }

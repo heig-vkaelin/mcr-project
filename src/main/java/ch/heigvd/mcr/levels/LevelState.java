@@ -17,6 +17,10 @@ public class LevelState {
     private Difficulty difficulty;
     private final LinkedList<Entity> entities;
 
+    private int exitPos;
+
+    private Direction exitSide;
+
     public LevelState(int id) {
         this.id = id;
         this.entities = new LinkedList<>();
@@ -113,6 +117,35 @@ public class LevelState {
      */
     public LinkedList<Entity> getEntities() {
         return entities;
+    }
+
+    /**
+     * Défini la position et le coté de la sortie
+     *
+     * @param pos position de la sortie
+     * @param dir coté de la sortie
+     */
+    public void setExit(int pos, Direction dir) {
+        this.exitPos = pos;
+        this.exitSide = dir;
+    }
+
+    /**
+     * Récupère la position de la sortie
+     *
+     * @return position de la sortie
+     */
+    public int getExitPos() {
+        return this.exitPos;
+    }
+
+    /**
+     * Récupère le côté de la sortie
+     *
+     * @return côté de la sortie
+     */
+    public Direction getExitSide() {
+        return this.exitSide;
     }
 
     /**
