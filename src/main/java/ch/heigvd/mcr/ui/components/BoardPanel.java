@@ -48,11 +48,25 @@ public class BoardPanel extends JPanel {
         // Display first row
         drawTopSide(g, Direction.UP, "T");
 
+        // drawRows(g, Direction.LEFT);
+
 
         // Left borders
         // drawSide(g, Direction.LEFT, "L");
         for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("L"), offset, i * ratio, ratio, ratio, null);
+            if (exitSide == Direction.LEFT) {
+                if (i - 1 == exitPos - 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH0"), offset, i * ratio, ratio, ratio, null);
+                } else if (i - 1 == exitPos) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH1"), offset, i * ratio, ratio, ratio, null);
+                } else if (i - 1 == exitPos + 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH2"), offset, i * ratio, ratio, ratio, null);
+                } else {
+                    g.drawImage(AssetManager.sprites.get("board").get("L"), offset, i * ratio, ratio, ratio, null);
+                }
+            } else {
+                g.drawImage(AssetManager.sprites.get("board").get("L"), offset, i * ratio, ratio, ratio, null);
+            }
         }
 
         // Center
@@ -62,11 +76,21 @@ public class BoardPanel extends JPanel {
             }
         }
 
-        // Right borders
         for (int i = 1; i <= size; ++i) {
-            g.drawImage(AssetManager.sprites.get("board").get("R"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+            if (exitSide == Direction.RIGHT) {
+                if (i - 1 == exitPos - 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("RH0"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+                } else if (i - 1 == exitPos) {
+                    g.drawImage(AssetManager.sprites.get("board").get("RH1"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+                } else if (i - 1 == exitPos + 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("RH2"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+                } else {
+                    g.drawImage(AssetManager.sprites.get("board").get("R"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+                }
+            } else {
+                g.drawImage(AssetManager.sprites.get("board").get("R"), offset + (size + 1) * ratio, i * ratio, ratio, ratio, null);
+            }
         }
-
 
         drawBottomSide(g, Direction.DOWN, "B");
 /*
@@ -127,6 +151,34 @@ public class BoardPanel extends JPanel {
         }
 
         g.drawImage(AssetManager.sprites.get("board").get(assetKey + "R"), offset + (size + 1) * ratio, (size + 1) * ratio, ratio, ratio, null);
+    }
+
+    private void drawRows(Graphics g, Direction side) {
+        /*
+        for (int i = 1; i <= size; ++i) {
+            for (int j = 1; j <= size; ++j) {
+                if (exitSide == side && exitPos == j - 1 && i == 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH0"), offset, ratio, ratio, ratio, null);
+
+                }
+                if (exitSide == side && exitPos == j && i == 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH1"), offset, ratio, ratio, ratio, null);
+
+                }
+                if (exitSide == side && exitPos == j + 1 && i == 1) {
+                    g.drawImage(AssetManager.sprites.get("board").get("LH2"), offset, ratio, ratio, ratio, null);
+
+                }
+                else if (exitPos == j) {
+                    g.drawImage(AssetManager.sprites.get("board").get("L"), offset, ratio, ratio, ratio, null);
+
+                } else {
+                    g.drawImage(AssetManager.sprites.get("board").get("C"), offset + i * ratio, j * ratio, ratio, ratio, null);
+                }
+            }
+        }
+
+         */
     }
 
     private void checkExit(Direction side, int i) {
