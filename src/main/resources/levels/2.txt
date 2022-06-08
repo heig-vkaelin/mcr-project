@@ -9,4 +9,4 @@ v 3 5 u police
 v 5 5 l taxi
 v 4 0 d police
 v 6 0 d bus
-p 6 6 r boy
+p 6 6 d boy
