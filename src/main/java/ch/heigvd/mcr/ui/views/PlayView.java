@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.RestartCommand;
 import ch.heigvd.mcr.levels.LevelState;

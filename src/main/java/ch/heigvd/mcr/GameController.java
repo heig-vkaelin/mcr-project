@@ -16,7 +16,6 @@ public class GameController {
      * Constructeur du contrôleur du jeu
      */
     private GameController() {
-        LevelController.getInstance();
     }
 
     /**
