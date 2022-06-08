@@ -1,10 +1,12 @@
 6
 2
-1 3 u red
-v 0 1 r taxi
-v 0 2 d yellow
-v 1 5 r police
-v 3 1 d truck
-v 3 5 r truck
+1 4 u red
+v 0 1 r yellow
+v 0 2 d blue
+v 3 0 d bus
+v 2 5 r truck
+v 2 0 u truck
+v 3 4 r police
+o 5 5 d cone
 v 0 4 d taxi
 o 4 0 d cone

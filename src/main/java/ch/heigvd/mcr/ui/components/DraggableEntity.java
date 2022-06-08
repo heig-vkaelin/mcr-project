@@ -35,6 +35,8 @@ public class DraggableEntity extends JLabel {
 
         this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
 
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {

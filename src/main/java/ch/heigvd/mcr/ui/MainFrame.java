@@ -15,10 +15,9 @@ public class MainFrame extends JFrame {
 
     private CardLayout currentView;
 
-    private JPanel mainPanel;
+    private final JPanel mainPanel;
 
     public MainFrame() {
-        super("DISIT");
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

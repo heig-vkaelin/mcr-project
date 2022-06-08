@@ -21,6 +21,7 @@ public class HomeView extends JPanel {
     public HomeView(MainFrame parent) {
         super(new BorderLayout());
         this.parent = parent;
+        parent.setTitle("DISIT");
 
         setBackground(Color.BLACK);
 
