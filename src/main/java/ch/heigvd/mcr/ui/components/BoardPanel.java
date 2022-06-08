@@ -7,8 +7,12 @@ import ch.heigvd.mcr.entities.Entity;
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
-import java.util.function.Function;
 
+/**
+ * Classe permettant d'afficher la grille de jeu
+ *
+ * @author Nicolas Crausaz
+ */
 public class BoardPanel extends JPanel {
 
     private final int size;
@@ -18,10 +22,18 @@ public class BoardPanel extends JPanel {
 
     private int offset;
 
-    private int exitPos;
+    private final int exitPos;
 
-    private Direction exitSide;
+    private final Direction exitSide;
 
+    /**
+     * Construit une nouvelle grille
+     *
+     * @param size     taille du coté de la grille (carrée)
+     * @param entities entités à afficher sur la grille
+     * @param exitPos  position de la sortie de la grille
+     * @param exitSide coté de la sortie de la grille
+     */
     public BoardPanel(int size, LinkedList<Entity> entities, int exitPos, Direction exitSide) {
         this.size = size;
         this.draggables = new LinkedList<>();
@@ -40,32 +52,39 @@ public class BoardPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        // TODO: Refactor
         super.paintComponent(g);
 
         ratio = Math.min(getWidth(), getHeight()) / (size + 2);
         offset = (getWidth() - ratio * (size + 2)) / 2;
 
-        // Display first row
+        // Affiche les bords
         drawHSide(g, Direction.UP, "T", 0);
         drawVSide(g, Direction.LEFT, "L", 0);
         drawVSide(g, Direction.RIGHT, "R", size + 1);
         drawHSide(g, Direction.DOWN, "B", size + 1);
 
-        // Center
+        // Affiche les cases normales
         for (int i = 1; i <= size; ++i) {
             for (int j = 1; j <= size; ++j) {
                 drawSprite(g, "C", i, j);
             }
         }
 
-        // update the scale of entities
+        // Met à jour les dimensions des entités
         for (DraggableEntity e : draggables) {
             e.setRatio(ratio);
             e.setOffset(offset + ratio);
         }
     }
 
+    /**
+     * Affiche un bord horizontal de la grille, affiche également les coins
+     *
+     * @param g               utilitaire d'affichage
+     * @param side            coté à afficher (haut ou bas)
+     * @param assetKey        clé pour l'affichage d'assets
+     * @param fixedCoordinate valeur de la coordonnée fixe (ici y)
+     */
     private void drawHSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
         drawSprite(g, assetKey + "L", 0, fixedCoordinate);
         for (int i = 1; i <= size; ++i) {
@@ -74,19 +93,37 @@ public class BoardPanel extends JPanel {
         drawSprite(g, assetKey + "R", (size + 1), fixedCoordinate);
     }
 
+    /**
+     * Affiche un bord vertical de la grille, n'affiche pas les coins
+     *
+     * @param g               utilitaire d'affichage
+     * @param side            coté à afficher (gauche ou droite)
+     * @param assetKey        clé pour l'affichage de sprites
+     * @param fixedCoordinate valeur de la coordonnée fixe (ici x)
+     */
     private void drawVSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
         for (int i = 1; i <= size; ++i) {
             drawBorders(g, side, assetKey, fixedCoordinate, i, i);
         }
     }
 
+    /**
+     * Affiche un bord ou une sortie sur les coordonnées souhaitées
+     *
+     * @param g        utilitaire d'affichage
+     * @param side     coté du bord
+     * @param assetKey clé pour l'affichage de sprites
+     * @param x        position x
+     * @param y        position y
+     * @param exit     position à vérifier pour placer une sortie
+     */
     private void drawBorders(Graphics g, Direction side, String assetKey, int x, int y, int exit) {
         if (exitSide == side) {
-            if (exit - 1 == exitPos - 1) {
+            if (exit == exitPos) {
                 drawSprite(g, assetKey + "H0", x, y);
-            } else if (exit - 1 == exitPos) {
+            } else if (exit == exitPos + 1) {
                 drawSprite(g, assetKey + "H1", x, y);
-            } else if (exit - 1 == exitPos + 1) {
+            } else if (exit == exitPos + 2) {
                 drawSprite(g, assetKey + "H2", x, y);
             } else {
                 drawSprite(g, assetKey, x, y);
@@ -96,6 +133,14 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * Affiche un sprite de case selon la clé
+     *
+     * @param g   utilitaire d'affichage
+     * @param key clé du sprite
+     * @param x   position x d'affichage
+     * @param y   position y d'affichage
+     */
     private void drawSprite(Graphics g, String key, int x, int y) {
         g.drawImage(
                 AssetManager.sprites.get("board").get(key),
