@@ -29,6 +29,7 @@ public class DraggableEntity extends JLabel {
     public DraggableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
         this.ratio = baseRatio;
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
 
@@ -37,9 +38,14 @@ public class DraggableEntity extends JLabel {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                entity.setX((e.getX() - getWidth() / 2) / ratio + entity.getX());
-                entity.setY((e.getY() - getHeight() / 2) / ratio + entity.getY());
-                repaint();
+                int x = (e.getX() - getWidth() / 2) / ratio + entity.getX();
+                int y = (e.getY() - getHeight() / 2) / ratio + entity.getY();
+                if(x != entity.getX() || y != entity.getY()) {
+                    entity.setX(x);
+                    entity.setY(y);
+                    repaint();
+                    System.out.println("Entity[" + entity.getType() + "] moved to (" + x + ", " + y + ")");
+                }
             }
 
             @Override
