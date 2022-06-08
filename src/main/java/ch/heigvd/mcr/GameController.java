@@ -84,6 +84,24 @@ public class GameController {
         entity.setY(newY);
         return true;
     }
+//TODO on va surement avoir besoin de modifier cette méthode
+    public void setPosition(Entity entity, int newX, int newY) {
+        if(entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
+            newX = entity.getX();
+            newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
+        } else {
+            newY = entity.getY();
+            newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
+        }
+
+        for (Entity e : state.getEntities()) {
+            if (entity != e && entity.isColliding(e, newX, newY))
+                return;
+        }
+
+        entity.setX(newX);
+        entity.setY(newY);
+    }
 
     public void addCommand(Command command) {
         undoStack.push(command);

@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.components;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
@@ -43,8 +44,7 @@ public class DraggableEntity extends JLabel {
                 int x = (e.getX() - getWidth() / 2) / ratio + entity.getX();
                 int y = (e.getY() - getHeight() / 2) / ratio + entity.getY();
                 if (x != entity.getX() || y != entity.getY()) {
-                    entity.setX(x);
-                    entity.setY(y);
+                    GameController.getInstance().setPosition(entity, x, y);
                     repaint();
                     System.out.println("Entity[" + entity.getType() + "] moved to (" + x + ", " + y + ")");
                 }

@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.ui.views.MenuView;
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
     }
 
     public void openLevelView(LevelState level) {
+        GameController.getInstance().setState(level); //TODO idk if this is the right way and place to do it
         mainPanel.add(new PlayView(this, level), "level");
         currentView.show(mainPanel, "level");
     }

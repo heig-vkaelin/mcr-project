@@ -6,6 +6,9 @@ import ch.heigvd.mcr.assets.loaders.ImageAssetLoader;
 import ch.heigvd.mcr.assets.loaders.SpriteSheetAssetLoader;
 import ch.heigvd.mcr.assets.registers.LevelsRegister;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Classe principale du jeu
  */
@@ -20,6 +23,7 @@ public class Main {
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
         AssetManager.images.register("menu_background", new ImageAssetLoader("images/menu_background.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
+        AssetManager.audios.register("music", new AudioAssetLoader("audio/music.wav"));
         AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
         AssetManager.sprites.register("cars", new SpriteSheetAssetLoader("sprites/cars.sheet"));
         AssetManager.sprites.register("obstacles", new SpriteSheetAssetLoader("sprites/obstacles.sheet"));
@@ -27,10 +31,22 @@ public class Main {
 
         AssetManager.levels.register(new LevelsRegister());
 
+        //create jframe for loading screen
+        final JFrame frame = new JFrame("MCR");
+        var loader = new JProgressBar();
+        frame.add(loader);
+        var screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize.width >> 2, 10);
+        frame.setUndecorated(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
         AssetManager.loadAll((progress, done) -> {
+            loader.setValue((int) (progress * 100));
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
-                AssetManager.audios.get("death").play();
+                frame.dispose();
+                AssetManager.audios.get("music").play();
                 GameController controller = GameController.getInstance();
                 controller.run(DELTA_MS);
             }
