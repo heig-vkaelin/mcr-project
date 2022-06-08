@@ -18,6 +18,7 @@ public class Main {
     public static void main(String[] args) {
         final int DELTA_MS = 20;
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
+        AssetManager.images.register("menu_background", new ImageAssetLoader("images/menu_background.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
         AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
         AssetManager.sprites.register("cars", new SpriteSheetAssetLoader("sprites/cars.sheet"));

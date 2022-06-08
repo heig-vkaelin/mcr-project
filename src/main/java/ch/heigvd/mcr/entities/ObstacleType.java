@@ -48,6 +48,11 @@ public enum ObstacleType implements EntityType {
     }
 
     @Override
+    public String getCategoryKey() {
+        return "obstacles";
+    }
+
+    @Override
     public int getWidth() {
         return width;
     }

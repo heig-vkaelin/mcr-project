@@ -33,6 +33,10 @@ public class LevelButton extends JButton {
         this.difficulty = difficulty;
         setVerticalAlignment(SwingConstants.TOP);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setBackground(Color.GRAY);
+        setFocusPainted(false);
+        setOpaque(true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     @Override

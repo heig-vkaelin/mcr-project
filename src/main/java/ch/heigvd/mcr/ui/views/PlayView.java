@@ -3,6 +3,10 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
+import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.components.BoardPanel;
+import ch.heigvd.mcr.ui.components.DraggableEntity;
+import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,86 +15,67 @@ import java.awt.*;
  * Classe représentant la vue de jeu dans un niveau spécifique
  *
  * @author Valentin Kaelin
+ * @author Nicolas Crausaz
  */
-public class PlayView implements View {
-    private static final int INITIAL_WIDTH = 640;
-    private static final int INITIAL_HEIGHT = 480;
+public class PlayView extends JPanel {
 
-    public final JFrame frame;
-    private final JPanel mainPanel;
-    private final JPanel gamePanel;
+    private final BoardPanel boardPanel;
     private final JPanel btnsPanel;
 
     private final JButton btnUndo;
     private final JButton btnMenu;
     private final JButton btnRestart;
     private final JButton btnCheat;
+    private final MainFrame parent;
 
     /**
      * Constructeur permettant de pour construire la vue
      *
      * @param level : le niveau à afficher
      */
-    public PlayView(LevelState level) {
-        frame = new JFrame();
-        frame.setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("DISIT - Niveau " + level.getId());
+    public PlayView(MainFrame parent, LevelState level) {
+        super(new BorderLayout());
+        this.parent = parent;
 
-        mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        parent.setTitle("DISIT - Niveau " + level.getId());
 
-        gamePanel = new JPanel();
-        gamePanel.setBackground(Color.GRAY);
+        setBackground(Color.WHITE);
 
         btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
-        btnsPanel.setLayout(new BoxLayout(btnsPanel, BoxLayout.X_AXIS));
 
-        btnUndo = new JButton("Annuler");
-        btnMenu = new JButton("Menu");
-        btnMenu.addActionListener(e -> {
-            new MenuView().show();
-            close();
-        });
-        btnRestart = new JButton("Recommencer");
-        btnRestart.addActionListener(e -> {
-            // TODO: Gérer l'affichage en se fiant au LevelState du GameController
-            GameController.getInstance().resetState();
-        });
+        btnUndo = new FlatButton("Annuler", new Color(180, 32, 42), Color.WHITE);
+        btnMenu = new FlatButton("Menu", new Color(180, 32, 42), Color.WHITE);
 
-        btnCheat = new JButton("Cheat");
-        btnCheat.addActionListener(e -> {
-            AssetManager.audios.get("death").play();
-        });
+        btnRestart = new FlatButton("Recommencer", new Color(180, 32, 42), Color.WHITE);
+        btnCheat = new FlatButton("Cheat", new Color(180, 32, 42), Color.WHITE);
+
+        registerHandlers();
+
+        boardPanel = new BoardPanel(level.getSideSize(), level.getEntities());
+        boardPanel.setBackground(Color.GRAY);
 
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
-
-        mainPanel.add(gamePanel);
-        mainPanel.add(btnsPanel);
-
-        frame.setContentPane(mainPanel);
-//        frame.pack();
-        frame.setVisible(true);
+        add(boardPanel, BorderLayout.CENTER);
+        add(btnsPanel, BorderLayout.PAGE_END);
     }
 
-    @Override
-    public void repaint() {
+    private void registerHandlers() {
+        btnMenu.addActionListener(e -> {
+            parent.openMenuView();
+        });
 
-    }
+        btnCheat.addActionListener(e -> {
+            AssetManager.audios.get("death").play();
+        });
 
-    @Override
-    public void close() {
-        frame.setVisible(false);
-        frame.dispose();
-    }
+        btnUndo.addActionListener(e -> {
+        });
 
-    @Override
-    public void show() {
-        frame.setVisible(true);
+        btnRestart.addActionListener(e -> {
+        });
     }
 }

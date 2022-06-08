@@ -1,5 +1,7 @@
 package ch.heigvd.mcr;
 
+import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.entities.Direction;
@@ -49,7 +51,7 @@ public class GameController {
 //            MenuView.getInstance().repaint()
 //        }).start();
 
-        new MenuView().show();
+        new MainFrame();
     }
 
     public void setState(LevelState state) {

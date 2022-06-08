@@ -8,6 +8,8 @@ package ch.heigvd.mcr.entities;
 public interface EntityType {
     String getKey();
 
+    String getCategoryKey();
+
     int getWidth();
 
     int getLength();
