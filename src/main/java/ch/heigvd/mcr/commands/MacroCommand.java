@@ -20,4 +20,16 @@ public class MacroCommand implements Command {
         }
         return true;
     }
+
+    @Override
+    public boolean rollback() {
+        for (Command c : subCommands) {
+            c.rollback();
+        }
+        return true;
+    }
+
+    public void addCommand(Command command) {
+        subCommands.add(command);
+    }
 }

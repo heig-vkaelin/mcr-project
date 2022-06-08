@@ -1,10 +1,13 @@
 package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.MenuView;
+
+import java.util.Stack;
 
 /**
  * Controller qui s'occupe des interactions entre l'utilisateur et le jeu ainsi
@@ -18,10 +21,13 @@ public class GameController {
 
     private LevelState state;
 
+    private final Stack<Command> undoStack;
+
     /**
      * Constructeur du contrôleur du jeu
      */
     private GameController() {
+        undoStack = new Stack<>();
     }
 
     /**
@@ -75,5 +81,15 @@ public class GameController {
         entity.setX(newX);
         entity.setY(newY);
         return true;
+    }
+
+    public void addCommand(Command command) {
+        undoStack.push(command);
+    }
+
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            undoStack.pop().rollback();
+        }
     }
 }
