@@ -17,8 +17,7 @@ public class SpriteSheet {
     private final Map<String, Image> sprites = new HashMap<>();
 
     public SpriteSheet(URL spriteSheetFile) throws IOException {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(spriteSheetFile.openStream()));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(spriteSheetFile.openStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("#") || line.isEmpty()) {
