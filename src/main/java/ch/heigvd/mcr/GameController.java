@@ -1,6 +1,8 @@
 package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.entities.Direction;
+import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.MenuView;
 
@@ -30,7 +32,7 @@ public class GameController {
             instance = new GameController();
         return instance;
     }
-    
+
     /**
      * Démarre le jeu
      *
@@ -50,5 +52,28 @@ public class GameController {
 
     public void resetState() {
         state = AssetManager.levels.get("level" + state.getId());
+    }
+
+    public boolean setNewPosition(Entity entity, int newX, int newY) {
+        if (!state.getEntities().contains(entity))
+            return false;
+
+        if ((entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) && newX != entity.getX()) {
+            return false;
+        } else if ((entity.getDirection() == Direction.RIGHT || entity.getDirection() == Direction.LEFT) && newY != entity.getY()) {
+            return false;
+        }
+
+        for (Entity e : state.getEntities()) {
+            if (entity != e && entity.isColliding(e))
+                return false;
+        }
+
+        if (newX < 0 || newY < 0 || newX >= state.getSideSize() || newY >= state.getSideSize())
+            return false;
+
+        entity.setX(newX);
+        entity.setY(newY);
+        return true;
     }
 }
