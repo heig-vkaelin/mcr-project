@@ -64,11 +64,18 @@ public class LevelParser {
                         // Voiture du joueur
                         final int x = Integer.parseInt(values[0]);
                         final int y = Integer.parseInt(values[1]);
+                        final Direction direction = Direction.getFromKey(values[2]);
 
                         if (isOutOfBounds(x, y, state.getSideSize())) {
                             throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
                         }
-                        state.addVehicle(x, y, Direction.getFromKey(values[2]), VehicleType.getFromKey(values[3]));
+                        state.addVehicle(x, y, direction, VehicleType.getFromKey(values[3]));
+
+                        if (direction == Direction.UP || direction == Direction.DOWN) {
+                            state.setExit(x, direction);
+                        } else {
+                            state.setExit(y, direction);
+                        }
                     }
                     default -> {
                         final int x = Integer.parseInt(values[1]);

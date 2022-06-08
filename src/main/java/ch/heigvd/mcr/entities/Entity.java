@@ -60,12 +60,4 @@ public abstract class Entity {
     public boolean isColliding(Entity entity) {
         return getBounds().intersects(entity.getBounds());
     }
-
-    public void setX(int newX) {
-        coordX = newX;
-    }
-
-    public void setY(int newY) {
-        coordY = newY;
-    }
 }

@@ -52,7 +52,7 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
-        boardPanel = new BoardPanel(level.getSideSize(), level.getEntities());
+        boardPanel = new BoardPanel(level.getSideSize(), level.getEntities(), level.getExitPos(), level.getExitSide());
         boardPanel.setBackground(Color.GRAY);
 
         btnsPanel.add(btnUndo);
@@ -72,10 +72,12 @@ public class PlayView extends JPanel {
             AssetManager.audios.get("death").play();
         });
 
+
         btnUndo.addActionListener(e -> {
         });
 
         btnRestart.addActionListener(e -> {
+
         });
     }
 }
