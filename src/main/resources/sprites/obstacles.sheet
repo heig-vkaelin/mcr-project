@@ -1,0 +1,10 @@
+# SpriteSheet for obstacles
+obstacles.png
+mailbox 0 0 16 16
+hydrant 16 0 16 16
+trashbin 32 0 16 16
+oilstain 48 0 16 16
+barrier 64 0 16 16
+cone 80 0 16 16
+barrier2 96 0 16 16
+reservoir 112 0 16 16

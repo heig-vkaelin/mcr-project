@@ -5,7 +5,7 @@ package ch.heigvd.mcr.entities;
  *
  * @author Lazar Pavicevic
  */
-public abstract class MovableEntity extends Entity{
+public abstract class MovableEntity extends Entity {
     public MovableEntity(int originX, int originY, Direction direction, EntityType type) {
         super(originX, originY, direction, type);
     }
