@@ -61,6 +61,11 @@ public enum PedestrianType implements EntityType {
     }
 
     @Override
+    public String getCategoryKey() {
+        return "pedestrians";
+    }
+
+    @Override
     public int getWidth() {
         return width;
     }

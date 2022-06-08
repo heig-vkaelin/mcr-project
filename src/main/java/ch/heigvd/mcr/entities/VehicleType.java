@@ -51,6 +51,11 @@ public enum VehicleType implements EntityType {
     }
 
     @Override
+    public String getCategoryKey() {
+        return "cars";
+    }
+
+    @Override
     public int getWidth() {
         return width;
     }

@@ -1,7 +1,7 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,25 +17,32 @@ public class DraggableEntity extends JLabel {
 
     private final Entity entity;
 
-    private final Image image;
+    private Image image;
 
-    public DraggableEntity(Entity entity) {
+    private int ratio;
+
+    public DraggableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
-        this.image = AssetManager.sprites.get("cars").get(entity.getType().getKey()).getScaledInstance(100, 200, Image.SCALE_DEFAULT);
+        this.ratio = baseRatio;
+
+        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
+
+        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
 
         setIcon(new ImageIcon(image));
-
-        setOpaque(true);
     }
-/*
+
+    public void setRatio(int ratio) {
+        this.ratio = ratio;
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
 
-        System.out.println("repaint car");
+        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
 
-        g.drawImage(image, 0, 0, 200, 100, null);
+        setIcon(new ImageIcon(image));
     }
-
- */
 }
