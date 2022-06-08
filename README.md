@@ -1,6 +1,6 @@
 ![logo](https://user-images.githubusercontent.com/6887819/170717194-b5d88fad-a2e7-4bff-997a-358fdb854482.png)
 
-# Donini is stuck in traffic
+# Dodo is stuck in traffic
 
 ## Auteurs
 - Maxime Scharwath
