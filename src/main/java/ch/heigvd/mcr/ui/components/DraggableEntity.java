@@ -1,10 +1,13 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.entities.*;
+import ch.heigvd.mcr.entities.Direction;
+import ch.heigvd.mcr.entities.Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Classe pour l'affichage et le déplacement d'entités sur le plateau de jeu
@@ -31,6 +34,19 @@ public class DraggableEntity extends JLabel {
 
         this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
 
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                entity.setX((e.getX() - getWidth() / 2) / ratio + entity.getX());
+                entity.setY((e.getY() - getHeight() / 2) / ratio + entity.getY());
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
         setIcon(new ImageIcon(image));
     }
 
