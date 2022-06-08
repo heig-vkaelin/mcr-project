@@ -30,8 +30,8 @@ public class Main {
         AssetManager.loadAll((progress, done) -> {
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
-                // AssetManager.audios.get("death").play();
-                GameController controller = new GameController();
+                AssetManager.audios.get("death").play();
+                GameController controller = GameController.getInstance();
                 controller.run(DELTA_MS);
             }
         });
