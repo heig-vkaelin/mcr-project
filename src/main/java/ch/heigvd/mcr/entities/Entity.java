@@ -60,4 +60,10 @@ public abstract class Entity {
     public boolean isColliding(Entity entity) {
         return getBounds().intersects(entity.getBounds());
     }
+
+    public boolean isColliding(Entity e, int x, int y) {
+        var b = getBounds();
+        b.setLocation(x, y);//to test if the entity is colliding with the new position
+        return b.intersects(e.getBounds());
+    }
 }
