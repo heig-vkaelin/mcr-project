@@ -1,8 +1,8 @@
 6
 2
 1 4 u red
-v 0 1 r taxi
-v 0 2 d yellow
+v 0 1 r yellow
+v 0 2 d blue
 v 3 0 d bus
 v 2 5 r truck
 v 2 0 u truck
