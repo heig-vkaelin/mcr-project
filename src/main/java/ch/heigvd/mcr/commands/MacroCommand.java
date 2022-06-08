@@ -5,12 +5,11 @@ import ch.heigvd.mcr.GameController;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MacroCommand extends ControllerCommand implements Command {
+public class MacroCommand implements Command {
 
     private List<Command> subCommands;
 
-    public MacroCommand(GameController controller) {
-        super(controller);
+    public MacroCommand() {
         subCommands = new LinkedList<>();
     }
 

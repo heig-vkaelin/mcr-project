@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.components.LevelButton;
@@ -49,6 +50,7 @@ public class MenuView implements View {
             );
             btn.addActionListener(e -> {
                 System.out.println("Click on level " + level.getId());
+                GameController.getInstance().setState(level);
                 new PlayView(level).show();
                 close();
             });

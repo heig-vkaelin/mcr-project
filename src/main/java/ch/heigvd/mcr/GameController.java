@@ -1,5 +1,7 @@
 package ch.heigvd.mcr;
 
+import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.MenuView;
 
 /**
@@ -11,6 +13,8 @@ import ch.heigvd.mcr.ui.views.MenuView;
 public class GameController {
 
     private static GameController instance;
+
+    private LevelState state;
 
     /**
      * Constructeur du contrôleur du jeu
@@ -38,5 +42,13 @@ public class GameController {
 //        }).start();
 
         new MenuView().show();
+    }
+
+    public void setState(LevelState state) {
+        this.state = state;
+    }
+
+    public void resetState() {
+        state = AssetManager.levels.get("level" + state.getId());
     }
 }

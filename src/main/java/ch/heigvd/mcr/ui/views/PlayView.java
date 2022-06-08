@@ -2,7 +2,6 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.commands.RestartCommand;
 import ch.heigvd.mcr.levels.LevelState;
 
 import javax.swing.*;
@@ -57,7 +56,8 @@ public class PlayView implements View {
         });
         btnRestart = new JButton("Recommencer");
         btnRestart.addActionListener(e -> {
-            new RestartCommand(GameController.getInstance()).execute();
+            // TODO: Gérer l'affichage en se fiant au LevelState du GameController
+            GameController.getInstance().resetState();
         });
 
         btnCheat = new JButton("Cheat");
