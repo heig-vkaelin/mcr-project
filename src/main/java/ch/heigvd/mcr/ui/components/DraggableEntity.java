@@ -70,12 +70,11 @@ public class DraggableEntity extends JLabel {
         if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
             setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getWidth(), ratio * entity.getType().getLength());
             icon = new ImageIcon(image);
-        }
-        else {
+        } else {
             setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getLength(), ratio * entity.getType().getWidth());
             icon = new RotatedIcon(new ImageIcon(image), RotatedIcon.Rotate.DOWN);
         }
 
-        setIcon(icon);
+        icon.paintIcon(this, g, 0, 0);
     }
 }
