@@ -11,17 +11,13 @@ public class BoardPanel extends JPanel {
 
     public BoardPanel(int size) {
         this.size = size;
-
-        // setLayout(new FlowLayout());
-        //setOpaque(false);
     }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-
+    public void paintComponent(Graphics g) {
         // TODO: Ajouter la sortie selon position et orientation de la voiture
         // TODO: Refactor
+        super.paintComponent(g);
 
         final int side = Math.min(getWidth(), getHeight()) / (size + 2);
         final int offset = (getWidth() - side * (size + 2)) / 2;

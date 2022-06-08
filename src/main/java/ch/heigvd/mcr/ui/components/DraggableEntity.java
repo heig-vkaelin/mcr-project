@@ -11,7 +11,7 @@ import java.awt.*;
  *
  * @author Nicolas Crausaz
  */
-public class DraggableEntity extends JPanel { // Idealement un jlabel
+public class DraggableEntity extends JLabel {
 
     // TODO: Implementer drag & drop et modifier les coordonnées des entités
 
@@ -21,15 +21,21 @@ public class DraggableEntity extends JPanel { // Idealement un jlabel
 
     public DraggableEntity(Entity entity) {
         this.entity = entity;
-        this.image = AssetManager.sprites.get("cars").get(entity.getType().getKey());
+        this.image = AssetManager.sprites.get("cars").get(entity.getType().getKey()).getScaledInstance(100, 200, Image.SCALE_DEFAULT);
+
+        setIcon(new ImageIcon(image));
 
         setOpaque(true);
     }
-
+/*
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        g.drawImage(image, 0, 0, null);
+        System.out.println("repaint car");
+
+        g.drawImage(image, 0, 0, 200, 100, null);
     }
+
+ */
 }
