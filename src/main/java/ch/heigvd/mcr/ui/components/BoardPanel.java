@@ -75,6 +75,7 @@ public class BoardPanel extends JPanel {
         // update the scale of entities
         for (DraggableEntity e : draggables) {
             e.setRatio(ratio);
+            e.setOffset(offset + ratio);
         }
     }
 }

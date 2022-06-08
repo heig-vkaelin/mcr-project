@@ -54,8 +54,6 @@ public class PlayView extends JPanel {
         boardPanel = new BoardPanel(level.getSideSize(), level.getEntities());
         boardPanel.setBackground(Color.GRAY);
 
-        boardPanel.setLayout(new FlowLayout());
-
         btnsPanel.add(btnUndo);
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
