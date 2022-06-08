@@ -40,7 +40,7 @@ public class DraggableEntity extends JLabel {
             public void mouseDragged(MouseEvent e) {
                 int x = (e.getX() - getWidth() / 2) / ratio + entity.getX();
                 int y = (e.getY() - getHeight() / 2) / ratio + entity.getY();
-                if(x != entity.getX() || y != entity.getY()) {
+                if (x != entity.getX() || y != entity.getY()) {
                     entity.setX(x);
                     entity.setY(y);
                     repaint();
@@ -93,17 +93,7 @@ public class DraggableEntity extends JLabel {
         else
             setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getLength(), ratio * entity.getType().getWidth());
 
-        Icon icon = null;
-        switch (entity.getDirection()) {
-            case UP ->
-                    icon = new RotatedIcon(new ImageIcon(image), RotatedIcon.Rotate.UPSIDE_DOWN);
-            case DOWN -> icon = new ImageIcon(image);
-            case LEFT ->
-                    icon = new RotatedIcon(new ImageIcon(image), RotatedIcon.Rotate.DOWN);
-            case RIGHT ->
-                    icon = new RotatedIcon(new ImageIcon(image), RotatedIcon.Rotate.UP);
-        }
-
+        Icon icon = new RotatedIcon(new ImageIcon(image), entity.getDirection());
         icon.paintIcon(this, g, 0, 0);
     }
 }
