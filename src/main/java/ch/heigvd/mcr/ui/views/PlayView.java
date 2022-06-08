@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 
@@ -54,6 +55,11 @@ public class PlayView implements View {
             close();
         });
         btnRestart = new JButton("Recommencer");
+        btnRestart.addActionListener(e -> {
+            // TODO: Gérer l'affichage en se fiant au LevelState du GameController
+            GameController.getInstance().resetState();
+        });
+
         btnCheat = new JButton("Cheat");
         btnCheat.addActionListener(e -> {
             AssetManager.audios.get("death").play();

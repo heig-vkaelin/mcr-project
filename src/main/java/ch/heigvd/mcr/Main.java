@@ -30,7 +30,7 @@ public class Main {
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
                 AssetManager.audios.get("death").play();
-                GameController controller = new GameController();
+                GameController controller = GameController.getInstance();
                 controller.run(DELTA_MS);
             }
         });
