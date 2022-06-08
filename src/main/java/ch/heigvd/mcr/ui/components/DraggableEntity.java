@@ -61,20 +61,21 @@ public class DraggableEntity extends JLabel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
 
+        Icon icon;
         this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
 
         if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
-            this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
             setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getWidth(), ratio * entity.getType().getLength());
+            icon = new ImageIcon(image);
         }
         else {
-            this.image = tmp.getScaledInstance(ratio * entity.getType().getLength(), ratio * entity.getType().getWidth(), Image.SCALE_DEFAULT);
             setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getLength(), ratio * entity.getType().getWidth());
+            icon = new RotatedIcon(new ImageIcon(image), RotatedIcon.Rotate.DOWN);
         }
 
-
-        setIcon(new ImageIcon(image));
+        setIcon(icon);
     }
 }
