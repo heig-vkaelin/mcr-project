@@ -11,7 +11,7 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private static final int INITIAL_WIDTH = 640;
-    private static final int INITIAL_HEIGHT = 480;
+    private static final int INITIAL_HEIGHT = 560;
 
     private CardLayout currentView;
 
@@ -19,9 +19,8 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super("DISIT");
-        setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
+        setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         currentView = new CardLayout();
         // Init with start panel
