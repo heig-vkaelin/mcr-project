@@ -29,6 +29,7 @@ public abstract class DragListener implements MouseListener, MouseMotionListener
 
     @Override
     final public void mouseReleased(MouseEvent e) {
+        if (!isDragged) return; // avoid calling dragEnded when the mouse is not dragged
         isDragged = false;
         dragEnded(e);
     }
@@ -45,6 +46,9 @@ public abstract class DragListener implements MouseListener, MouseMotionListener
     final public void mouseDragged(MouseEvent e) {
         if (!isDragged) return;
         dragMoved(e);
+        if (!isDragged) {
+            dragEnded(e);
+        }
     }
 
     @Override

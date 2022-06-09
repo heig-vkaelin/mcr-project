@@ -42,6 +42,8 @@ public class DraggableEntity extends JLabel {
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         DragListener dragListener = new DragListener() {
+            ValidateState state;
+
             @Override
             public void dragStarted(MouseEvent e) {
                 System.out.println("dragStarted at " + entity.getX() + " " + entity.getY());
@@ -49,16 +51,15 @@ public class DraggableEntity extends JLabel {
 
             @Override
             public void dragEnded(MouseEvent e) {
-                System.out.println("dragEnded at " + entity.getX() + " " + entity.getY());
+                System.out.println("dragEnded at " + state.x() + " " + state.y() + " collision: " + state.collidedEntity());
             }
 
             @Override
             public void dragMoved(MouseEvent e) {
-                if (!isDragged) return;
                 int x = (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX());
                 int y = (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY());
                 if (x != entity.getX() || y != entity.getY()) {
-                    var state = GameController.getInstance().validatePosition(entity, x, y);
+                    state = GameController.getInstance().validatePosition(entity, x, y);
                     entity.setX(state.x());
                     entity.setY(state.y());
                     if (state.collidedEntity() != null) {
