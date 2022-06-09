@@ -4,6 +4,7 @@ import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +27,6 @@ public class DraggableEntity extends JLabel {
 
     private int offset;
 
-    private int offsetX;
-    private int offsetY;
-    private boolean isDragged;
-
     public DraggableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
         this.ratio = baseRatio;
@@ -42,7 +39,7 @@ public class DraggableEntity extends JLabel {
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         DragListener dragListener = new DragListener() {
-            ValidateState state;
+            @Nullable() ValidateState state;
 
             @Override
             public void dragStarted(MouseEvent e) {
@@ -51,6 +48,7 @@ public class DraggableEntity extends JLabel {
 
             @Override
             public void dragEnded(MouseEvent e) {
+                if (state == null) return;
                 System.out.println("dragEnded at " + state.x() + " " + state.y() + " collision: " + state.collidedEntity());
             }
 
