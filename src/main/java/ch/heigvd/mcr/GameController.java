@@ -86,19 +86,24 @@ public class GameController {
     }
 //TODO on va surement avoir besoin de modifier cette méthode
     public void setPosition(Entity entity, int newX, int newY) {
+        int currentX = entity.getX();
+        int currentY = entity.getY();
+        //force axial movement
         if(entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
-            newX = entity.getX();
+            newX = currentX;
             newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
         } else {
-            newY = entity.getY();
+            newY = currentY;
             newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
         }
 
         for (Entity e : state.getEntities()) {
-            if (entity != e && entity.isColliding(e, newX, newY))
+            if (entity != e && entity.isColliding(e, newX, newY)){
+                System.out.println("Entity[" + entity.getType() + "] Colliding with " + e.getType());
                 return;
+            }
         }
-
+        System.out.println("Entity[" + entity.getType() + "] Setting position to " + newX + " " + newY);
         entity.setX(newX);
         entity.setY(newY);
     }
