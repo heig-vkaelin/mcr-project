@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.BoardPanel;
@@ -30,14 +31,15 @@ public class PlayView extends JPanel {
 
     /**
      * Constructeur permettant de pour construire la vue
-     *
-     * @param level : le niveau à afficher
      */
-    public PlayView(MainFrame parent, LevelState level) {
+    public PlayView(MainFrame parent) {
         super(new BorderLayout());
         this.parent = parent;
 
-        parent.setTitle("DISIT - Niveau " + level.getId());
+        System.out.println("new PlayView !");
+
+        LevelState l = GameController.getInstance().getState();
+        parent.setTitle("DISIT - Niveau " + l.getId());
 
         setBackground(Color.WHITE);
 
@@ -52,7 +54,7 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
-        boardPanel = new BoardPanel(level.getSideSize(), level.getEntities(), level.getExitPos(), level.getExitSide());
+        boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
         boardPanel.setBackground(Color.GRAY);
 
         btnsPanel.add(btnUndo);
@@ -64,9 +66,7 @@ public class PlayView extends JPanel {
     }
 
     private void registerHandlers() {
-        btnMenu.addActionListener(e -> {
-            parent.openMenuView();
-        });
+        btnMenu.addActionListener(e -> parent.openMenuView());
 
         btnCheat.addActionListener(e -> {
             AssetManager.audios.get("death").play();
@@ -77,7 +77,12 @@ public class PlayView extends JPanel {
         });
 
         btnRestart.addActionListener(e -> {
-
+            new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
+            // GameController.getInstance().resetState();
         });
+    }
+
+    private void renderBoard() {
+
     }
 }

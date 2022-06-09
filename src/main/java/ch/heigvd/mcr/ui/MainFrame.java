@@ -14,11 +14,13 @@ public class MainFrame extends JFrame {
     private static final int INITIAL_WIDTH = 640;
     private static final int INITIAL_HEIGHT = 560;
 
+    private static MainFrame instance;
+
     private CardLayout currentView;
 
     private final JPanel mainPanel;
 
-    public MainFrame() {
+    private MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -36,6 +38,13 @@ public class MainFrame extends JFrame {
         pack();
     }
 
+    public static MainFrame getInstance() {
+        if (instance == null) {
+            instance = new MainFrame();
+        }
+        return instance;
+    }
+
     public void showHomeView() {
         currentView.show(mainPanel, "home");
     }
@@ -44,9 +53,8 @@ public class MainFrame extends JFrame {
         currentView.show(mainPanel, "menu");
     }
 
-    public void openLevelView(LevelState level) {
-        GameController.getInstance().setState(level); //TODO idk if this is the right way and place to do it
-        mainPanel.add(new PlayView(this, level), "level");
+    public void openLevelView() {
+        mainPanel.add(new PlayView(this), "level");
         currentView.show(mainPanel, "level");
     }
 }

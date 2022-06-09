@@ -46,7 +46,7 @@ public class DraggableEntity extends JLabel {
                 if (x != entity.getX() || y != entity.getY()) {
                     GameController.getInstance().setPosition(entity, x, y);
                     repaint();
-                    System.out.println("Entity[" + entity.getType() + "] moved to (" + x + ", " + y + ")");
+                    // System.out.println("Entity[" + entity.getType() + "] moved to (" + x + ", " + y + ")");
                 }
             }
 

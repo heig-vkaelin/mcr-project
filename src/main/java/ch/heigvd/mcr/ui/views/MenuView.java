@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.FlatButton;
@@ -46,9 +47,8 @@ public class MenuView extends JPanel {
                     level.getId(),
                     level.getDifficulty()
             );
-            btn.addActionListener(e -> {
-                parent.openLevelView(level);
-            });
+            // parent.openLevelView(level)
+            btn.addActionListener(e -> new LoadLevelCommand(level.getId()).execute());
             levelButtons.add(btn);
             cards.add(btn);
         }
@@ -64,7 +64,6 @@ public class MenuView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.drawImage(AssetManager.images.get("menu_background").getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT), 0, 0, null);
     }
 }

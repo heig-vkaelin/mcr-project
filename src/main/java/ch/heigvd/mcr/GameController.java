@@ -1,5 +1,6 @@
 package ch.heigvd.mcr;
 
+import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.assets.AssetManager;
@@ -8,6 +9,7 @@ import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.MenuView;
+import ch.heigvd.mcr.ui.views.PlayView;
 
 import java.util.Stack;
 
@@ -51,15 +53,20 @@ public class GameController {
 //            MenuView.getInstance().repaint()
 //        }).start();
 
-        new MainFrame();
+        MainFrame.getInstance();
     }
 
     public void setState(LevelState state) {
+        System.out.println("Loading a new level state");
         this.state = state;
     }
 
+    public LevelState getState () {
+        return this.state;
+    }
+
     public void resetState() {
-        state = AssetManager.levels.get("level" + state.getId());
+        new LoadLevelCommand(state.getId()).execute();
     }
 
     public boolean setNewPosition(Entity entity, int newX, int newY) {
