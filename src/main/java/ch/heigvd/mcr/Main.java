@@ -23,7 +23,9 @@ public class Main {
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
         AssetManager.images.register("menu_background", new ImageAssetLoader("images/menu_background.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
+        AssetManager.audios.register("horn", new AudioAssetLoader("audio/horn.wav"));
         AssetManager.audios.register("music", new AudioAssetLoader("audio/music.wav"));
+        AssetManager.audios.register("menu", new AudioAssetLoader("audio/menu.wav"));
         AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
         AssetManager.sprites.register("cars", new SpriteSheetAssetLoader("sprites/cars.sheet"));
         AssetManager.sprites.register("obstacles", new SpriteSheetAssetLoader("sprites/obstacles.sheet"));
@@ -46,7 +48,7 @@ public class Main {
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
                 frame.dispose();
-                AssetManager.audios.get("music").play();
+                AssetManager.audios.get("menu").play();
                 GameController controller = GameController.getInstance();
                 controller.run(DELTA_MS);
             }

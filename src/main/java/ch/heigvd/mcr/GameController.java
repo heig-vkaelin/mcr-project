@@ -1,13 +1,12 @@
 package ch.heigvd.mcr;
 
-import ch.heigvd.mcr.ui.MainFrame;
-import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelState;
-import ch.heigvd.mcr.ui.views.MenuView;
+import ch.heigvd.mcr.ui.MainFrame;
+import ch.heigvd.mcr.ui.components.ValidateState;
 
 import java.util.Stack;
 
@@ -20,10 +19,8 @@ import java.util.Stack;
 public class GameController {
 
     private static GameController instance;
-
-    private LevelState state;
-
     private final Stack<Command> undoStack;
+    private LevelState state;
 
     /**
      * Constructeur du contrôleur du jeu
@@ -84,23 +81,28 @@ public class GameController {
         entity.setY(newY);
         return true;
     }
-//TODO on va surement avoir besoin de modifier cette méthode
-    public void setPosition(Entity entity, int newX, int newY) {
-        if(entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
-            newX = entity.getX();
+
+    public ValidateState validatePosition(Entity entity, int newX, int newY) {
+        int currentX = entity.getX();
+        int currentY = entity.getY();
+
+        //force axial movement
+        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
+            newX = currentX;
+            newY = Math.max(currentY - 1, Math.min(newY, currentY + 1)); // only move one cell
             newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
         } else {
-            newY = entity.getY();
+            newY = currentY;
+            newX = Math.max(currentX - 1, Math.min(newX, currentX + 1)); // only move one cell
             newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
         }
 
         for (Entity e : state.getEntities()) {
-            if (entity != e && entity.isColliding(e, newX, newY))
-                return;
+            if (entity != e && entity.isColliding(e, newX, newY)) {
+                return new ValidateState(currentX, currentY, e);
+            }
         }
-
-        entity.setX(newX);
-        entity.setY(newY);
+        return new ValidateState(newX, newY, null);
     }
 
     public void addCommand(Command command) {

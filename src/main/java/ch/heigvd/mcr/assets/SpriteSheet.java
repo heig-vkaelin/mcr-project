@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteSheet {
-    private BufferedImage source = null;
     private final Map<String, Image> sprites = new HashMap<>();
+    private BufferedImage source = null;
 
     public SpriteSheet(URL spriteSheetFile) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(spriteSheetFile.openStream()))) {

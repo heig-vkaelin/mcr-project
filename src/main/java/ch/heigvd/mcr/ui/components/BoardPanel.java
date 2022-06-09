@@ -17,14 +17,10 @@ public class BoardPanel extends JPanel {
 
     private final int size;
     private final LinkedList<DraggableEntity> draggables;
-
-    private int ratio;
-
-    private int offset;
-
     private final int exitPos;
-
     private final Direction exitSide;
+    private int ratio;
+    private int offset;
 
     /**
      * Construit une nouvelle grille

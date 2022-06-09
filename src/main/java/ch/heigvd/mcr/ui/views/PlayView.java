@@ -1,11 +1,9 @@
 package ch.heigvd.mcr.ui.views;
 
-import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.BoardPanel;
-import ch.heigvd.mcr.ui.components.DraggableEntity;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;

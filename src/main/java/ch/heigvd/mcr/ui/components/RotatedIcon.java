@@ -2,10 +2,8 @@ package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.entities.Direction;
 
-import java.awt.Component;
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import javax.swing.Icon;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Wrapper autour de la classe Icon native de Swing afin de pouvoir les pivoter

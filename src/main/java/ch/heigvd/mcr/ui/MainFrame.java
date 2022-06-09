@@ -13,10 +13,8 @@ public class MainFrame extends JFrame {
 
     private static final int INITIAL_WIDTH = 640;
     private static final int INITIAL_HEIGHT = 560;
-
-    private CardLayout currentView;
-
     private final JPanel mainPanel;
+    private final CardLayout currentView;
 
     public MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
