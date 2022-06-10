@@ -25,7 +25,12 @@ public class SpriteSheet {
                 }
                 if (source == null) {
                     Path imagePathRelativeToSpriteSheet = Path.of(spriteSheetFile.toURI()).getParent().resolve(line);
-                    source = ImageIO.read(imagePathRelativeToSpriteSheet.toFile());
+                    if (spriteSheetFile.getProtocol().equals("jar")) {
+                        String imagePath = imagePathRelativeToSpriteSheet.toString().substring(1);
+                        source = ImageIO.read(ClassLoader.getSystemResource(imagePath));
+                    }else{
+                        source = ImageIO.read(imagePathRelativeToSpriteSheet.toFile());
+                    }
                     continue;
                 }
                 String[] parts = line.split(" ");
