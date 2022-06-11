@@ -49,10 +49,6 @@ public class GameController {
      * @param delta : ms entre les deux rafraichissements de la vue
      */
     public void run(int delta) {
-//        new Timer(delta, e -> {
-//            MenuView.getInstance().repaint()
-//        }).start();
-
         MainFrame.getInstance();
     }
 
@@ -61,12 +57,8 @@ public class GameController {
         this.state = state;
     }
 
-    public LevelState getState () {
+    public LevelState getState() {
         return this.state;
-    }
-
-    public void resetState() {
-        new LoadLevelCommand(state.getId()).execute();
     }
 
     public boolean setNewPosition(Entity entity, int newX, int newY) {
@@ -91,9 +83,10 @@ public class GameController {
         entity.setY(newY);
         return true;
     }
-//TODO on va surement avoir besoin de modifier cette méthode
+
+    //TODO on va surement avoir besoin de modifier cette méthode
     public void setPosition(Entity entity, int newX, int newY) {
-        if(entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
+        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
             newX = entity.getX();
             newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
         } else {

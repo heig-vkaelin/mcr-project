@@ -6,7 +6,6 @@ import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.BoardPanel;
-import ch.heigvd.mcr.ui.components.DraggableEntity;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
 import javax.swing.*;
@@ -19,9 +18,6 @@ import java.awt.*;
  * @author Nicolas Crausaz
  */
 public class PlayView extends JPanel {
-
-    private final BoardPanel boardPanel;
-    private final JPanel btnsPanel;
 
     private final JButton btnUndo;
     private final JButton btnMenu;
@@ -43,7 +39,7 @@ public class PlayView extends JPanel {
 
         setBackground(Color.WHITE);
 
-        btnsPanel = new JPanel();
+        JPanel btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
 
         btnUndo = new FlatButton("Annuler", new Color(180, 32, 42), Color.WHITE);
@@ -54,7 +50,7 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
-        boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
+        BoardPanel boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
         boardPanel.setBackground(Color.GRAY);
 
         btnsPanel.add(btnUndo);
@@ -78,11 +74,6 @@ public class PlayView extends JPanel {
 
         btnRestart.addActionListener(e -> {
             new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
-            // GameController.getInstance().resetState();
         });
-    }
-
-    private void renderBoard() {
-
     }
 }
