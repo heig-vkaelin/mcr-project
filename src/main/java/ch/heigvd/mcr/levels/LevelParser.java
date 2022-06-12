@@ -64,9 +64,6 @@ public class LevelParser {
                         final int y = Integer.parseInt(values[1]);
                         final Direction direction = Direction.getFromKey(values[2]);
 
-                        if (isOutOfBounds(x, y, state.getSideSize())) {
-                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
-                        }
                         state.addVehicle(x, y, direction, VehicleType.getFromKey(values[3]));
 
                         if (direction == Direction.UP || direction == Direction.DOWN) {
@@ -78,10 +75,6 @@ public class LevelParser {
                     default -> {
                         final int x = Integer.parseInt(values[1]);
                         final int y = Integer.parseInt(values[2]);
-
-                        if (isOutOfBounds(x, y, state.getSideSize())) {
-                            throw new IllegalArgumentException("Entity coordinates must fit in the game dimensions");
-                        }
 
                         final Direction direction = Direction.getFromKey(values[3]);
 
@@ -100,18 +93,6 @@ public class LevelParser {
             e.printStackTrace();
         }
         return state;
-    }
-
-    /**
-     * Vérifie si les coordonnées sont valides pour la taille du plateau
-     *
-     * @param x    Coordonnée axe x
-     * @param y    Coordonnée axe y
-     * @param size la taille du plateau de jeu
-     * @return vrai si valide, sinon faux
-     */
-    private static boolean isOutOfBounds(int x, int y, int size) {
-        return x < 0 || y < 0 || x >= size || y >= size;
     }
 
     /**
