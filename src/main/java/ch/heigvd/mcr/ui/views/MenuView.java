@@ -8,8 +8,10 @@ import ch.heigvd.mcr.ui.components.LevelButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Classe représentant la vue permettant de choisir quel niveau choisir
@@ -35,7 +37,12 @@ public class MenuView extends JPanel {
         JPanel cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
 
         cards.setOpaque(false);
-        for (LevelState level : AssetManager.levels.getAll()) {
+
+        List<LevelState> levels = AssetManager.levels.getAll().stream()
+                .sorted(Comparator.comparingInt(LevelState::getId))
+                .toList();
+
+        for (LevelState level : levels) {
             JButton btn = new LevelButton(
                     "Niveau",
                     level.getId(),

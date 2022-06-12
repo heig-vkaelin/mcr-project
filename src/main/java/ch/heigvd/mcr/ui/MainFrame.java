@@ -19,7 +19,6 @@ public class MainFrame extends JFrame {
     private CardLayout currentView;
 
     private final JPanel mainPanel;
-    private final CardLayout currentView;
 
     private MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
