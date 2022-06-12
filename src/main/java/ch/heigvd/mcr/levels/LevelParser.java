@@ -90,7 +90,7 @@ public class LevelParser {
                 ++count;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.toString());
         }
         return state;
     }
