@@ -13,10 +13,9 @@ import java.util.LinkedList;
 public class LevelState {
 
     private final int id;
+    private final LinkedList<Entity> entities;
     private int sideSize;
     private Difficulty difficulty;
-    private final LinkedList<Entity> entities;
-
     private int exitPos;
 
     private Direction exitSide;
@@ -24,27 +23,6 @@ public class LevelState {
     public LevelState(int id) {
         this.id = id;
         this.entities = new LinkedList<>();
-    }
-
-    /**
-     * Défini la taille du plateau de jeu (carré)
-     *
-     * @param sideSize taille du coté du tableau de jeu
-     * @throws RuntimeException si la taille est invalide
-     */
-    public void setSideSize(int sideSize) throws RuntimeException {
-        if (sideSize < 1) throw new RuntimeException("Invalid size");
-
-        this.sideSize = sideSize;
-    }
-
-    /**
-     * Défini la difficulté du niveau
-     *
-     * @param difficulty difficulté du niveau
-     */
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
     }
 
     /**
@@ -102,12 +80,33 @@ public class LevelState {
     }
 
     /**
+     * Défini la taille du plateau de jeu (carré)
+     *
+     * @param sideSize taille du coté du tableau de jeu
+     * @throws RuntimeException si la taille est invalide
+     */
+    public void setSideSize(int sideSize) throws RuntimeException {
+        if (sideSize < 1) throw new RuntimeException("Invalid size");
+
+        this.sideSize = sideSize;
+    }
+
+    /**
      * Récupère la difficulté du niveau
      *
      * @return difficulté du niveau
      */
     public Difficulty getDifficulty() {
         return difficulty;
+    }
+
+    /**
+     * Défini la difficulté du niveau
+     *
+     * @param difficulty difficulté du niveau
+     */
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     /**
@@ -156,6 +155,10 @@ public class LevelState {
      */
     private boolean validateLevelCoherence(Entity newEntity) {
         final Rectangle bounds = newEntity.getBounds();
+        Rectangle board = new Rectangle(0, 0, sideSize, sideSize);
+
+        if (!board.contains(bounds))
+            return false;
 
         for (Entity e : getEntities()) {
             if (bounds.contains(e.getBounds()) || bounds.intersects(e.getBounds())) {

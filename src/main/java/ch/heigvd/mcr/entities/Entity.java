@@ -24,12 +24,12 @@ public abstract class Entity {
         return coordX;
     }
 
-    public int getY() {
-        return coordY;
-    }
-
     public void setX(int x) {
         this.coordX = x;
+    }
+
+    public int getY() {
+        return coordY;
     }
 
     public void setY(int y) {

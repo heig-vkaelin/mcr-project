@@ -18,7 +18,7 @@ public enum VehicleType implements EntityType {
     POLICE("police", 1, 2),
     VAN("van", 1, 2),
     TRUCK("truck", 1, 3),
-    SCHOOL_BUS("schoolbus", 1, 3),
+    SCHOOL_BUS("school_bus", 1, 3),
     BUS("bus", 1, 4);
 
     private final String key;

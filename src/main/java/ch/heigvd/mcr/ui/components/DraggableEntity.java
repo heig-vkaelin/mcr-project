@@ -4,11 +4,11 @@ import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 /**
  * Classe pour l'affichage et le déplacement d'entités sur le plateau de jeu
@@ -38,23 +38,39 @@ public class DraggableEntity extends JLabel {
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        addMouseMotionListener(new MouseMotionListener() {
+        DragListener dragListener = new DragListener() {
+            @Nullable() ValidateState state;
+
             @Override
-            public void mouseDragged(MouseEvent e) {
-                int x = (e.getX() - getWidth() / 2) / ratio + entity.getX();
-                int y = (e.getY() - getHeight() / 2) / ratio + entity.getY();
+            public void dragStarted(MouseEvent e) {
+                System.out.println("dragStarted at " + entity.getX() + " " + entity.getY());
+            }
+
+            @Override
+            public void dragEnded(MouseEvent e) {
+                if (state == null) return;
+                System.out.println("dragEnded at " + state.x() + " " + state.y() + " collision: " + state.collidedEntity());
+            }
+
+            @Override
+            public void dragMoved(MouseEvent e) {
+                int x = (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX());
+                int y = (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY());
                 if (x != entity.getX() || y != entity.getY()) {
-                    GameController.getInstance().setPosition(entity, x, y);
+                    state = GameController.getInstance().validatePosition(entity, x, y);
+                    entity.setX(state.x());
+                    entity.setY(state.y());
+                    if (state.collidedEntity() != null) {
+                        stopDragging(); // to avoid infinite calls
+                        AssetManager.audios.get("horn").play();
+                        System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
+                    }
                     repaint();
-                    System.out.println("Entity[" + entity.getType() + "] moved to (" + x + ", " + y + ")");
                 }
             }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-
-            }
-        });
+        };
+        addMouseListener(dragListener);
+        addMouseMotionListener(dragListener);
         setIcon(new ImageIcon(image));
     }
 
