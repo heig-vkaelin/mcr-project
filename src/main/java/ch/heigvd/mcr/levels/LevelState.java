@@ -155,6 +155,10 @@ public class LevelState {
      */
     private boolean validateLevelCoherence(Entity newEntity) {
         final Rectangle bounds = newEntity.getBounds();
+        Rectangle board = new Rectangle(0, 0, sideSize, sideSize);
+
+        if (!board.contains(bounds))
+            return false;
 
         for (Entity e : getEntities()) {
             if (bounds.contains(e.getBounds()) || bounds.intersects(e.getBounds())) {
