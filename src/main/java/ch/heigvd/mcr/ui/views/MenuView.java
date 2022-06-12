@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.LevelButton;
@@ -19,10 +20,6 @@ public class MenuView extends JPanel {
     private static final int COLUMNS = 4;
     private static final int PADDING = 20;
 
-    private final JPanel cards;
-
-    private final List<JButton> levelButtons;
-
     private final MainFrame parent;
 
 
@@ -34,8 +31,8 @@ public class MenuView extends JPanel {
 
         parent.setTitle("DISIT - Select level");
 
-        levelButtons = new LinkedList<>();
-        cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
+        List<JButton> levelButtons = new LinkedList<>();
+        JPanel cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
 
         cards.setOpaque(false);
         for (LevelState level : AssetManager.levels.getAll()) {
@@ -44,25 +41,16 @@ public class MenuView extends JPanel {
                     level.getId(),
                     level.getDifficulty()
             );
-            btn.addActionListener(e -> {
-                parent.openLevelView(level);
-            });
+            btn.addActionListener(e -> new LoadLevelCommand(level.getId()).execute());
             levelButtons.add(btn);
             cards.add(btn);
         }
-
-//        FlatButton goBack = new FlatButton("Home", new Color(180, 32, 42), Color.WHITE);
-//        JPanel btnPanel = new JPanel();
-//        btnPanel.add(goBack);
-
         add(cards);
-//        add(btnPanel, BorderLayout.PAGE_END);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.drawImage(AssetManager.images.get("menu_background").getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT), 0, 0, null);
     }
 }

@@ -12,8 +12,6 @@ import java.net.URL;
  */
 public class LevelAssetLoader implements AssetLoader<LevelState> {
     private final URL path;
-    boolean loaded = false;
-    private LevelState level;
 
     public LevelAssetLoader(String path) {
         this.path = ClassLoader.getSystemResource(path);
@@ -21,18 +19,15 @@ public class LevelAssetLoader implements AssetLoader<LevelState> {
 
     @Override
     public boolean isLoaded() {
-        return loaded;
+        return true;
     }
 
     @Override
     public void load() {
-        if (loaded) return;
-        level = LevelParser.parseLevelFile(path);
-        loaded = true;
     }
 
     @Override
     public LevelState get() {
-        return level;
+        return LevelParser.parseLevelFile(path);
     }
 }
