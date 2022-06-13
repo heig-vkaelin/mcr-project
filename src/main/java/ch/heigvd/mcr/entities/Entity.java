@@ -66,4 +66,8 @@ public abstract class Entity {
         b.setLocation(x, y);//to test if the entity is colliding with the new position
         return b.intersects(e.getBounds());
     }
+
+    public abstract boolean isInteractive();
+
+    public abstract void onCrash();
 }

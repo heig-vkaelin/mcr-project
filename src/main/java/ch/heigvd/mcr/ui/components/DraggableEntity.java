@@ -68,15 +68,19 @@ public class DraggableEntity extends JLabel {
                     entity.setY(state.y());
                     if (state.collidedEntity() != null) {
                         stopDragging(); // to avoid infinite calls
-                        AssetManager.audios.get("horn").play();
+                        state.collidedEntity().onCrash();
                         System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
                     }
                     repaint();
                 }
             }
         };
-        addMouseListener(dragListener);
-        addMouseMotionListener(dragListener);
+
+        if (entity.isInteractive()) {
+            addMouseListener(dragListener);
+            addMouseMotionListener(dragListener);
+        }
+
         setIcon(new ImageIcon(image));
     }
 
