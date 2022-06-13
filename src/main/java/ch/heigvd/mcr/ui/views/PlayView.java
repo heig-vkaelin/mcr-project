@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.Audio;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.UndoCommand;
 import ch.heigvd.mcr.levels.LevelState;
@@ -20,10 +21,12 @@ import java.awt.*;
  */
 public class PlayView extends JPanel {
 
-    private final JButton btnUndo;
-    private final JButton btnMenu;
-    private final JButton btnRestart;
-    private final JButton btnCheat;
+    private final FlatButton btnUndo;
+    private final FlatButton btnMenu;
+    private final FlatButton btnRestart;
+    private final FlatButton btnCheat;
+
+    private final FlatButton btnSound;
     private final MainFrame parent;
 
     private BoardPanel boardPanel;
@@ -47,9 +50,9 @@ public class PlayView extends JPanel {
 
         btnUndo = new FlatButton("Annuler", new Color(180, 32, 42), Color.WHITE);
         btnMenu = new FlatButton("Menu", new Color(180, 32, 42), Color.WHITE);
-
         btnRestart = new FlatButton("Recommencer", new Color(180, 32, 42), Color.WHITE);
         btnCheat = new FlatButton("Cheat", new Color(180, 32, 42), Color.WHITE);
+        btnSound = new FlatButton("Sound ON", new Color(180, 32, 42), Color.WHITE);
 
         registerHandlers();
 
@@ -60,6 +63,7 @@ public class PlayView extends JPanel {
         btnsPanel.add(btnMenu);
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
+        btnsPanel.add(btnSound);
         add(boardPanel, BorderLayout.CENTER);
         add(btnsPanel, BorderLayout.PAGE_END);
     }
@@ -71,13 +75,22 @@ public class PlayView extends JPanel {
     private void registerHandlers() {
         btnMenu.addActionListener(e -> parent.openMenuView());
 
-        btnCheat.addActionListener(e -> {
-            AssetManager.audios.get("death").play();
-        });
-
+        btnCheat.addActionListener(e -> AssetManager.audios.get("death").play());
 
         btnUndo.addActionListener(e -> new UndoCommand().execute());
 
         btnRestart.addActionListener(e -> new LoadLevelCommand(GameController.getInstance().getState().getId()).execute());
+
+        // Todo: create a button class with an sound icon
+        btnSound.addActionListener(e -> {
+            Audio a = AssetManager.audios.get("menu");
+            if (a.isPlaying()) {
+                a.stop();
+                btnSound.setText("Sound OFF");
+            } else {
+                a.play();
+                btnSound.setText("Sound ON");
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.Audio;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
@@ -14,8 +15,11 @@ import java.awt.*;
  */
 public class HomeView extends JPanel {
 
-    private final JButton play;
-    private final JButton quit;
+    private final FlatButton play;
+    private final FlatButton quit;
+
+    private final FlatButton sound;
+
     private final MainFrame parent;
 
     public HomeView(MainFrame parent) {
@@ -30,9 +34,11 @@ public class HomeView extends JPanel {
 
         play = new FlatButton("Play !", new Color(180, 32, 42), Color.WHITE);
         quit = new FlatButton("Quit", new Color(180, 32, 42), Color.WHITE);
+        sound = new FlatButton("Sound ON", new Color(180, 32, 42), Color.WHITE);
 
         play.setPreferredSize(new Dimension(200, 40));
         quit.setPreferredSize(new Dimension(200, 40));
+        sound.setPreferredSize(new Dimension(100, 40));
 
         btnPanel.setBackground(Color.BLACK);
 
@@ -41,6 +47,7 @@ public class HomeView extends JPanel {
 
         btnPanel.add(quit);
         btnPanel.add(play);
+        btnPanel.add(sound);
         add(picLabel, BorderLayout.NORTH);
         add(btnPanel, BorderLayout.SOUTH);
 
@@ -51,5 +58,16 @@ public class HomeView extends JPanel {
         play.addActionListener(e -> parent.openMenuView());
 
         quit.addActionListener(e -> System.exit(0));
+
+        sound.addActionListener(e -> {
+            Audio a = AssetManager.audios.get("menu");
+            if (a.isPlaying()) {
+                a.stop();
+                sound.setText("Sound OFF");
+            } else {
+                a.play();
+                sound.setText("Sound ON");
+            }
+        });
     }
 }

@@ -14,6 +14,8 @@ import java.net.URL;
 public class Audio {
     private final Clip clip;
 
+    private boolean isPlaying;
+
     public Audio(URL file) throws IOException {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
@@ -28,8 +30,22 @@ public class Audio {
      * Plays the audio file.
      */
     public void play() {
-        System.out.println("Playing audio");
         clip.setFramePosition(0);
         clip.start();
+        isPlaying = true;
+    }
+
+    /**
+     * Stops the audio file
+     */
+    public void stop() {
+        if (isPlaying) {
+            clip.stop();
+            isPlaying = false;
+        }
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
     }
 }
