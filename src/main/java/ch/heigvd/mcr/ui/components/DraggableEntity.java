@@ -5,6 +5,7 @@ import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Position;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -53,19 +54,19 @@ public class DraggableEntity extends JLabel {
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
                 // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
-                entity.setX(startX);
-                entity.setY(startY);
-                new MoveCommand(entity, state.x(), state.y()).execute();
+                entity.setPosition(startX, startY);
+                new MoveCommand(entity, state.position()).execute();
             }
 
             @Override
             public void dragMoved(MouseEvent e) {
-                int x = (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX());
-                int y = (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY());
-                if (x != entity.getX() || y != entity.getY()) {
-                    state = GameController.getInstance().validatePosition(entity, x, y);
-                    entity.setX(state.x());
-                    entity.setY(state.y());
+                Position position = new Position(
+                        (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX()),
+                        (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY())
+                );
+                if (position.x() != entity.getX() || position.y() != entity.getY()) {
+                    state = GameController.getInstance().validatePosition(entity, position);
+                    entity.setPosition(state.position());
                     if (state.collidedEntity() != null) {
                         stopDragging(); // to avoid infinite calls
                         state.collidedEntity().onCrash();

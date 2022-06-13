@@ -2,6 +2,7 @@ package ch.heigvd.mcr.commands;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Position;
 import ch.heigvd.mcr.ui.MainFrame;
 
 /**
@@ -17,12 +18,12 @@ public class MoveCommand implements Command {
     private final int newX;
     private final int newY;
 
-    public MoveCommand(Entity entity, int newX, int newY) {
+    public MoveCommand(Entity entity, Position newPosition) {
         this.entity = entity;
         this.oldX = entity.getX();
         this.oldY = entity.getY();
-        this.newX = newX;
-        this.newY = newY;
+        this.newX = newPosition.x();
+        this.newY = newPosition.y();
     }
 
     @Override

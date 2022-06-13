@@ -29,7 +29,7 @@ public class PlayView extends JPanel {
     private final FlatButton btnSound;
     private final MainFrame parent;
 
-    private BoardPanel boardPanel;
+    private final BoardPanel boardPanel;
 
     /**
      * Constructeur permettant de pour construire la vue
@@ -68,7 +68,7 @@ public class PlayView extends JPanel {
         add(btnsPanel, BorderLayout.PAGE_END);
     }
 
-    public void refresh () {
+    public void refresh() {
         boardPanel.refresh();
     }
 

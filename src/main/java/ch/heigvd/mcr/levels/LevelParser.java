@@ -60,29 +60,28 @@ public class LevelParser {
                     }
                     case 2 -> {
                         // Voiture du joueur
-                        final int x = Integer.parseInt(values[0]);
-                        final int y = Integer.parseInt(values[1]);
+                        final Position position = new Position(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
+
                         final Direction direction = Direction.getFromKey(values[2]);
 
-                        state.addVehicle(x, y, direction, VehicleType.getFromKey(values[3]));
+                        state.addVehicle(position, direction, VehicleType.getFromKey(values[3]));
 
                         if (direction == Direction.UP || direction == Direction.DOWN) {
-                            state.setExit(x, direction);
+                            state.setExit(position.x(), direction);
                         } else {
-                            state.setExit(y, direction);
+                            state.setExit(position.y(), direction);
                         }
                     }
                     default -> {
-                        final int x = Integer.parseInt(values[1]);
-                        final int y = Integer.parseInt(values[2]);
+                        final Position position = new Position(Integer.parseInt(values[1]), Integer.parseInt(values[2]));
 
                         final Direction direction = Direction.getFromKey(values[3]);
 
                         // Type d'entité
                         switch (values[0]) {
-                            case "v" -> state.addVehicle(x, y, direction, VehicleType.getFromKey(values[4]));
-                            case "o" -> state.addObstacle(x, y, direction, ObstacleType.getFromKey(values[4]));
-                            case "p" -> state.addPedestrian(x, y, direction, PedestrianType.getFromKey(values[4]));
+                            case "v" -> state.addVehicle(position, direction, VehicleType.getFromKey(values[4]));
+                            case "o" -> state.addObstacle(position, direction, ObstacleType.getFromKey(values[4]));
+                            case "p" -> state.addPedestrian(position, direction, PedestrianType.getFromKey(values[4]));
                             default -> throw new RuntimeException("Invalid entity type");
                         }
                     }
@@ -92,6 +91,7 @@ public class LevelParser {
         } catch (Exception e) {
             throw new RuntimeException(e.toString());
         }
+        state.saveState();
         return state;
     }
 

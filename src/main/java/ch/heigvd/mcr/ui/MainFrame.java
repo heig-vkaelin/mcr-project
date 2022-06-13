@@ -1,7 +1,5 @@
 package ch.heigvd.mcr.ui;
 
-import ch.heigvd.mcr.GameController;
-import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.views.HomeView;
 import ch.heigvd.mcr.ui.views.MenuView;
 import ch.heigvd.mcr.ui.views.PlayView;
@@ -15,12 +13,9 @@ public class MainFrame extends JFrame {
     private static final int INITIAL_HEIGHT = 560;
 
     private static MainFrame instance;
-
-    private CardLayout currentView;
-
-    private PlayView currentPlayView;
-
     private final JPanel mainPanel;
+    private final CardLayout currentView;
+    private PlayView currentPlayView;
 
     private MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));

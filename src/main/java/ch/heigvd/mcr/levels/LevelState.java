@@ -13,6 +13,8 @@ import java.util.LinkedList;
 public class LevelState {
 
     private final int id;
+
+    private final LinkedList<EntityDescriptor<?>> descriptors;
     private final LinkedList<Entity> entities;
     private int sideSize;
     private Difficulty difficulty;
@@ -23,42 +25,40 @@ public class LevelState {
     public LevelState(int id) {
         this.id = id;
         this.entities = new LinkedList<>();
+        this.descriptors = new LinkedList<>();
     }
 
     /**
      * Ajoute un véhicule au niveau
      *
-     * @param x         coordonnée du véhicule sur l'axe x
-     * @param y         coordonnée du véhicule sur l'axe y
+     * @param position  position du véhicule
      * @param direction direction du véhicule
      * @param type      type de véhicule
      */
-    public void addVehicle(int x, int y, Direction direction, VehicleType type) {
-        addEntity(new Vehicle(x, y, direction, type));
+    public void addVehicle(Position position, Direction direction, VehicleType type) {
+        addEntity(new Vehicle(position, direction, type));
     }
 
     /**
      * Ajoute un obstacle au niveau
      *
-     * @param x         coordonnée de l'obstacle sur l'axe x
-     * @param y         coordonnée de l'obstacle sur l'axe y
+     * @param position  position de l'obstacle
      * @param direction direction de l'obstacle
      * @param type      type de l'obstacle
      */
-    public void addObstacle(int x, int y, Direction direction, ObstacleType type) {
-        addEntity(new Obstacle(x, y, direction, type));
+    public void addObstacle(Position position, Direction direction, ObstacleType type) {
+        addEntity(new Obstacle(position, direction, type));
     }
 
     /**
      * Ajoute un piéton au niveau
      *
-     * @param x         coordonnée du piéton sur l'axe x
-     * @param y         coordonnée du piéton sur l'axe y
+     * @param position  position du piéton
      * @param direction direction du piéton
      * @param type      type de piéton
      */
-    public void addPedestrian(int x, int y, Direction direction, PedestrianType type) {
-        addEntity(new Pedestrian(x, y, direction, type));
+    public void addPedestrian(Position position, Direction direction, PedestrianType type) {
+        addEntity(new Pedestrian(position, direction, type));
     }
 
     /**
@@ -179,6 +179,20 @@ public class LevelState {
             this.entities.add(entity);
         } else {
             throw new RuntimeException("Invalid entity configuration for this level state");
+        }
+    }
+
+    public void saveState() {
+        descriptors.clear();
+        for (Entity e : entities) {
+            descriptors.add(e.getDescriptor());
+        }
+    }
+
+    public void loadState() {
+        entities.clear();
+        for (EntityDescriptor<?> d : descriptors) {
+            entities.add(d.createEntity());
         }
     }
 }

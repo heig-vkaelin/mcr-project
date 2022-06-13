@@ -8,8 +8,8 @@ import ch.heigvd.mcr.assets.AssetManager;
  * @author Lazar Pavicevic
  */
 public class Obstacle extends Entity {
-    public Obstacle(int originX, int originY, Direction direction, ObstacleType type) {
-        super(originX, originY, direction, type);
+    public Obstacle(Position position, Direction direction, ObstacleType type) {
+        super(position, direction, type);
     }
 
     @Override

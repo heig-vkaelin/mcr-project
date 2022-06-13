@@ -8,8 +8,8 @@ import ch.heigvd.mcr.assets.AssetManager;
  * @author Lazar Pavicevic
  */
 public class Vehicle extends MovableEntity {
-    public Vehicle(int originX, int originY, Direction direction, VehicleType type) {
-        super(originX, originY, direction, type);
+    public Vehicle(Position position, Direction direction, VehicleType type) {
+        super(position, direction, type);
     }
 
     @Override

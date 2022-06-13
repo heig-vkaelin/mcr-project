@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Classe représentant la vue permettant de choisir quel niveau choisir

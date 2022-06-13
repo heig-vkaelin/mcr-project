@@ -8,8 +8,8 @@ import ch.heigvd.mcr.assets.AssetManager;
  * @author Lazar Pavicevic
  */
 public class Pedestrian extends MovableEntity {
-    public Pedestrian(int originX, int originY, Direction direction, PedestrianType type) {
-        super(originX, originY, direction, type);
+    public Pedestrian(Position position, Direction direction, PedestrianType type) {
+        super(position, direction, type);
     }
 
     @Override
