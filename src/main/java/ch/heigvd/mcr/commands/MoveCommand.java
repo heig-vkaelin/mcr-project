@@ -2,6 +2,7 @@ package ch.heigvd.mcr.commands;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.ui.MainFrame;
 
 /**
  * Classe représentant une commande de déplacement d'une entité
@@ -11,7 +12,6 @@ import ch.heigvd.mcr.entities.Entity;
  */
 public class MoveCommand implements Command {
     private final Entity entity;
-
     private final int oldX;
     private final int oldY;
     private final int newX;
@@ -33,6 +33,10 @@ public class MoveCommand implements Command {
 
     @Override
     public boolean rollback() {
-        return GameController.getInstance().setNewPosition(entity, oldX, oldY);
+        if (GameController.getInstance().setNewPosition(entity, oldX, oldY)) {
+            MainFrame.getInstance().refreshPlayView();
+            return true;
+        }
+        return false;
     }
 }

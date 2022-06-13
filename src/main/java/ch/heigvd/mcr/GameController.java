@@ -1,16 +1,10 @@
 package ch.heigvd.mcr;
 
-import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.ui.MainFrame;
-import ch.heigvd.mcr.ui.views.HomeView;
-import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.levels.LevelState;
-import ch.heigvd.mcr.ui.views.MenuView;
-import ch.heigvd.mcr.ui.views.PlayView;
-import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.ValidateState;
 
 import java.util.Stack;
@@ -53,7 +47,6 @@ public class GameController {
     }
 
     public void setState(LevelState state) {
-        System.out.println("Loading a new level state");
         this.state = state;
     }
 

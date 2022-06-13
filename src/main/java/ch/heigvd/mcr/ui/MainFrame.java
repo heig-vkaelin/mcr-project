@@ -18,6 +18,8 @@ public class MainFrame extends JFrame {
 
     private CardLayout currentView;
 
+    private PlayView currentPlayView;
+
     private final JPanel mainPanel;
 
     private MainFrame() {
@@ -54,7 +56,14 @@ public class MainFrame extends JFrame {
     }
 
     public void openLevelView() {
-        mainPanel.add(new PlayView(this), "level");
+        currentPlayView = new PlayView(this);
+        mainPanel.add(currentPlayView, "level");
         currentView.show(mainPanel, "level");
+    }
+
+    public void refreshPlayView() {
+        if (currentPlayView != null) {
+            currentPlayView.refresh();
+        }
     }
 }

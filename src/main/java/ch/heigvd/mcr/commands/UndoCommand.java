@@ -7,7 +7,7 @@ public class UndoCommand implements Command {
     @Override
     public boolean execute() {
         GameController.getInstance().undo();
-        return false;
+        return true;
     }
 
     @Override

@@ -46,6 +46,12 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    public void refresh() {
+        for (DraggableEntity e : draggables) {
+            e.repaint();
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -68,6 +74,7 @@ public class BoardPanel extends JPanel {
 
         // Met à jour les dimensions des entités
         for (DraggableEntity e : draggables) {
+//            System.out.println(e.getCurrentX() + " " + e.getCurrentY());
             e.setRatio(ratio);
             e.setOffset(offset + ratio);
         }

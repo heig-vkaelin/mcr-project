@@ -3,6 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
+import ch.heigvd.mcr.commands.UndoCommand;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.BoardPanel;
@@ -24,6 +25,8 @@ public class PlayView extends JPanel {
     private final JButton btnRestart;
     private final JButton btnCheat;
     private final MainFrame parent;
+
+    private BoardPanel boardPanel;
 
     /**
      * Constructeur permettant de pour construire la vue
@@ -50,7 +53,7 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
-        BoardPanel boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
+        boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
         boardPanel.setBackground(Color.GRAY);
 
         btnsPanel.add(btnUndo);
@@ -61,6 +64,10 @@ public class PlayView extends JPanel {
         add(btnsPanel, BorderLayout.PAGE_END);
     }
 
+    public void refresh () {
+        boardPanel.refresh();
+    }
+
     private void registerHandlers() {
         btnMenu.addActionListener(e -> parent.openMenuView());
 
@@ -69,11 +76,8 @@ public class PlayView extends JPanel {
         });
 
 
-        btnUndo.addActionListener(e -> {
-        });
+        btnUndo.addActionListener(e -> new UndoCommand().execute());
 
-        btnRestart.addActionListener(e -> {
-            new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
-        });
+        btnRestart.addActionListener(e -> new LoadLevelCommand(GameController.getInstance().getState().getId()).execute());
     }
 }

@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import org.jetbrains.annotations.Nullable;
@@ -17,8 +18,6 @@ import java.awt.event.MouseEvent;
  */
 public class DraggableEntity extends JLabel {
 
-    // TODO: Implementer drag & drop et modifier les coordonnées des entités
-
     private final Entity entity;
 
     private Image image;
@@ -30,6 +29,7 @@ public class DraggableEntity extends JLabel {
     public DraggableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
         this.ratio = baseRatio;
+
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
@@ -41,15 +41,21 @@ public class DraggableEntity extends JLabel {
         DragListener dragListener = new DragListener() {
             @Nullable() ValidateState state;
 
+            int startX, startY;
+
             @Override
             public void dragStarted(MouseEvent e) {
-                System.out.println("dragStarted at " + entity.getX() + " " + entity.getY());
+                startX = entity.getX();
+                startY = entity.getY();
             }
 
             @Override
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
-                System.out.println("dragEnded at " + state.x() + " " + state.y() + " collision: " + state.collidedEntity());
+                // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
+                entity.setX(startX);
+                entity.setY(startY);
+                new MoveCommand(entity, state.x(), state.y()).execute();
             }
 
             @Override
