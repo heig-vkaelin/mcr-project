@@ -28,7 +28,7 @@ public class SpriteSheet {
                     if (spriteSheetFile.getProtocol().equals("jar")) {
                         String imagePath = imagePathRelativeToSpriteSheet.toString().substring(1);
                         source = ImageIO.read(ClassLoader.getSystemResource(imagePath));
-                    }else{
+                    } else {
                         source = ImageIO.read(imagePathRelativeToSpriteSheet.toFile());
                     }
                     continue;

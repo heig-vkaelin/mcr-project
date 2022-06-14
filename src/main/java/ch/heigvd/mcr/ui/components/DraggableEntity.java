@@ -2,8 +2,10 @@ package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Position;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -17,8 +19,6 @@ import java.awt.event.MouseEvent;
  */
 public class DraggableEntity extends JLabel {
 
-    // TODO: Implementer drag & drop et modifier les coordonnées des entités
-
     private final Entity entity;
 
     private Image image;
@@ -30,6 +30,7 @@ public class DraggableEntity extends JLabel {
     public DraggableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
         this.ratio = baseRatio;
+
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
@@ -41,36 +42,46 @@ public class DraggableEntity extends JLabel {
         DragListener dragListener = new DragListener() {
             @Nullable() ValidateState state;
 
+            int startX, startY;
+
             @Override
             public void dragStarted(MouseEvent e) {
-                System.out.println("dragStarted at " + entity.getX() + " " + entity.getY());
+                startX = entity.getX();
+                startY = entity.getY();
             }
 
             @Override
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
-                System.out.println("dragEnded at " + state.x() + " " + state.y() + " collision: " + state.collidedEntity());
+                // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
+                entity.setPosition(startX, startY);
+                new MoveCommand(entity, state.position()).execute();
             }
 
             @Override
             public void dragMoved(MouseEvent e) {
-                int x = (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX());
-                int y = (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY());
-                if (x != entity.getX() || y != entity.getY()) {
-                    state = GameController.getInstance().validatePosition(entity, x, y);
-                    entity.setX(state.x());
-                    entity.setY(state.y());
+                Position position = new Position(
+                        (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX()),
+                        (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY())
+                );
+                if (position.x() != entity.getX() || position.y() != entity.getY()) {
+                    state = GameController.getInstance().validatePosition(entity, position);
+                    entity.setPosition(state.position());
                     if (state.collidedEntity() != null) {
                         stopDragging(); // to avoid infinite calls
-                        AssetManager.audios.get("horn").play();
+                        state.collidedEntity().onCrash();
                         System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
                     }
                     repaint();
                 }
             }
         };
-        addMouseListener(dragListener);
-        addMouseMotionListener(dragListener);
+
+        if (entity.isInteractive()) {
+            addMouseListener(dragListener);
+            addMouseMotionListener(dragListener);
+        }
+
         setIcon(new ImageIcon(image));
     }
 

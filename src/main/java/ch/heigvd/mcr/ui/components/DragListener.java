@@ -6,7 +6,6 @@ import java.awt.event.MouseMotionListener;
 
 public abstract class DragListener implements MouseListener, MouseMotionListener {
 
-
     protected int offsetX;
     protected int offsetY;
     protected boolean isDragged;

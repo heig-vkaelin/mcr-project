@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Position;
 
-public record ValidateState(int x, int y, Entity collidedEntity) {
+public record ValidateState(Position position, Entity collidedEntity) {
 }

@@ -16,9 +16,9 @@ public class LoadLevelCommand implements Command {
     @Override
     public boolean execute() {
         LevelState level = AssetManager.levels.get("level" + levelId);
+        level.loadState();
         GameController.getInstance().setState(level);
         MainFrame.getInstance().openLevelView();
-        System.out.println("loading level" + levelId);
         return true;
     }
 
