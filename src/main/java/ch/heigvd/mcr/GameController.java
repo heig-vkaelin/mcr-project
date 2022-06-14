@@ -107,19 +107,8 @@ public class GameController {
             }
         }
 
-        if (entity.isThePlayer()) {
-            if (state.getExitSide() == Direction.UP && newY == 0) {
-                return new ValidateState(new Position(newX, newY), null, true);
-            }
-            if (state.getExitSide() == Direction.DOWN && newY == state.getSideSize() - entity.getType().getLength()) {
-                return new ValidateState(new Position(newX, newY), null, true);
-            }
-            if (state.getExitSide() == Direction.LEFT && newX == 0) {
-                return new ValidateState(new Position(newX, newY), null, true);
-            }
-            if (state.getExitSide() == Direction.RIGHT && newX == state.getSideSize() - entity.getType().getLength()) {
-                return new ValidateState(new Position(newX, newY), null, true);
-            }
+        if (playerWon(entity, newX, newY)) {
+            return new ValidateState(new Position(newX, newY), null, true);
         }
 
         return new ValidateState(new Position(newX, newY), null, false);
@@ -164,5 +153,12 @@ public class GameController {
         JFrame jFrame = new JFrame();
         JOptionPane.showMessageDialog(jFrame, "You won in " + state.getNbMoves() + " moves !");
         MainFrame.getInstance().openMenuView();
+    }
+
+    private boolean playerWon(Entity entity, int newX, int newY) {
+        return entity.isThePlayer() && state.getExitSide() == Direction.UP && newY == 0
+                || state.getExitSide() == Direction.DOWN && newY == state.getSideSize() - entity.getType().getLength()
+                || state.getExitSide() == Direction.LEFT && newX == 0
+                || state.getExitSide() == Direction.RIGHT && newX == state.getSideSize() - entity.getType().getLength();
     }
 }
