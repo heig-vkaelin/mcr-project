@@ -156,9 +156,10 @@ public class GameController {
     }
 
     private boolean playerWon(Entity entity, int newX, int newY) {
-        return entity.isThePlayer() && state.getExitSide() == Direction.UP && newY == 0
+        return entity.isThePlayer()
+                && (state.getExitSide() == Direction.UP && newY == 0
                 || state.getExitSide() == Direction.DOWN && newY == state.getSideSize() - entity.getType().getLength()
                 || state.getExitSide() == Direction.LEFT && newX == 0
-                || state.getExitSide() == Direction.RIGHT && newX == state.getSideSize() - entity.getType().getLength();
+                || state.getExitSide() == Direction.RIGHT && newX == state.getSideSize() - entity.getType().getLength());
     }
 }
