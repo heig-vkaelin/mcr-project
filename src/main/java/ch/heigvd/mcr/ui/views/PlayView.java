@@ -28,12 +28,12 @@ import java.util.List;
 public class PlayView extends JPanel {
     private final JLabel nbMovesLabel;
 
-    private final FlatButton btnUndo;
-    private final FlatButton btnMenu;
-    private final FlatButton btnRestart;
-    private final FlatButton btnCheat;
+    private final JButton btnUndo;
+    private final JButton btnMenu;
+    private final JButton btnRestart;
+    private final JButton btnCheat;
 
-    private final FlatButton btnSound;
+    private final JButton btnSound;
     private final MainFrame parent;
 
     private final BoardPanel boardPanel;
@@ -63,7 +63,7 @@ public class PlayView extends JPanel {
         btnMenu = new FlatButton("Menu", RED, Color.WHITE);
         btnRestart = new FlatButton("Recommencer", RED, Color.WHITE);
         btnCheat = new FlatButton("Cheat", RED, Color.WHITE);
-        btnSound = new MuteButton();
+        btnSound = new MuteButton(RED, Color.WHITE);
 
         events = new LinkedList<>();
 

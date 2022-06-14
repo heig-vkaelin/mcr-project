@@ -28,6 +28,7 @@ public class Main {
         AssetManager.audios.register("music", new AudioAssetLoader("audio/music.wav"));
         AssetManager.audios.register("bonk", new AudioAssetLoader("audio/bonk.wav"));
         AssetManager.audios.register("menu", new AudioAssetLoader("audio/menu.wav"));
+        AssetManager.sprites.register("icons", new SpriteSheetAssetLoader("sprites/icons.sheet"));
         AssetManager.sprites.register("board", new SpriteSheetAssetLoader("sprites/board.sheet"));
         AssetManager.sprites.register("cars", new SpriteSheetAssetLoader("sprites/cars.sheet"));
         AssetManager.sprites.register("obstacles", new SpriteSheetAssetLoader("sprites/obstacles.sheet"));

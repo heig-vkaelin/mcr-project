@@ -1,25 +1,27 @@
 package ch.heigvd.mcr.ui.components;
 
+import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.AudioManager;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class MuteButton extends FlatButton {
-    // TODO: add a sound icon
-    public MuteButton() {
-        super(
-                "Sound " + (AudioManager.getInstance().isMuted() ? "OFF" : "ON"),
-                new Color(180, 32, 42),
-                Color.WHITE
-        );
-
+public class MuteButton extends JButton {
+    public MuteButton(Color bgColor, Color txtColor) {
+        super(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
+        setBackground(bgColor);
+        setForeground(txtColor);
+        setBorderPainted(false);
+        setFocusPainted(false);
+        setOpaque(true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addActionListener(e -> {
             if (AudioManager.getInstance().isMuted()) {
                 AudioManager.getInstance().setMuted(false);
-                setText("Sound ON");
+                setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
             } else {
                 AudioManager.getInstance().setMuted(true);
-                setText("Sound OFF");
+                setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_off")));
             }
         });
     }

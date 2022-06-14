@@ -17,10 +17,10 @@ import java.awt.*;
  */
 public class HomeView extends JPanel {
 
-    private final FlatButton play;
-    private final FlatButton quit;
+    private final JButton play;
+    private final JButton quit;
 
-    private final FlatButton sound;
+    private final JButton sound;
 
     private final MainFrame parent;
 
@@ -36,7 +36,7 @@ public class HomeView extends JPanel {
 
         play = new FlatButton("Play !", new Color(180, 32, 42), Color.WHITE);
         quit = new FlatButton("Quit", new Color(180, 32, 42), Color.WHITE);
-        sound = new MuteButton();
+        sound = new MuteButton(new Color(180, 32, 42), Color.WHITE);
 
         play.setPreferredSize(new Dimension(200, 40));
         quit.setPreferredSize(new Dimension(200, 40));
