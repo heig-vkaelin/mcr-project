@@ -1,6 +1,7 @@
 package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.assets.loaders.AudioAssetLoader;
 import ch.heigvd.mcr.assets.loaders.ImageAssetLoader;
 import ch.heigvd.mcr.assets.loaders.SpriteSheetAssetLoader;
@@ -49,7 +50,7 @@ public class Main {
             System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
                 frame.dispose();
-                AssetManager.audios.get("menu").play();
+                AudioManager.getInstance().play(AssetManager.audios.get("menu"));
                 GameController controller = GameController.getInstance();
                 controller.run(DELTA_MS);
             }

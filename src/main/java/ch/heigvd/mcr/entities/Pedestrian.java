@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.entities;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.AudioManager;
 
 /**
  * Classe représentant un piéton pouvant se déplacer de manière autonome sur le board
@@ -19,6 +20,6 @@ public class Pedestrian extends MovableEntity {
 
     @Override
     public void onCrash() {
-        AssetManager.audios.get("death").play();
+        AudioManager.getInstance().play(AssetManager.audios.get("death"));
     }
 }

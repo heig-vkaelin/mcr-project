@@ -2,6 +2,7 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.Audio;
+import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.FlatButton;
 
@@ -34,7 +35,7 @@ public class HomeView extends JPanel {
 
         play = new FlatButton("Play !", new Color(180, 32, 42), Color.WHITE);
         quit = new FlatButton("Quit", new Color(180, 32, 42), Color.WHITE);
-        sound = new FlatButton("Sound ON", new Color(180, 32, 42), Color.WHITE);
+        sound = new FlatButton("Sound OFF", new Color(180, 32, 42), Color.WHITE);
 
         play.setPreferredSize(new Dimension(200, 40));
         quit.setPreferredSize(new Dimension(200, 40));
@@ -52,6 +53,8 @@ public class HomeView extends JPanel {
         add(btnPanel, BorderLayout.SOUTH);
 
         registerHandlers();
+
+        AudioManager.getInstance().loop(AssetManager.audios.get("menu"));
     }
 
     private void registerHandlers() {
@@ -60,13 +63,12 @@ public class HomeView extends JPanel {
         quit.addActionListener(e -> System.exit(0));
 
         sound.addActionListener(e -> {
-            Audio a = AssetManager.audios.get("menu");
-            if (a.isPlaying()) {
-                a.stop();
-                sound.setText("Sound OFF");
-            } else {
-                a.play();
+            if (AudioManager.getInstance().isMuted()) {
+                AudioManager.getInstance().setMuted(false);
                 sound.setText("Sound ON");
+            } else {
+                AudioManager.getInstance().setMuted(true);
+                sound.setText("Sound OFF");
             }
         });
     }

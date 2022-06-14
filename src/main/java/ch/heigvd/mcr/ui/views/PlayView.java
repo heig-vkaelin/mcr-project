@@ -3,6 +3,7 @@ package ch.heigvd.mcr.ui.views;
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.Audio;
+import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.UndoCommand;
 import ch.heigvd.mcr.levels.LevelState;
@@ -75,7 +76,7 @@ public class PlayView extends JPanel {
     private void registerHandlers() {
         btnMenu.addActionListener(e -> parent.openMenuView());
 
-        btnCheat.addActionListener(e -> AssetManager.audios.get("death").play());
+        btnCheat.addActionListener(e -> AudioManager.getInstance().play(AssetManager.audios.get("death")));
 
         btnUndo.addActionListener(e -> new UndoCommand().execute());
 
@@ -83,13 +84,12 @@ public class PlayView extends JPanel {
 
         // Todo: create a button class with an sound icon
         btnSound.addActionListener(e -> {
-            Audio a = AssetManager.audios.get("menu");
-            if (a.isPlaying()) {
-                a.stop();
-                btnSound.setText("Sound OFF");
-            } else {
-                a.play();
+            if (AudioManager.getInstance().isMuted()) {
+                AudioManager.getInstance().setMuted(false);
                 btnSound.setText("Sound ON");
+            } else {
+                AudioManager.getInstance().setMuted(true);
+                btnSound.setText("Sound OFF");
             }
         });
     }

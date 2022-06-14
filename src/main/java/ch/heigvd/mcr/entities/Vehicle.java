@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.entities;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.AudioManager;
 
 /**
  * Classe représentant un véhicule pouvant se déplacer sur le board
@@ -19,6 +20,6 @@ public class Vehicle extends MovableEntity {
 
     @Override
     public void onCrash() {
-        AssetManager.audios.get("horn").play();
+        AudioManager.getInstance().play(AssetManager.audios.get("horn"));
     }
 }

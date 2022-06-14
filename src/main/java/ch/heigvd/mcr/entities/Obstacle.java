@@ -1,6 +1,7 @@
 package ch.heigvd.mcr.entities;
 
 import ch.heigvd.mcr.assets.AssetManager;
+import ch.heigvd.mcr.assets.AudioManager;
 
 /**
  * Classe représentant un obstacle qui est une pièce immobile dans le jeu
@@ -19,6 +20,6 @@ public class Obstacle extends Entity {
 
     @Override
     public void onCrash() {
-        AssetManager.audios.get("bonk").play();
+        AudioManager.getInstance().play(AssetManager.audios.get("bonk"));
     }
 }
