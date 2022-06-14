@@ -1,0 +1,16 @@
+6
+3
+1 2 r red
+v 0 0 r taxi
+v 0 1 r truck
+v 0 2 d police
+v 1 5 l yellow
+v 2 3 u van
+v 3 0 u blue
+v 3 2 d taxi
+v 3 4 l van
+v 4 0 d taxi
+v 4 3 r police
+o 4 5 d cone
+o 5 0 d barrier
+v 5 4 u blue

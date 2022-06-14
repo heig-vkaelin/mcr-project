@@ -1,14 +1,16 @@
 6
 3
-2 2 r red
-v 0 0 d truck
-v 1 0 r truck
-v 4 0 l blue
-v 1 1 d police
-v 2 1 r taxi
-v 5 1 d truck
-v 0 3 r truck
-v 0 5 l blue
-v 2 4 u taxi
-v 3 3 d blue
-v 4 4 r yellow
+0 2 r red
+v 0 1 r truck
+v 0 4 d yellow
+v 1 4 l taxi
+v 1 5 r police
+v 2 0 r gray
+v 2 2 d striped
+v 3 1 u blue
+v 3 3 l van
+v 3 4 d police
+v 4 0 u blue
+o 5 0 d trashbin
+v 5 2 u gray
+o 5 5 d trashbin

@@ -1,0 +1,14 @@
+6
+3
+1 2 r red
+v 0 0 r truck
+v 0 1 d yellow
+v 0 4 l taxi
+v 2 3 u van
+o 2 5 d cone
+v 3 0 d school_bus
+v 3 3 l striped
+v 4 0 r gray
+v 4 5 l police
+v 5 1 d yellow
+v 5 3 u yellow
