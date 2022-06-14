@@ -32,10 +32,7 @@ public class MuteButton extends JButton {
     }
 
     private void refreshIcon() {
-        if (AudioManager.getInstance().isMuted()) {
-            setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_off")));
-        } else {
-            setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
-        }
+        String text = AudioManager.getInstance().isMuted() ? "sound_off" : "sound_on";
+        setIcon(new ImageIcon(AssetManager.sprites.get("icons").get(text)));
     }
 }
