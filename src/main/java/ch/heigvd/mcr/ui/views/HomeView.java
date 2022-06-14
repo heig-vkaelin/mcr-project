@@ -56,6 +56,12 @@ public class HomeView extends JPanel {
         registerHandlers();
 
         AudioManager.getInstance().loop(AssetManager.audios.get("menu"));
+        picLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AudioManager.getInstance().stop(AssetManager.audios.get("menu"));
+                AudioManager.getInstance().loop(AssetManager.audios.get("sw"));
+            }
+        });
     }
 
     private void registerHandlers() {

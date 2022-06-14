@@ -20,7 +20,7 @@ public class AudioManager {
         audio.loop(isMuted ? 0 : volume);
     }
 
-    void stop(Audio audio) {
+    public void stop(Audio audio) {
         audios.remove(audio);
         audio.stop();
     }
