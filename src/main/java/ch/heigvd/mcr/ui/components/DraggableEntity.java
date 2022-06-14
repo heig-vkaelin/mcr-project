@@ -57,6 +57,12 @@ public class DraggableEntity extends JLabel {
                 // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
                 entity.setPosition(startX, startY);
                 GameController.getInstance().addCommand(new MoveCommand(entity, state.position()));
+
+                if (state.hasReachedExit()) {
+                    System.out.println("Game win !");
+                    MainFrame.getInstance().openMenuView();
+                    // TODO: Mettre ici l'appel au popup
+                }
             }
 
             @Override
@@ -73,12 +79,6 @@ public class DraggableEntity extends JLabel {
                         state.collidedEntity().onCrash();
                         System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
                     }
-
-                    if (state.hasReachedExit()) {
-                        System.out.println("Game win !");
-                        MainFrame.getInstance().openMenuView();
-                    }
-
                     repaint();
                 }
             }
