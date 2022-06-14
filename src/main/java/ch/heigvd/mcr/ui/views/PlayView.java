@@ -85,6 +85,7 @@ public class PlayView extends AbstractView {
 
     public void update() {
         updateNbMoves();
+        updateUndoBtn();
     }
 
     private void registerHandlers() {
@@ -98,6 +99,7 @@ public class PlayView extends AbstractView {
 
         // Écoute des événements
         events.add(GameController.getInstance().onCommand((Command c) -> update()));
+        updateUndoBtn();
     }
 
     public void onHide() {
@@ -105,11 +107,15 @@ public class PlayView extends AbstractView {
             e.unsubscribe();
     }
 
+    public void refresh() {
+        boardPanel.refresh();
+    }
+
     private void updateNbMoves() {
         nbMovesLabel.setText("Number of moves : " + GameController.getInstance().getState().getNbMoves());
     }
 
-    public void refresh() {
-        boardPanel.refresh();
+    private void updateUndoBtn() {
+        btnUndo.setEnabled(GameController.getInstance().getState().getNbMoves() > 0);
     }
 }
