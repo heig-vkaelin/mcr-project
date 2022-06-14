@@ -1,0 +1,14 @@
+20
+2
+0 0 r red
+p 1 2 d weirdman
+p 1 3 d bigman
+p 1 4 d fitgirl
+p 1 5 d fatdog
+p 1 6 d gandalf
+p 1 7 d boy
+p 1 8 d boy
+p 1 9 d boy
+p 1 10 d boy
+p 1 11 d boy
+p 1 12 d boy

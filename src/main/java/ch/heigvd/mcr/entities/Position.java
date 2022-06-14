@@ -14,4 +14,12 @@ public record Position(int x, int y) {
 
     public static final List<Position> DIRECTIONS =
             List.of(UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT);
+
+    public static Position randomDirection() {
+        return DIRECTIONS.get((int) (Math.random() * DIRECTIONS.size()));
+    }
+
+    public static Position add(Position p1, Position p2) {
+        return new Position(p1.x + p2.x, p1.y + p2.y);
+    }
 }

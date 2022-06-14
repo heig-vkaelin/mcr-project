@@ -4,6 +4,7 @@ import ch.heigvd.mcr.entities.*;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Classe représentant l'état d'un niveau
@@ -15,16 +16,19 @@ public class LevelState {
 
     private final LinkedList<EntityDescriptor<?>> descriptors;
     private final LinkedList<Entity> entities;
+    private final List<Pedestrian> pedestrians;
     private int sideSize;
     private Difficulty difficulty;
     private int exitPos;
     private Direction exitSide;
     private int nbMoves;
 
+
     public LevelState(int id) {
         this.id = id;
-        this.entities = new LinkedList<>();
-        this.descriptors = new LinkedList<>();
+        entities = new LinkedList<>();
+        descriptors = new LinkedList<>();
+        pedestrians = new LinkedList<>();
         nbMoves = 0;
     }
 
@@ -58,7 +62,9 @@ public class LevelState {
      * @param type      type de piéton
      */
     public void addPedestrian(Position position, Direction direction, PedestrianType type) {
-        addEntity(new Pedestrian(position, direction, type));
+        Pedestrian p = new Pedestrian(position, direction, type);
+        addEntity(p);
+        pedestrians.add(p);
     }
 
     /**
@@ -182,6 +188,10 @@ public class LevelState {
         }
     }
 
+    public List<Pedestrian> getPedestrians() {
+        return pedestrians;
+    }
+
     public void addMove() {
         nbMoves++;
     }
@@ -207,8 +217,15 @@ public class LevelState {
 
     public void loadState() {
         entities.clear();
+        pedestrians.clear();
         for (EntityDescriptor<?> d : descriptors) {
-            entities.add(d.createEntity());
+            Entity e = d.createEntity();
+            entities.add(e);
+
+            // TODO: cacher avant dimanche
+            if (e.getType() instanceof PedestrianType) {
+                pedestrians.add((Pedestrian) e);
+            }
         }
         resetMoves();
     }

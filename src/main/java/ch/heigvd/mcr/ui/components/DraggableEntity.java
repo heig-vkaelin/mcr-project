@@ -1,14 +1,11 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.GameController;
-import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.commands.MoveCommand;
-import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Position;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -39,7 +36,7 @@ public class DraggableEntity extends DrawableEntity {
                 if (state == null) return;
                 // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
                 entity.setPosition(startX, startY);
-                GameController.getInstance().addCommand(new MoveCommand(entity, state.position()));
+                GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
             }
 
             @Override

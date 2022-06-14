@@ -1,16 +1,10 @@
 package ch.heigvd.mcr.ui.components;
 
-import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.commands.MoveCommand;
-import ch.heigvd.mcr.entities.Direction;
-import ch.heigvd.mcr.entities.Entity;
-import ch.heigvd.mcr.entities.Position;
-import org.jetbrains.annotations.Nullable;
+import ch.heigvd.mcr.entities.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class DrawableEntity extends JLabel {
     private final Entity entity;
@@ -41,22 +35,6 @@ public class DrawableEntity extends JLabel {
 
     public void setOffset(int offset) {
         this.offset = offset;
-    }
-
-    public int getEntityDefaultWidth() {
-        return entity.getType().getWidth();
-    }
-
-    public int getEntityDefaultLength() {
-        return entity.getType().getLength();
-    }
-
-    public int getCurrentX() {
-        return entity.getX();
-    }
-
-    public int getCurrentY() {
-        return entity.getX();
     }
 
     @Override

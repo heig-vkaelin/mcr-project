@@ -1,8 +1,11 @@
 package ch.heigvd.mcr;
 
 import ch.heigvd.mcr.commands.Command;
+import ch.heigvd.mcr.commands.MoveCommand;
+import ch.heigvd.mcr.commands.TurnCommand;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
 import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
@@ -10,6 +13,7 @@ import ch.heigvd.mcr.ui.components.ValidateState;
 
 import java.util.EventListener;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -62,19 +66,15 @@ public class GameController {
         if (!state.getEntities().contains(entity))
             return false;
 
-        if ((entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) && newX != entity.getX()) {
-            return false;
-        } else if ((entity.getDirection() == Direction.RIGHT || entity.getDirection() == Direction.LEFT) && newY != entity.getY()) {
-            return false;
-        }
+        // Clang
+        newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
+        newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
 
         for (Entity e : state.getEntities()) {
-            if (entity != e && entity.isColliding(e))
+            if (entity != e && entity.isColliding(e, newX, newY)) {
                 return false;
+            }
         }
-
-        if (newX < 0 || newY < 0 || newX >= state.getSideSize() || newY >= state.getSideSize())
-            return false;
 
         entity.setPosition(newX, newY);
         return true;
@@ -110,6 +110,25 @@ public class GameController {
 
         command.execute();
         commandListeners.forEach(l -> l.commandExecuted(command));
+    }
+
+    public void playTurn(Command command) {
+        TurnCommand turn = new TurnCommand();
+        turn.addCommand(command);
+        // TODO: make move the peyDey
+        //        turn.addCommand(pedestrianCommand);
+
+        List<Pedestrian> pedestrians = state.getPedestrians();
+        for (Pedestrian pedestrian : pedestrians) {
+            turn.addCommand(
+                    new MoveCommand(
+                            pedestrian,
+                            Position.add(pedestrian.getPosition(), Position.randomDirection())
+                    )
+            );
+        }
+
+        addCommand(turn);
     }
 
     public void undo() {
