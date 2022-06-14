@@ -40,17 +40,22 @@ public abstract class Entity {
         return type;
     }
 
-    public Rectangle getBounds() {
-        switch (direction) {
-            case UP, DOWN -> {
-                return new Rectangle(position.x(), position.y(), type.getWidth(), type.getLength());
-            }
+    public int getWidth() {
+        if (Direction.isVertical(direction))
+            return type.getWidth();
 
-            case LEFT, RIGHT -> {
-                return new Rectangle(position.x(), position.y(), type.getLength(), type.getWidth());
-            }
-        }
-        return null;
+        return type.getLength();
+    }
+
+    public int getHeight() {
+        if (Direction.isVertical(direction))
+            return type.getLength();
+
+        return type.getWidth();
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(position.x(), position.y(), getWidth(), getHeight());
     }
 
     public boolean isColliding(Entity entity) {

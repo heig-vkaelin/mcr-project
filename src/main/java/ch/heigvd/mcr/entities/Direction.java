@@ -17,6 +17,10 @@ public enum Direction {
         this.key = key;
     }
 
+    public static boolean isVertical(Direction direction) {
+        return direction == Direction.UP || direction == Direction.DOWN;
+    }
+
     /**
      * Récupère une direction en fonction de sa clé
      *

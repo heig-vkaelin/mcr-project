@@ -67,8 +67,8 @@ public class GameController {
             return false;
 
         // Clang
-        newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
-        newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
+        newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getHeight()));
+        newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getWidth()));
 
         for (Entity e : state.getEntities()) {
             if (entity != e && entity.isColliding(e, newX, newY)) {
