@@ -1,5 +1,6 @@
 package ch.heigvd.mcr.ui.components;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.*;
 
@@ -41,6 +42,10 @@ public class DrawableEntity extends JLabel {
 
     public void setOffset(int offset) {
         this.offset = offset;
+    }
+
+    public Entity getEntity() {
+        return entity;
     }
 
     @Override

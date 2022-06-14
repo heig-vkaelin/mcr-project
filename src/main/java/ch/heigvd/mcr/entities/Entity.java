@@ -15,11 +15,13 @@ public abstract class Entity {
     private final Direction direction;
     private final EntityType type;
     protected Position position;
+    private boolean alive;
 
     public Entity(Position position, Direction direction, EntityType type) {
         this.position = position;
         this.direction = direction;
         this.type = type;
+        this.alive = true;
     }
 
     public int getX() {
@@ -88,5 +90,17 @@ public abstract class Entity {
 
     public boolean isThePlayer() {
         return false;
+    }
+
+    public void kill() {
+        alive = false;
+    }
+
+    public void revive() {
+        alive = true;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

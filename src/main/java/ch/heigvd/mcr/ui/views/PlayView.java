@@ -108,4 +108,8 @@ public class PlayView extends AbstractView {
     private void updateNbMoves() {
         nbMovesLabel.setText("Number of moves : " + GameController.getInstance().getState().getNbMoves());
     }
+
+    public void refresh() {
+        boardPanel.refresh();
+    }
 }

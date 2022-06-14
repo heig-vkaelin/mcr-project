@@ -1,12 +1,14 @@
 package ch.heigvd.mcr.ui.components;
 
+import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe permettant d'afficher la grille de jeu
@@ -19,7 +21,7 @@ import java.util.LinkedList;
  */
 public class BoardPanel extends JPanel {
     private final int size;
-    private final LinkedList<DrawableEntity> drawables;
+    private final List<DrawableEntity> drawables;
     private final int exitPos;
     private final Direction exitSide;
     private int ratio;
@@ -33,9 +35,9 @@ public class BoardPanel extends JPanel {
      * @param exitPos  position de la sortie de la grille
      * @param exitSide coté de la sortie de la grille
      */
-    public BoardPanel(int size, LinkedList<Entity> entities, int exitPos, Direction exitSide) {
+    public BoardPanel(int size, List<Entity> entities, int exitPos, Direction exitSide) {
         this.size = size;
-        this.drawables = new LinkedList<>();
+        this.drawables = new ArrayList<>();
         this.offset = 1;
         this.ratio = 1;
 
@@ -53,9 +55,7 @@ public class BoardPanel extends JPanel {
     }
 
     public void refresh() {
-        for (DrawableEntity e : drawables) {
-            e.repaint();
-        }
+        repaint();
     }
 
     @Override
@@ -75,6 +75,18 @@ public class BoardPanel extends JPanel {
         for (int i = 1; i <= size; ++i) {
             for (int j = 1; j <= size; ++j) {
                 drawSprite(g, "C", i, j);
+            }
+        }
+
+        // TODO: refactor this shit
+        // Supprime les drawables non utilisés
+        for (int i = 0; i < drawables.size(); ) {
+            DrawableEntity e = drawables.get(i);
+            if (!e.getEntity().isAlive()) {
+                remove(e);
+                drawables.remove(e);
+            } else {
+                i++;
             }
         }
 

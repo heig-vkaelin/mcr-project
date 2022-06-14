@@ -154,6 +154,10 @@ public class GameController {
         MainFrame.getInstance().openMenuView();
     }
 
+    public void addEntity(Entity e) {
+        state.addEntity(e);
+    }
+
     public void removeEntity(Entity e) {
         state.removeEntity(e);
     }

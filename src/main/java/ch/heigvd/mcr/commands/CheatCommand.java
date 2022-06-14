@@ -11,21 +11,17 @@ public class CheatCommand implements Command {
     private static final Random rand = new Random();
     private Entity deletedEntity;
 
-
     @Override
     public void execute() {
         int it = rand.nextInt(GameController.getInstance().getState().getEntities().size());
         int i = 0;
-
-        System.out.println(it);
 
         for (Entity e : GameController.getInstance().getState().getEntities()) {
             if (it == i) {
                 if (!e.isThePlayer()) {
                     System.out.println("delete" + e);
                     deletedEntity = e;
-                }
-                else {
+                } else {
                     // si c'est le player
                     System.out.println("c'est le player");
                     // todo: prendre le suivante ou celui
@@ -34,17 +30,21 @@ public class CheatCommand implements Command {
             ++i;
         }
 
-        GameController.getInstance().removeEntity(deletedEntity);
-        MainFrame.getInstance().refreshPlayView();
+        if (deletedEntity != null) {
+            GameController.getInstance().removeEntity(deletedEntity);
+            deletedEntity.kill();
+            MainFrame.getInstance().refreshPlayView();
+        }
     }
 
     @Override
     public void rollback() {
-
+        // TODO: implement rollback psk les entités crevées ne reviennent po lors
+        //  d'un undo d'un move par ex
     }
 
     @Override
     public boolean isUndoable() {
-        return true;
+        return false;
     }
 }

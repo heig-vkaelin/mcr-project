@@ -68,4 +68,10 @@ public class MainFrame extends JFrame {
         currentView.show(mainPanel, "level");
         setTitle(currentPlayView.getTitle());
     }
+
+    public void refreshPlayView() {
+        if (currentPlayView != null) {
+            currentPlayView.refresh();
+        }
+    }
 }
