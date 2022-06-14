@@ -18,7 +18,6 @@ import java.util.LinkedList;
  * @author Valentin Kaelin
  */
 public class BoardPanel extends JPanel {
-
     private final int size;
     private final LinkedList<DrawableEntity> drawables;
     private final int exitPos;

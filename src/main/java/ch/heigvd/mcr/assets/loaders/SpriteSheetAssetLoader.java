@@ -13,12 +13,12 @@ import ch.heigvd.mcr.assets.SpriteSheet;
  */
 public class SpriteSheetAssetLoader implements AssetLoader<SpriteSheet> {
     private final String path;
-
     private SpriteSheet spriteSheet;
-    private boolean loaded = false;
+    private boolean loaded;
 
     public SpriteSheetAssetLoader(String path) {
         this.path = path;
+        loaded = false;
     }
 
     @Override

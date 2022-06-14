@@ -19,19 +19,17 @@ import java.util.*;
  */
 public class AssetManager<A> {
     private static final List<AssetManager<?>> ASSET_MANAGERS = new LinkedList<>();
-
-
     public static AssetManager<Image> images = createAsset("image");
-
     public static AssetManager<SpriteSheet> sprites = createAsset("sprite");
     public static AssetManager<Audio> audios = createAsset("audio");
     public static AssetManager<LevelState> levels = createAsset("level");
 
-    private final HashMap<String, AssetLoader<A>> assets = new HashMap<>();
+    private final HashMap<String, AssetLoader<A>> assets;
     private final String name;
 
     private AssetManager(String name) {
         this.name = name;
+        assets = new HashMap<>();
     }
 
     private static <A> AssetManager<A> createAsset(String name) {
@@ -50,7 +48,7 @@ public class AssetManager<A> {
             Collection<AssetLoader<?>> assets = getAllLoaders();
             int total = assets.size();
             int loaded = 0;
-            for (var asset : assets) {
+            for (AssetLoader<?> asset : assets) {
                 asset.load();
                 loaded++;
                 listener.onProgress((double) loaded / (double) total, loaded == total);

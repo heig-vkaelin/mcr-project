@@ -28,7 +28,6 @@ import java.util.Stack;
  * @author Valentin Kaelin
  */
 public class GameController {
-
     private static GameController instance;
 
     private LevelState state;

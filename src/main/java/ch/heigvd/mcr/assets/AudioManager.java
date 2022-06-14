@@ -13,11 +13,15 @@ import java.util.HashSet;
  */
 public class AudioManager {
     private static AudioManager instance;
-    private final HashSet<Audio> audios = new HashSet<>();
+    private final HashSet<Audio> audios;
+    private double volume;
+    boolean isMuted;
 
-    private double volume = 1.0;
-
-    boolean isMuted = false;
+    AudioManager() {
+        audios = new HashSet<>();
+        volume = 1.0;
+        isMuted = false;
+    }
 
     public void play(Audio audio) {
         audios.add(audio);

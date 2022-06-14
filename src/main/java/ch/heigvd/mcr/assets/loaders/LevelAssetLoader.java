@@ -16,11 +16,12 @@ import java.net.URL;
  */
 public class LevelAssetLoader implements AssetLoader<LevelState> {
     private final URL path;
-    boolean loaded = false;
     private LevelState level;
+    boolean loaded;
 
     public LevelAssetLoader(String path) {
         this.path = ClassLoader.getSystemResource(path);
+        loaded = false;
     }
 
     @Override

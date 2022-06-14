@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class LevelState {
     private final int id;
-
     private final LinkedList<EntityDescriptor<?>> descriptors;
     private final LinkedList<Entity> entities;
     private final List<Pedestrian> pedestrians;

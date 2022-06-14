@@ -17,11 +17,12 @@ import java.net.URL;
  */
 public class ImageAssetLoader implements AssetLoader<Image> {
     private final URL url;
-    boolean loaded = false;
     private BufferedImage image;
+    boolean loaded;
 
     public ImageAssetLoader(String path) {
         url = ClassLoader.getSystemResource(path);
+        loaded = false;
     }
 
     @Override

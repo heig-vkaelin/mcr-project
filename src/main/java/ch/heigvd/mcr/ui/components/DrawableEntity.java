@@ -17,11 +17,8 @@ import java.awt.*;
  */
 public class DrawableEntity extends JLabel {
     private final Entity entity;
-
     private Image image;
-
     private int ratio;
-
     private int offset;
 
     public DrawableEntity(Entity entity, int baseRatio) {

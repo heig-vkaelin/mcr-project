@@ -17,11 +17,11 @@ import java.net.URL;
 public class AudioAssetLoader implements AssetLoader<Audio> {
     private final URL url;
     private Audio audio;
-
-    private boolean loaded = false;
+    private boolean loaded;
 
     public AudioAssetLoader(String path) {
         url = ClassLoader.getSystemResource(path);
+        loaded = false;
     }
 
     @Override

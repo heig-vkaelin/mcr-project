@@ -18,7 +18,6 @@ import java.net.URL;
  */
 public class Audio {
     private final Clip clip;
-
     private boolean isPlaying;
 
     public Audio(URL file) throws IOException {

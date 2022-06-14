@@ -14,7 +14,6 @@ import java.awt.*;
 public abstract class Entity {
     private final Direction direction;
     private final EntityType type;
-
     protected Position position;
 
     public Entity(Position position, Direction direction, EntityType type) {
@@ -66,7 +65,7 @@ public abstract class Entity {
     }
 
     public boolean isColliding(Entity e, int x, int y) {
-        var b = getBounds();
+        Rectangle b = getBounds();
         b.setLocation(x, y);//to test if the entity is colliding with the new position
         return b.intersects(e.getBounds());
     }

@@ -44,9 +44,9 @@ public class Main {
 
         // create jframe for loading screen
         final JFrame frame = new JFrame("MCR");
-        var loader = new JProgressBar();
+        JProgressBar loader = new JProgressBar();
         frame.add(loader);
-        var screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize.width >> 2, 10);
         frame.setUndecorated(true);
         frame.setLocationRelativeTo(null);

@@ -22,7 +22,6 @@ import java.awt.*;
 public class HomeView extends AbstractView {
     private final JButton play;
     private final JButton quit;
-
     private final JButton sound;
 
     public HomeView(MainFrame parent) {

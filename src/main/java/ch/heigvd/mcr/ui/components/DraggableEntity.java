@@ -6,10 +6,8 @@ import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
-import ch.heigvd.mcr.ui.MainFrame;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 

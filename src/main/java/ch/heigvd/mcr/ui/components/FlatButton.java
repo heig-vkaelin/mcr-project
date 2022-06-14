@@ -13,7 +13,6 @@ import java.awt.*;
  * @author Valentin Kaelin
  */
 public class FlatButton extends JButton {
-
     /**
      * Construit un bouton plat standard
      *
