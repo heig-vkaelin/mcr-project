@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class MuteButton extends JButton {
     public MuteButton(Color bgColor, Color txtColor) {
-        super(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
+        super("");
+        refreshIcon();
         setBackground(bgColor);
         setForeground(txtColor);
         setBorderPainted(false);
@@ -16,13 +17,16 @@ public class MuteButton extends JButton {
         setOpaque(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addActionListener(e -> {
-            if (AudioManager.getInstance().isMuted()) {
-                AudioManager.getInstance().setMuted(false);
-                setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
-            } else {
-                AudioManager.getInstance().setMuted(true);
-                setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_off")));
-            }
+            AudioManager.getInstance().setMuted(!AudioManager.getInstance().isMuted());
+            refreshIcon();
         });
+    }
+
+    private void refreshIcon(){
+        if (AudioManager.getInstance().isMuted()) {
+            setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_off")));
+        } else {
+            setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_on")));
+        }
     }
 }
