@@ -78,4 +78,8 @@ public abstract class Entity {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public boolean isThePlayer() {
+        return false;
+    }
 }

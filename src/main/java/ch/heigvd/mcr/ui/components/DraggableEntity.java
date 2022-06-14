@@ -6,6 +6,7 @@ import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Position;
+import ch.heigvd.mcr.ui.MainFrame;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -72,6 +73,12 @@ public class DraggableEntity extends JLabel {
                         state.collidedEntity().onCrash();
                         System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
                     }
+
+                    if (state.hasReachedExit()) {
+                        System.out.println("Game win !");
+                        MainFrame.getInstance().openMenuView();
+                    }
+
                     repaint();
                 }
             }

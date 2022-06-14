@@ -40,6 +40,17 @@ public class LevelState {
     }
 
     /**
+     * Ajoute un véhicule du joueur au niveau
+     *
+     * @param position  position du véhicule
+     * @param direction direction du véhicule
+     * @param type      type de véhicule
+     */
+    public void addPlayer(Position position, Direction direction, VehicleType type) {
+        addEntity(new PlayerVehicle(position, direction, type));
+    }
+
+    /**
      * Ajoute un obstacle au niveau
      *
      * @param position  position de l'obstacle
