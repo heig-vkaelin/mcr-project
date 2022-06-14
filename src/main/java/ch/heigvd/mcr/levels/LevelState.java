@@ -195,12 +195,16 @@ public class LevelState {
      * @param entity entité à ajouter
      * @throws RuntimeException si l'ajoute d'une entité entraine une incohérence
      */
-    private void addEntity(Entity entity) throws RuntimeException {
+    public void addEntity(Entity entity) throws RuntimeException {
         if (validateLevelCoherence(entity)) {
             this.entities.add(entity);
         } else {
             throw new RuntimeException("Invalid entity configuration for this level state");
         }
+    }
+
+    public void removeEntity(Entity entity) {
+        this.entities.remove(entity);
     }
 
     public List<Pedestrian> getPedestrians() {

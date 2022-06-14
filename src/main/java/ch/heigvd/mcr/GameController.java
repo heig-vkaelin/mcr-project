@@ -155,6 +155,10 @@ public class GameController {
         MainFrame.getInstance().openMenuView();
     }
 
+    public void removeEntity(Entity e) {
+        state.removeEntity(e);
+    }
+
     private boolean playerWon(Entity entity, int newX, int newY) {
         return entity.isThePlayer() && state.getExitSide() == Direction.UP && newY == 0
                 || state.getExitSide() == Direction.DOWN && newY == state.getSideSize() - entity.getType().getLength()

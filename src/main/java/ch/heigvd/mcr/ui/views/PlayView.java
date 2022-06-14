@@ -4,6 +4,7 @@ import ch.heigvd.mcr.Event;
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.AudioManager;
+import ch.heigvd.mcr.commands.CheatCommand;
 import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.UndoCommand;
@@ -92,7 +93,7 @@ public class PlayView extends JPanel {
     private void registerHandlers() {
         btnMenu.addActionListener(e -> parent.openMenuView());
 
-        btnCheat.addActionListener(e -> AudioManager.getInstance().play(AssetManager.audios.get("death")));
+        btnCheat.addActionListener(e -> GameController.getInstance().addCommand(new CheatCommand()));
 
         btnUndo.addActionListener(e -> GameController.getInstance().addCommand(new UndoCommand()));
 
