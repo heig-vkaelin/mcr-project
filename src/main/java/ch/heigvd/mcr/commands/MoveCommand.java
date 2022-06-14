@@ -33,7 +33,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void rollback() {
-        GameController.getInstance().setNewPosition(entity, oldX, oldY);
+        entity.setPosition(oldX, oldY);
     }
 
     @Override
