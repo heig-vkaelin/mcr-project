@@ -16,7 +16,11 @@ import java.awt.event.MouseEvent;
 /**
  * Classe pour l'affichage et le déplacement d'entités sur le plateau de jeu
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class DraggableEntity extends DrawableEntity {
     public DraggableEntity(Entity entity, int baseRatio) {
@@ -52,6 +56,8 @@ public class DraggableEntity extends DrawableEntity {
                         GameController.getInstance().endGame();
                     }
                 }
+
+
             }
 
             @Override

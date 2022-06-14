@@ -3,10 +3,13 @@ package ch.heigvd.mcr.entities;
 import java.util.Arrays;
 
 /**
- * Enum spécifiant les orientations possibles pour une pièce
+ * Enum spécifiant les orientations possibles pour une entité
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public enum Direction {
     UP("u"), DOWN("d"), LEFT("l"), RIGHT("r");

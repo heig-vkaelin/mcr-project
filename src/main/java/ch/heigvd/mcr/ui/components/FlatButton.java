@@ -6,7 +6,11 @@ import java.awt.*;
 /**
  * Flat looking button
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class FlatButton extends JButton {
 

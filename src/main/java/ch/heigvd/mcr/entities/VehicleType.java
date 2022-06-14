@@ -5,8 +5,11 @@ import java.util.Arrays;
 /**
  * Enum spécifiant les types disponibles pour les véhicules
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public enum VehicleType implements EntityType {
     RED_CAR("red", 1, 2),

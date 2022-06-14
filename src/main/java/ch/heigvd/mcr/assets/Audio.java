@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * An Audio wrapper that can be used to play audio files.
+ * Classe permettant de jouer des sons
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class Audio {
     private final Clip clip;
@@ -50,6 +54,7 @@ public class Audio {
             isPlaying = false;
         }
     }
+
     public float getVolume() {
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         return (float) Math.pow(10f, gainControl.getValue() / 20f);

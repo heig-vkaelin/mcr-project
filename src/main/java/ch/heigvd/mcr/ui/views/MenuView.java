@@ -15,6 +15,10 @@ import java.util.List;
 /**
  * Classe représentant la vue permettant de choisir quel niveau choisir
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
 public class MenuView extends JPanel {

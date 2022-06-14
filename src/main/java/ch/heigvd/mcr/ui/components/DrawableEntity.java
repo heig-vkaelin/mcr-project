@@ -6,6 +6,15 @@ import ch.heigvd.mcr.entities.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Entité pouvant être dessinée
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class DrawableEntity extends JLabel {
     private final Entity entity;
 

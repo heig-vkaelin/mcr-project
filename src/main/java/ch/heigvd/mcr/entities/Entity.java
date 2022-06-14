@@ -3,10 +3,13 @@ package ch.heigvd.mcr.entities;
 import java.awt.*;
 
 /**
- * Classe représentant une entité affichable sur la grille
+ * Classe abstraite représentant une entité du jeu
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public abstract class Entity {
     private final Direction direction;

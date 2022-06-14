@@ -2,8 +2,16 @@ package ch.heigvd.mcr.assets.loaders;
 
 import ch.heigvd.mcr.assets.SpriteSheet;
 
+/**
+ * Classe permettant de charger des SpriteSheets
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class SpriteSheetAssetLoader implements AssetLoader<SpriteSheet> {
-
     private final String path;
 
     private SpriteSheet spriteSheet;

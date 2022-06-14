@@ -9,9 +9,13 @@ import java.util.List;
 import java.util.*;
 
 /**
- * The AssetManager is responsible for loading and storing assets.
+ * Classe chargeant et stockant les différents assets du jeu.
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class AssetManager<A> {
     private static final List<AssetManager<?>> ASSET_MANAGERS = new LinkedList<>();

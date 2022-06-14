@@ -2,6 +2,15 @@ package ch.heigvd.mcr.assets;
 
 import java.util.HashSet;
 
+/**
+ * Classe permettant de gérer les sons du jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class AudioManager {
     private static AudioManager instance;
     private final HashSet<Audio> audios = new HashSet<>();
@@ -53,7 +62,7 @@ public class AudioManager {
     }
 
     public static AudioManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new AudioManager();
         }
         return instance;

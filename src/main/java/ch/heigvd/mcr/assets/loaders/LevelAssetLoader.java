@@ -6,9 +6,13 @@ import ch.heigvd.mcr.levels.LevelState;
 import java.net.URL;
 
 /**
- * A class that loads levels from the file system from resources.
+ * Classe permettant de charger des niveaux
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class LevelAssetLoader implements AssetLoader<LevelState> {
     private final URL path;

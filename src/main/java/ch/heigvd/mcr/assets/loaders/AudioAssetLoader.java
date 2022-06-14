@@ -6,9 +6,13 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A class that loads audio from the file system from resources.
+ * Classe permettant de charger des sons
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class AudioAssetLoader implements AssetLoader<Audio> {
     private final URL url;

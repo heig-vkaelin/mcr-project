@@ -7,6 +7,15 @@ import ch.heigvd.mcr.ui.views.PlayView;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe représentant la fenêtre principale du jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class MainFrame extends JFrame {
 
     private static final int INITIAL_WIDTH = 640;

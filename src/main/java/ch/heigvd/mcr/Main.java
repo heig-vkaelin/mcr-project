@@ -12,6 +12,12 @@ import java.awt.*;
 
 /**
  * Classe principale du jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class Main {
     /**
