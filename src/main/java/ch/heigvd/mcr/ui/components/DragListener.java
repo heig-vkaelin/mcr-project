@@ -4,8 +4,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * Listener pour les évènements de drag and drop de la souris
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public abstract class DragListener implements MouseListener, MouseMotionListener {
-
     protected int offsetX;
     protected int offsetY;
     protected boolean isDragged;
@@ -28,7 +36,8 @@ public abstract class DragListener implements MouseListener, MouseMotionListener
 
     @Override
     final public void mouseReleased(MouseEvent e) {
-        if (!isDragged) return; // avoid calling dragEnded when the mouse is not dragged
+        if (!isDragged)
+            return; // avoid calling dragEnded when the mouse is not dragged
         isDragged = false;
         dragEnded(e);
     }

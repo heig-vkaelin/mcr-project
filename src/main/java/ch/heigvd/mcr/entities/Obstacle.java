@@ -6,7 +6,11 @@ import ch.heigvd.mcr.assets.AudioManager;
 /**
  * Classe représentant un obstacle qui est une pièce immobile dans le jeu
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class Obstacle extends Entity {
     public Obstacle(Position position, Direction direction, ObstacleType type) {

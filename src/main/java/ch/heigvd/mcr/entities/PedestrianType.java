@@ -5,8 +5,11 @@ import java.util.Arrays;
 /**
  * Enum spécifiant les types disponibles pour les piétons
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public enum PedestrianType implements EntityType {
     BOY("boy"),

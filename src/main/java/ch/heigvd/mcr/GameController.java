@@ -21,14 +21,19 @@ import java.util.Stack;
  * Controller qui s'occupe des interactions entre l'utilisateur et le jeu ainsi
  * que de la gestion des vues.
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
 public class GameController {
-    private final LinkedList<CommandListener> commandListeners;
 
     private static GameController instance;
-    private final Stack<Command> undoStack;
+
     private LevelState state;
+    private final Stack<Command> undoStack;
+    private final LinkedList<CommandListener> commandListeners;
 
     /**
      * Constructeur du contrôleur du jeu
@@ -62,22 +67,22 @@ public class GameController {
         this.state = state;
     }
 
-    public boolean setNewPosition(Entity entity, int newX, int newY) {
+    public void setNewPosition(Entity entity, int newX, int newY) {
         if (!state.getEntities().contains(entity))
-            return false;
+            return;
 
         // Clang
         newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getHeight()));
         newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getWidth()));
 
+
         for (Entity e : state.getEntities()) {
             if (entity != e && entity.isColliding(e, newX, newY)) {
-                return false;
+                return;
             }
         }
 
         entity.setPosition(newX, newY);
-        return true;
     }
 
     public ValidateState validatePosition(Entity entity, Position newPosition) {
@@ -89,11 +94,11 @@ public class GameController {
         if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
             newX = current.x();
             newY = Math.max(current.y() - 1, Math.min(newY, current.y() + 1)); // only move one cell
-            newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getType().getLength()));
+            newY = Math.max(0, Math.min(newY, state.getSideSize() - entity.getHeight()));
         } else {
             newY = current.y();
             newX = Math.max(current.x() - 1, Math.min(newX, current.x() + 1)); // only move one cell
-            newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getType().getLength()));
+            newX = Math.max(0, Math.min(newX, state.getSideSize() - entity.getWidth()));
         }
 
         for (Entity e : state.getEntities()) {
@@ -131,11 +136,8 @@ public class GameController {
     public void playTurn(Command command) {
         TurnCommand turn = new TurnCommand();
         turn.addCommand(command);
-        // TODO: make move the peyDey
-        //        turn.addCommand(pedestrianCommand);
 
-        List<Pedestrian> pedestrians = state.getPedestrians();
-        for (Pedestrian pedestrian : pedestrians) {
+        for (Pedestrian pedestrian : state.getPedestrians()) {
             turn.addCommand(
                     new MoveCommand(
                             pedestrian,

@@ -12,6 +12,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe représentant une SpriteSheet contenant plusieurs sprites
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class SpriteSheet {
     private final Map<String, Image> sprites = new HashMap<>();
     private BufferedImage source = null;

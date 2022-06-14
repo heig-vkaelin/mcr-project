@@ -7,8 +7,11 @@ import ch.heigvd.mcr.entities.Position;
 /**
  * Classe représentant une commande de déplacement d'une entité
  *
- * @author Lazar Pavicevic
  * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class MoveCommand implements Command {
     private final Entity entity;

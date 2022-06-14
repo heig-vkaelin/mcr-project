@@ -10,6 +10,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+/**
+ * Classe permettant d'enregistrer les différents fichiers de niveaux du jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class LevelsRegister implements Register<LevelState> {
     @Override
     public void register(AssetManager<LevelState> assetManager) {

@@ -5,8 +5,11 @@ import java.util.Arrays;
 /**
  * Enum spécifiant les types disponibles pour les obstacles
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public enum ObstacleType implements EntityType {
     MAIL_BOX("mailbox"),

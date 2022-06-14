@@ -2,6 +2,15 @@ package ch.heigvd.mcr.entities;
 
 import java.util.List;
 
+/**
+ * Record représentant une position dans la grille de jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public record Position(int x, int y) {
     public static final Position UP = new Position(0, -1);
     public static final Position DOWN = new Position(0, 1);

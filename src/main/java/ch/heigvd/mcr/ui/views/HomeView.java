@@ -13,7 +13,11 @@ import java.awt.*;
 /**
  * Vue de la page d'accueil
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class HomeView extends JPanel {
 

@@ -6,7 +6,11 @@ import ch.heigvd.mcr.assets.AudioManager;
 /**
  * Classe représentant un véhicule pouvant se déplacer sur le board
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class Vehicle extends MovableEntity {
     public Vehicle(Position position, Direction direction, VehicleType type) {

@@ -21,8 +21,11 @@ import java.util.List;
 /**
  * Classe représentant la vue de jeu dans un niveau spécifique
  *
- * @author Valentin Kaelin
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class PlayView extends JPanel {
     private final JLabel nbMovesLabel;

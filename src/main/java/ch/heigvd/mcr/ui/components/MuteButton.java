@@ -6,6 +6,15 @@ import ch.heigvd.mcr.assets.AudioManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Bouton permettant d'activer / désactiver le son du jeu
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ */
 public class MuteButton extends JButton {
     public MuteButton(Color bgColor, Color txtColor) {
         super("");
@@ -22,7 +31,7 @@ public class MuteButton extends JButton {
         });
     }
 
-    private void refreshIcon(){
+    private void refreshIcon() {
         if (AudioManager.getInstance().isMuted()) {
             setIcon(new ImageIcon(AssetManager.sprites.get("icons").get("sound_off")));
         } else {

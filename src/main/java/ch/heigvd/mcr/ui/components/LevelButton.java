@@ -8,6 +8,10 @@ import java.awt.*;
 /**
  * Bouton permettant de sélectionner un niveau.
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
 public class LevelButton extends JButton {

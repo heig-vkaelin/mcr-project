@@ -11,7 +11,11 @@ import java.nio.file.Paths;
 /**
  * Classe permettant de lire et sérialiser des fichiers de niveau du jeu
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class LevelParser {
 

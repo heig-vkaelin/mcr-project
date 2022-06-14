@@ -7,9 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe représentant l'état d'un niveau
+ * Classe représentant l'état actuel d'un niveau
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class LevelState {
     private final int id;

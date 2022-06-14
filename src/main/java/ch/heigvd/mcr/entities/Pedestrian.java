@@ -4,9 +4,14 @@ import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.AudioManager;
 
 /**
- * Classe représentant un piéton pouvant se déplacer de manière autonome sur le board
+ * Classe représentant un piéton pouvant se déplacer de manière aléatoire et autonome
+ * sur le board
  *
+ * @author Jonathan Friedli
  * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class Pedestrian extends MovableEntity {
     public Pedestrian(Position position, Direction direction, PedestrianType type) {

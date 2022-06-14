@@ -7,9 +7,13 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * A class that loads images from the file system from resources.
+ * Classe permettant de charger des images
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class ImageAssetLoader implements AssetLoader<Image> {
     private final URL url;

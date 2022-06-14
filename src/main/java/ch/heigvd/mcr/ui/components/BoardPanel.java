@@ -11,7 +11,11 @@ import java.util.LinkedList;
 /**
  * Classe permettant d'afficher la grille de jeu
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
  * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public class BoardPanel extends JPanel {
 

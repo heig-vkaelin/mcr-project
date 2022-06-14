@@ -1,10 +1,14 @@
 package ch.heigvd.mcr.assets.loaders;
 
 /**
- * Interface for asset loaders.
+ * Interface commune à tous les loaders d'assets
  *
- * @param <T> The type of asset to load.
+ * @param <T> : le type de l'asset à charger
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
  * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
  */
 public interface AssetLoader<T> {
     /**

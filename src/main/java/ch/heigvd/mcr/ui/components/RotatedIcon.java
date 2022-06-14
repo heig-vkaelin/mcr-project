@@ -10,6 +10,10 @@ import java.awt.*;
  * facilement.
  * Code initial: https://tips4java.wordpress.com/2009/04/06/rotated-icon/
  *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
 public class RotatedIcon implements Icon {
