@@ -20,7 +20,6 @@ public class Main {
      * @param args : arguments passés en ligne de commande
      */
     public static void main(String[] args) {
-        final int DELTA_MS = 20;
         AssetManager.images.register("logo", new ImageAssetLoader("images/logo.png"));
         AssetManager.images.register("menu_background", new ImageAssetLoader("images/menu_background.png"));
         AssetManager.audios.register("death", new AudioAssetLoader("audio/death.wav"));
@@ -36,7 +35,7 @@ public class Main {
 
         AssetManager.levels.register(new LevelsRegister());
 
-        //create jframe for loading screen
+        // create jframe for loading screen
         final JFrame frame = new JFrame("MCR");
         var loader = new JProgressBar();
         frame.add(loader);
@@ -53,7 +52,7 @@ public class Main {
                 frame.dispose();
                 AudioManager.getInstance().play(AssetManager.audios.get("menu"));
                 GameController controller = GameController.getInstance();
-                controller.run(DELTA_MS);
+                controller.run();
             }
         });
     }

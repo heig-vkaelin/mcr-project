@@ -20,7 +20,7 @@ import java.util.Stack;
  * @author Valentin Kaelin
  */
 public class GameController {
-    private LinkedList<CommandListener> commandListeners = new LinkedList<>();
+    private final LinkedList<CommandListener> commandListeners;
 
     private static GameController instance;
     private final Stack<Command> undoStack;
@@ -30,6 +30,7 @@ public class GameController {
      * Constructeur du contrôleur du jeu
      */
     private GameController() {
+        commandListeners = new LinkedList<>();
         undoStack = new Stack<>();
     }
 
@@ -44,10 +45,8 @@ public class GameController {
 
     /**
      * Démarre le jeu
-     *
-     * @param delta : ms entre les deux rafraichissements de la vue
      */
-    public void run(int delta) {
+    public void run() {
         MainFrame.getInstance();
     }
 
@@ -81,20 +80,12 @@ public class GameController {
         return true;
     }
 
-
-    //TODO on va surement avoir besoin de modifier cette méthode
-    public void setPosition(Entity entity, int newX, int newY) {
-        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
-            newX = entity.getX();
-        }
-    }
-
     public ValidateState validatePosition(Entity entity, Position newPosition) {
         int newX = newPosition.x();
         int newY = newPosition.y();
         Position current = entity.getPosition();
 
-        //force axial movement
+        // force axial movement
         if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN) {
             newX = current.x();
             newY = Math.max(current.y() - 1, Math.min(newY, current.y() + 1)); // only move one cell
