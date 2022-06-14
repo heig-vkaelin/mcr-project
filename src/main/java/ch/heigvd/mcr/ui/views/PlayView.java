@@ -26,6 +26,7 @@ import java.util.List;
  * @author Nicolas Crausaz
  */
 public class PlayView extends JPanel {
+    private final JLabel nbMovesLabel;
 
     private final FlatButton btnUndo;
     private final FlatButton btnMenu;
@@ -55,6 +56,8 @@ public class PlayView extends JPanel {
         JPanel btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
 
+        nbMovesLabel = new JLabel("Nombre de coups : 0");
+
         final Color RED = new Color(180, 32, 42);
         btnUndo = new FlatButton("Annuler", RED, Color.WHITE);
         btnMenu = new FlatButton("Menu", RED, Color.WHITE);
@@ -80,6 +83,7 @@ public class PlayView extends JPanel {
 
     public void refresh() {
         boardPanel.refresh();
+        updateNbMoves();
     }
 
     private void registerHandlers() {
@@ -92,11 +96,7 @@ public class PlayView extends JPanel {
         btnRestart.addActionListener(e -> new LoadLevelCommand(GameController.getInstance().getState().getId()).execute());
 
         // Écoute des événements
-        events.add(GameController.getInstance().onCommand(
-                (Command c) ->
-                        System.out.println(
-                                "Commande executed : " + c.getClass().getSimpleName()))
-        );
+        events.add(GameController.getInstance().onCommand((Command c) -> refresh()));
     }
 
     public void onHide() {
@@ -104,7 +104,7 @@ public class PlayView extends JPanel {
             e.unsubscribe();
     }
 
-    private void setSoundButtonText() {
-
+    private void updateNbMoves() {
+        nbMovesLabel.setText("Nombre de coups : " + GameController.getInstance().getState().getNbMoves());
     }
 }

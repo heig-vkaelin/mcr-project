@@ -28,7 +28,6 @@ public class MoveCommand implements Command {
 
     @Override
     public boolean execute() {
-        GameController.getInstance().addCommand(this);
         return GameController.getInstance().setNewPosition(entity, newX, newY);
     }
 
