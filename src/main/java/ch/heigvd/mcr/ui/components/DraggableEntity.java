@@ -9,6 +9,7 @@ import ch.heigvd.mcr.entities.Position;
 import ch.heigvd.mcr.ui.MainFrame;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -48,14 +49,9 @@ public class DraggableEntity extends DrawableEntity {
                     GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
 
                     if (state.hasReachedExit()) {
-                        System.out.println("Game win !");
-                        MainFrame.getInstance().openMenuView();
-                        // TODO: Mettre ici l'appel au popup
+                        GameController.getInstance().endGame();
                     }
                 }
-
-
-
             }
 
             @Override

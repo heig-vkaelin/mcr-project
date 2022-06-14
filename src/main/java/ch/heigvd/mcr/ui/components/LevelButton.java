@@ -99,9 +99,9 @@ public class LevelButton extends JButton {
      */
     private String getDifficultyText(Difficulty difficulty) {
         return switch (difficulty) {
-            case EASY -> "Facile";
-            case MEDIUM -> "Moyen";
-            case HARD -> "Difficile";
+            case EASY -> "Easy";
+            case MEDIUM -> "Medium";
+            case HARD -> "Difficult";
         };
     }
 }

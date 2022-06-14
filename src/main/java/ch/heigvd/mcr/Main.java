@@ -47,7 +47,6 @@ public class Main {
 
         AssetManager.loadAll((progress, done) -> {
             loader.setValue((int) (progress * 100));
-            System.out.println("Loading assets: " + (int) (progress * 100) + "%");
             if (done) {
                 frame.dispose();
                 AudioManager.getInstance().play(AssetManager.audios.get("menu"));

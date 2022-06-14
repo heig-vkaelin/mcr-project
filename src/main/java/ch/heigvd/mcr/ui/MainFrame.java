@@ -11,7 +11,6 @@ public class MainFrame extends JFrame {
 
     private static final int INITIAL_WIDTH = 640;
     private static final int INITIAL_HEIGHT = 560;
-
     private static MainFrame instance;
     private final JPanel mainPanel;
     private final CardLayout currentView;
