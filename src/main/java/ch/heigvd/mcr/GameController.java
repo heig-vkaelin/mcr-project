@@ -8,7 +8,10 @@ import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.ValidateState;
 
+import java.util.EventListener;
+import java.util.LinkedList;
 import java.util.Stack;
+
 
 /**
  * Controller qui s'occupe des interactions entre l'utilisateur et le jeu ainsi
@@ -17,6 +20,7 @@ import java.util.Stack;
  * @author Valentin Kaelin
  */
 public class GameController {
+    private LinkedList<CommandListener> commandListeners = new LinkedList<>();
 
     private static GameController instance;
     private final Stack<Command> undoStack;
@@ -110,6 +114,7 @@ public class GameController {
     }
 
     public void addCommand(Command command) {
+        commandListeners.forEach(l -> l.commandExecuted(command));
         undoStack.push(command);
     }
 
@@ -117,5 +122,10 @@ public class GameController {
         if (!undoStack.isEmpty()) {
             undoStack.pop().rollback();
         }
+    }
+
+    public Event onCommand(CommandListener listener) {
+        commandListeners.add(listener);
+        return () -> commandListeners.remove(listener);
     }
 }

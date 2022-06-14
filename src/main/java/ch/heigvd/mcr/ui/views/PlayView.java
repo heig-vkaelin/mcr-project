@@ -4,6 +4,7 @@ import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.Audio;
 import ch.heigvd.mcr.assets.AudioManager;
+import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.UndoCommand;
 import ch.heigvd.mcr.levels.LevelState;
@@ -67,6 +68,8 @@ public class PlayView extends JPanel {
         btnsPanel.add(btnSound);
         add(boardPanel, BorderLayout.CENTER);
         add(btnsPanel, BorderLayout.PAGE_END);
+
+        GameController.getInstance().onCommand((Command c)->System.out.println("Commande executed : " + c.getClass().getSimpleName()));
     }
 
     public void refresh() {
