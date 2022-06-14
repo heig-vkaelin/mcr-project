@@ -17,25 +17,9 @@ import java.awt.event.MouseEvent;
  *
  * @author Nicolas Crausaz
  */
-public class DraggableEntity extends JLabel {
-
-    private final Entity entity;
-
-    private Image image;
-
-    private int ratio;
-
-    private int offset;
-
+public class DraggableEntity extends DrawableEntity {
     public DraggableEntity(Entity entity, int baseRatio) {
-        this.entity = entity;
-        this.ratio = baseRatio;
-
-        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
-
-        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
+        super(entity, baseRatio);
 
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -61,8 +45,8 @@ public class DraggableEntity extends JLabel {
             @Override
             public void dragMoved(MouseEvent e) {
                 Position position = new Position(
-                        (int) Math.round((e.getX() - offsetX) / (double) ratio + entity.getX()),
-                        (int) Math.round((e.getY() - offsetY) / (double) ratio + entity.getY())
+                        (int) Math.round((e.getX() - offsetX) / (double) getRatio() + entity.getX()),
+                        (int) Math.round((e.getY() - offsetY) / (double) getRatio() + entity.getY())
                 );
                 if (position.x() != entity.getX() || position.y() != entity.getY()) {
                     state = GameController.getInstance().validatePosition(entity, position);
@@ -77,52 +61,7 @@ public class DraggableEntity extends JLabel {
             }
         };
 
-        if (entity.isInteractive()) {
-            addMouseListener(dragListener);
-            addMouseMotionListener(dragListener);
-        }
-
-        setIcon(new ImageIcon(image));
-    }
-
-    public void setRatio(int ratio) {
-        this.ratio = ratio;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    public int getEntityDefaultWidth() {
-        return entity.getType().getWidth();
-    }
-
-    public int getEntityDefaultLenght() {
-        return entity.getType().getLength();
-    }
-
-    public int getCurrentX() {
-        return entity.getX();
-    }
-
-    public int getCurrentY() {
-        return entity.getX();
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
-
-        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
-
-        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN)
-            setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getWidth(), ratio * entity.getType().getLength());
-        else
-            setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getLength(), ratio * entity.getType().getWidth());
-
-        Icon icon = new RotatedIcon(new ImageIcon(image), entity.getDirection());
-        icon.paintIcon(this, g, 0, 0);
+        addMouseListener(dragListener);
+        addMouseMotionListener(dragListener);
     }
 }
