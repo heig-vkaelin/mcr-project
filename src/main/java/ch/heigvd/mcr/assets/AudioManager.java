@@ -35,7 +35,6 @@ public class AudioManager {
     private void refreshVolume() {
         for (Audio audio : audios) {
             audio.setVolume(isMuted ? 0 : volume);
-            System.out.println(audio.getVolume());
         }
     }
 

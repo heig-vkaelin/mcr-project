@@ -3,7 +3,6 @@ package ch.heigvd.mcr.commands;
 import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Position;
-import ch.heigvd.mcr.ui.MainFrame;
 
 /**
  * Classe représentant une commande de déplacement d'une entité

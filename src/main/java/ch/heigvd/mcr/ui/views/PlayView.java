@@ -32,11 +32,10 @@ public class PlayView extends JPanel {
     private final JButton btnRestart;
     private final JButton btnCheat;
 
-    private final JButton btnSound;
     private final MainFrame parent;
 
     private final BoardPanel boardPanel;
-    private List<Event> events;
+    private final List<Event> events;
 
     /**
      * Constructeur permettant de pour construire la vue
@@ -44,8 +43,6 @@ public class PlayView extends JPanel {
     public PlayView(MainFrame parent) {
         super(new BorderLayout());
         this.parent = parent;
-
-        System.out.println("new PlayView !");
 
         LevelState l = GameController.getInstance().getState();
         parent.setTitle("DISIT - Niveau " + l.getId());
@@ -62,7 +59,7 @@ public class PlayView extends JPanel {
         btnMenu = new FlatButton("Menu", RED, Color.WHITE);
         btnRestart = new FlatButton("Recommencer", RED, Color.WHITE);
         btnCheat = new FlatButton("Cheat", RED, Color.WHITE);
-        btnSound = new MuteButton(RED, Color.WHITE);
+        JButton btnSound = new MuteButton(RED, Color.WHITE);
 
         events = new LinkedList<>();
 

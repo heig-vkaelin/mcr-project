@@ -1,8 +1,10 @@
 package ch.heigvd.mcr.ui.components;
 
 import ch.heigvd.mcr.GameController;
+import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Entity;
+import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,8 +37,15 @@ public class DraggableEntity extends DrawableEntity {
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
                 // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
-                entity.setPosition(startX, startY);
-                GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
+
+                // TODO: enlever avant dimanche
+                // Perdu => reset
+                if (state.collidedEntity() instanceof Pedestrian) {
+                    new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
+                } else {
+                    entity.setPosition(startX, startY);
+                    GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
+                }
             }
 
             @Override
