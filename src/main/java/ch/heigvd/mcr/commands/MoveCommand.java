@@ -27,16 +27,22 @@ public class MoveCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
-        return GameController.getInstance().setNewPosition(entity, newX, newY);
+    public void execute() {
+        if (GameController.getInstance().setNewPosition(entity, newX, newY)) {
+            GameController.getInstance().getState().addMove();
+        }
     }
 
     @Override
-    public boolean rollback() {
+    public void rollback() {
         if (GameController.getInstance().setNewPosition(entity, oldX, oldY)) {
             MainFrame.getInstance().refreshPlayView();
-            return true;
+            GameController.getInstance().getState().cancelMove();
         }
-        return false;
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return true;
     }
 }

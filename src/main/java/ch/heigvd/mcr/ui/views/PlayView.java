@@ -77,12 +77,16 @@ public class PlayView extends JPanel {
         btnsPanel.add(btnRestart);
         btnsPanel.add(btnCheat);
         btnsPanel.add(btnSound);
+        btnsPanel.add(nbMovesLabel);
         add(boardPanel, BorderLayout.CENTER);
         add(btnsPanel, BorderLayout.PAGE_END);
     }
 
     public void refresh() {
         boardPanel.refresh();
+    }
+
+    public void update() {
         updateNbMoves();
     }
 
@@ -91,12 +95,12 @@ public class PlayView extends JPanel {
 
         btnCheat.addActionListener(e -> AudioManager.getInstance().play(AssetManager.audios.get("death")));
 
-        btnUndo.addActionListener(e -> new UndoCommand().execute());
+        btnUndo.addActionListener(e -> GameController.getInstance().addCommand(new UndoCommand()));
 
         btnRestart.addActionListener(e -> new LoadLevelCommand(GameController.getInstance().getState().getId()).execute());
 
         // Écoute des événements
-        events.add(GameController.getInstance().onCommand((Command c) -> refresh()));
+        events.add(GameController.getInstance().onCommand((Command c) -> update()));
     }
 
     public void onHide() {

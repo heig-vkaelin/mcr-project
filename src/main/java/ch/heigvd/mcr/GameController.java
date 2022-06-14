@@ -114,9 +114,11 @@ public class GameController {
     }
 
     public void addCommand(Command command) {
-        commandListeners.forEach(l -> l.commandExecuted(command));
-        undoStack.push(command);
+        if (command.isUndoable())
+            undoStack.push(command);
+
         command.execute();
+        commandListeners.forEach(l -> l.commandExecuted(command));
     }
 
     public void undo() {

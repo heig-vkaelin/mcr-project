@@ -186,7 +186,7 @@ public class LevelState {
         nbMoves++;
     }
 
-    public void removeMove() {
+    public void cancelMove() {
         nbMoves--;
     }
 

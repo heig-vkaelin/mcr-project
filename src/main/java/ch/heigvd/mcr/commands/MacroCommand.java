@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MacroCommand implements Command {
-
     private final List<Command> subCommands;
 
     public MacroCommand() {
@@ -12,22 +11,25 @@ public class MacroCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         for (Command c : subCommands) {
             c.execute();
         }
-        return true;
     }
 
     @Override
-    public boolean rollback() {
+    public void rollback() {
         for (Command c : subCommands) {
             c.rollback();
         }
-        return true;
     }
 
     public void addCommand(Command command) {
         subCommands.add(command);
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return true;
     }
 }
