@@ -38,8 +38,8 @@ public class RotatedIcon implements Icon {
     public int getIconWidth() {
         if (direction == Direction.DOWN || direction == Direction.UP)
             return icon.getIconWidth();
-        else
-            return icon.getIconHeight();
+
+        return icon.getIconHeight();
     }
 
     /**
@@ -49,8 +49,8 @@ public class RotatedIcon implements Icon {
     public int getIconHeight() {
         if (direction == Direction.UP || direction == Direction.DOWN)
             return icon.getIconHeight();
-        else
-            return icon.getIconWidth();
+
+        return icon.getIconWidth();
     }
 
     /**
