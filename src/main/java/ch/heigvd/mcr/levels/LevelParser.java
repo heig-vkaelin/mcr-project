@@ -64,7 +64,7 @@ public class LevelParser {
 
                         final Direction direction = Direction.getFromKey(values[2]);
 
-                        state.addVehicle(position, direction, VehicleType.getFromKey(values[3]));
+                        state.addPlayer(position, direction, VehicleType.getFromKey(values[3]));
 
                         if (direction == Direction.UP || direction == Direction.DOWN) {
                             state.setExit(position.x(), direction);

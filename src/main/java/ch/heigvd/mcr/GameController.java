@@ -11,7 +11,6 @@ import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.ValidateState;
 
-import java.util.EventListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -98,10 +97,26 @@ public class GameController {
 
         for (Entity e : state.getEntities()) {
             if (entity != e && entity.isColliding(e, newX, newY)) {
-                return new ValidateState(current, e);
+                return new ValidateState(current, e, false);
             }
         }
-        return new ValidateState(new Position(newX, newY), null);
+
+        if (entity.isThePlayer()) {
+            if (state.getExitSide() == Direction.UP && newY == 0) {
+                return new ValidateState(new Position(newX, newY), null, true);
+            }
+            if (state.getExitSide() == Direction.DOWN && newY == state.getSideSize() - entity.getType().getLength()) {
+                return new ValidateState(new Position(newX, newY), null, true);
+            }
+            if (state.getExitSide() == Direction.LEFT && newX == 0) {
+                return new ValidateState(new Position(newX, newY), null, true);
+            }
+            if (state.getExitSide() == Direction.RIGHT && newX == state.getSideSize() - entity.getType().getLength()) {
+                return new ValidateState(new Position(newX, newY), null, true);
+            }
+        }
+
+        return new ValidateState(new Position(newX, newY), null, false);
     }
 
     public void addCommand(Command command) {

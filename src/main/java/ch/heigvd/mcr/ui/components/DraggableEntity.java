@@ -6,6 +6,7 @@ import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
+import ch.heigvd.mcr.ui.MainFrame;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -45,7 +46,16 @@ public class DraggableEntity extends DrawableEntity {
                 } else {
                     entity.setPosition(startX, startY);
                     GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
+
+                    if (state.hasReachedExit()) {
+                        System.out.println("Game win !");
+                        MainFrame.getInstance().openMenuView();
+                        // TODO: Mettre ici l'appel au popup
+                    }
                 }
+
+
+
             }
 
             @Override
