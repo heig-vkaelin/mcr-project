@@ -3,15 +3,17 @@ package ch.heigvd.mcr.commands;
 import ch.heigvd.mcr.GameController;
 
 public class UndoCommand implements Command {
-
     @Override
-    public boolean execute() {
+    public void execute() {
         GameController.getInstance().undo();
-        return true;
     }
 
     @Override
-    public boolean rollback() {
-        return true;
+    public void rollback() {
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return false;
     }
 }

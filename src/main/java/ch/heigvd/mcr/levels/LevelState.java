@@ -11,7 +11,6 @@ import java.util.LinkedList;
  * @author Nicolas Crausaz
  */
 public class LevelState {
-
     private final int id;
 
     private final LinkedList<EntityDescriptor<?>> descriptors;
@@ -19,13 +18,14 @@ public class LevelState {
     private int sideSize;
     private Difficulty difficulty;
     private int exitPos;
-
     private Direction exitSide;
+    private int nbMoves;
 
     public LevelState(int id) {
         this.id = id;
         this.entities = new LinkedList<>();
         this.descriptors = new LinkedList<>();
+        nbMoves = 0;
     }
 
     /**
@@ -182,6 +182,22 @@ public class LevelState {
         }
     }
 
+    public void addMove() {
+        nbMoves++;
+    }
+
+    public void cancelMove() {
+        nbMoves--;
+    }
+
+    public int getNbMoves() {
+        return nbMoves;
+    }
+
+    public void resetMoves() {
+        nbMoves = 0;
+    }
+
     public void saveState() {
         descriptors.clear();
         for (Entity e : entities) {
@@ -194,5 +210,6 @@ public class LevelState {
         for (EntityDescriptor<?> d : descriptors) {
             entities.add(d.createEntity());
         }
+        resetMoves();
     }
 }

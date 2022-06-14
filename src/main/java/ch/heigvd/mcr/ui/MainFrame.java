@@ -51,6 +51,9 @@ public class MainFrame extends JFrame {
     }
 
     public void openLevelView() {
+        if (currentPlayView != null) {
+            currentPlayView.onHide();
+        }
         currentPlayView = new PlayView(this);
         mainPanel.add(currentPlayView, "level");
         currentView.show(mainPanel, "level");

@@ -6,7 +6,6 @@ import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 
 public class LoadLevelCommand implements Command {
-
     private final int levelId;
 
     public LoadLevelCommand(int id) {
@@ -14,16 +13,19 @@ public class LoadLevelCommand implements Command {
     }
 
     @Override
-    public boolean execute() {
+    public void execute() {
         LevelState level = AssetManager.levels.get("level" + levelId);
         level.loadState();
         GameController.getInstance().setState(level);
         MainFrame.getInstance().openLevelView();
-        return true;
     }
 
     @Override
-    public boolean rollback() {
+    public void rollback() {
+    }
+
+    @Override
+    public boolean isUndoable() {
         return false;
     }
 }

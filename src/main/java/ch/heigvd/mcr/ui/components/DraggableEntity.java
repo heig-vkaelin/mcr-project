@@ -55,7 +55,7 @@ public class DraggableEntity extends JLabel {
                 if (state == null) return;
                 // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
                 entity.setPosition(startX, startY);
-                new MoveCommand(entity, state.position()).execute();
+                GameController.getInstance().addCommand(new MoveCommand(entity, state.position()));
             }
 
             @Override
