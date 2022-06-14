@@ -21,21 +21,16 @@ import java.util.List;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class MenuView extends JPanel {
+public class MenuView extends AbstractView {
     private static final int COLUMNS = 4;
     private static final int PADDING = 20;
-    private final MainFrame parent;
-
 
     /**
      * Constructeur permettant de construire la vue
      */
     public MenuView(MainFrame parent) {
-        this.parent = parent;
+        super(parent);
 
-        parent.setTitle("DISIT - Select level");
-
-        List<JButton> levelButtons = new LinkedList<>();
         JPanel cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
 
         cards.setOpaque(false);
@@ -51,10 +46,14 @@ public class MenuView extends JPanel {
                     level.getDifficulty()
             );
             btn.addActionListener(e -> new LoadLevelCommand(level.getId()).execute());
-            levelButtons.add(btn);
             cards.add(btn);
         }
         add(cards);
+    }
+
+    @Override
+    public String getTitle() {
+        return "DISIT - Select level";
     }
 
     @Override

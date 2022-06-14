@@ -19,19 +19,14 @@ import java.awt.*;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class HomeView extends JPanel {
-
+public class HomeView extends AbstractView {
     private final JButton play;
     private final JButton quit;
 
     private final JButton sound;
 
-    private final MainFrame parent;
-
     public HomeView(MainFrame parent) {
-        super(new BorderLayout());
-        this.parent = parent;
-        parent.setTitle("DISIT");
+        super(parent, new BorderLayout());
 
         setBackground(Color.BLACK);
 
@@ -68,8 +63,13 @@ public class HomeView extends JPanel {
         });
     }
 
+    @Override
+    public String getTitle() {
+        return "DISIT";
+    }
+
     private void registerHandlers() {
-        play.addActionListener(e -> parent.openMenuView());
+        play.addActionListener(e -> getFrame().openMenuView());
 
         quit.addActionListener(e -> System.exit(0));
     }

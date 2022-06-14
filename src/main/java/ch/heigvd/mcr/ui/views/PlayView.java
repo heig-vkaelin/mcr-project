@@ -28,15 +28,13 @@ import java.util.List;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class PlayView extends JPanel {
+public class PlayView extends AbstractView {
     private final JLabel nbMovesLabel;
 
     private final JButton btnUndo;
     private final JButton btnMenu;
     private final JButton btnRestart;
     private final JButton btnCheat;
-
-    private final MainFrame parent;
 
     private final BoardPanel boardPanel;
     private final List<Event> events;
@@ -45,11 +43,8 @@ public class PlayView extends JPanel {
      * Constructeur permettant de pour construire la vue
      */
     public PlayView(MainFrame parent) {
-        super(new BorderLayout());
-        this.parent = parent;
+        super(parent, new BorderLayout());
 
-        LevelState l = GameController.getInstance().getState();
-        parent.setTitle("DISIT - Level " + l.getId());
 
         setBackground(Color.WHITE);
 
@@ -69,6 +64,7 @@ public class PlayView extends JPanel {
 
         registerHandlers();
 
+        LevelState l = GameController.getInstance().getState();
         boardPanel = new BoardPanel(l.getSideSize(), l.getEntities(), l.getExitPos(), l.getExitSide());
         boardPanel.setBackground(Color.GRAY);
 
@@ -82,8 +78,9 @@ public class PlayView extends JPanel {
         add(btnsPanel, BorderLayout.PAGE_END);
     }
 
-    public void refresh() {
-        boardPanel.refresh();
+    @Override
+    public String getTitle() {
+        return "DISIT - Level " + GameController.getInstance().getState().getId();
     }
 
     public void update() {
@@ -91,7 +88,7 @@ public class PlayView extends JPanel {
     }
 
     private void registerHandlers() {
-        btnMenu.addActionListener(e -> parent.openMenuView());
+        btnMenu.addActionListener(e -> getFrame().openMenuView());
 
         btnCheat.addActionListener(e -> GameController.getInstance().addCommand(new CheatCommand()));
 

@@ -17,13 +17,13 @@ import java.awt.*;
  * @author Valentin Kaelin
  */
 public class MainFrame extends JFrame {
-
     private static final int INITIAL_WIDTH = 640;
     private static final int INITIAL_HEIGHT = 560;
     private static MainFrame instance;
     private final JPanel mainPanel;
     private final CardLayout currentView;
     private PlayView currentPlayView;
+    private final MenuView menuView;
 
     private MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
@@ -33,10 +33,13 @@ public class MainFrame extends JFrame {
         // Init with start panel
         mainPanel = new JPanel(currentView);
 
-        mainPanel.add(new HomeView(this), "home");
-        mainPanel.add(new MenuView(this), "menu");
+        HomeView homeView = new HomeView(this);
+        menuView = new MenuView(this);
+        mainPanel.add(homeView, "home");
+        mainPanel.add(menuView, "menu");
 
         add(mainPanel);
+        setTitle(homeView.getTitle());
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -50,12 +53,9 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
-    public void showHomeView() {
-        currentView.show(mainPanel, "home");
-    }
-
     public void openMenuView() {
         currentView.show(mainPanel, "menu");
+        setTitle(menuView.getTitle());
     }
 
     public void openLevelView() {
@@ -65,11 +65,6 @@ public class MainFrame extends JFrame {
         currentPlayView = new PlayView(this);
         mainPanel.add(currentPlayView, "level");
         currentView.show(mainPanel, "level");
-    }
-
-    public void refreshPlayView() {
-        if (currentPlayView != null) {
-            currentPlayView.refresh();
-        }
+        setTitle(currentPlayView.getTitle());
     }
 }
