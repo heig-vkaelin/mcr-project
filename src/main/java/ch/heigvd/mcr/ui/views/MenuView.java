@@ -20,7 +20,6 @@ import java.util.List;
 public class MenuView extends JPanel {
     private static final int COLUMNS = 4;
     private static final int PADDING = 20;
-
     private final MainFrame parent;
 
 

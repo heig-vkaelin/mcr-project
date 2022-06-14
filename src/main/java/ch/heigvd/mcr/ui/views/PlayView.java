@@ -45,19 +45,19 @@ public class PlayView extends JPanel {
         this.parent = parent;
 
         LevelState l = GameController.getInstance().getState();
-        parent.setTitle("DISIT - Niveau " + l.getId());
+        parent.setTitle("DISIT - Level " + l.getId());
 
         setBackground(Color.WHITE);
 
         JPanel btnsPanel = new JPanel();
         btnsPanel.setBackground(Color.WHITE);
 
-        nbMovesLabel = new JLabel("Nombre de coups : 0");
+        nbMovesLabel = new JLabel("Number of moves : 0");
 
         final Color RED = new Color(180, 32, 42);
-        btnUndo = new FlatButton("Annuler", RED, Color.WHITE);
+        btnUndo = new FlatButton("Undo", RED, Color.WHITE);
         btnMenu = new FlatButton("Menu", RED, Color.WHITE);
-        btnRestart = new FlatButton("Recommencer", RED, Color.WHITE);
+        btnRestart = new FlatButton("Restart", RED, Color.WHITE);
         btnCheat = new FlatButton("Cheat", RED, Color.WHITE);
         JButton btnSound = new MuteButton(RED, Color.WHITE);
 
@@ -105,6 +105,6 @@ public class PlayView extends JPanel {
     }
 
     private void updateNbMoves() {
-        nbMovesLabel.setText("Nombre de coups : " + GameController.getInstance().getState().getNbMoves());
+        nbMovesLabel.setText("Number of moves : " + GameController.getInstance().getState().getNbMoves());
     }
 }

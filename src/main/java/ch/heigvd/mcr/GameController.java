@@ -11,6 +11,7 @@ import ch.heigvd.mcr.levels.LevelState;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.ValidateState;
 
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -155,5 +156,11 @@ public class GameController {
     public Event onCommand(CommandListener listener) {
         commandListeners.add(listener);
         return () -> commandListeners.remove(listener);
+    }
+
+    public void endGame() {
+        JFrame jFrame = new JFrame();
+        JOptionPane.showMessageDialog(jFrame, "You won in " + state.getNbMoves() + " moves !");
+        MainFrame.getInstance().openMenuView();
     }
 }
