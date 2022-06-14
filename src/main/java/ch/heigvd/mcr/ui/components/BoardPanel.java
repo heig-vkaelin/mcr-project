@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class BoardPanel extends JPanel {
 
     private final int size;
-    private final LinkedList<DraggableEntity> draggables;
+    private final LinkedList<DrawableEntity> drawables;
     private final int exitPos;
     private final Direction exitSide;
     private int ratio;
@@ -32,7 +32,7 @@ public class BoardPanel extends JPanel {
      */
     public BoardPanel(int size, LinkedList<Entity> entities, int exitPos, Direction exitSide) {
         this.size = size;
-        this.draggables = new LinkedList<>();
+        this.drawables = new LinkedList<>();
         this.offset = 1;
         this.ratio = 1;
 
@@ -40,14 +40,17 @@ public class BoardPanel extends JPanel {
         this.exitSide = exitSide;
 
         for (Entity e : entities) {
-            DraggableEntity de = new DraggableEntity(e, ratio);
-            this.draggables.add(de);
-            add(de);
+            DrawableEntity drawable = e.isInteractive() ?
+                    new DraggableEntity(e, ratio) :
+                    new DrawableEntity(e, ratio);
+
+            drawables.add(drawable);
+            add(drawable);
         }
     }
 
     public void refresh() {
-        for (DraggableEntity e : draggables) {
+        for (DrawableEntity e : drawables) {
             e.repaint();
         }
     }
@@ -73,8 +76,7 @@ public class BoardPanel extends JPanel {
         }
 
         // Met à jour les dimensions des entités
-        for (DraggableEntity e : draggables) {
-//            System.out.println(e.getCurrentX() + " " + e.getCurrentY());
+        for (DrawableEntity e : drawables) {
             e.setRatio(ratio);
             e.setOffset(offset + ratio);
         }
