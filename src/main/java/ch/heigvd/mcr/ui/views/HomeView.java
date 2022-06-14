@@ -5,6 +5,7 @@ import ch.heigvd.mcr.assets.Audio;
 import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.FlatButton;
+import ch.heigvd.mcr.ui.components.MuteButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class HomeView extends JPanel {
 
         play = new FlatButton("Play !", new Color(180, 32, 42), Color.WHITE);
         quit = new FlatButton("Quit", new Color(180, 32, 42), Color.WHITE);
-        sound = new FlatButton("Sound OFF", new Color(180, 32, 42), Color.WHITE);
+        sound = new MuteButton();
 
         play.setPreferredSize(new Dimension(200, 40));
         quit.setPreferredSize(new Dimension(200, 40));
@@ -61,15 +62,5 @@ public class HomeView extends JPanel {
         play.addActionListener(e -> parent.openMenuView());
 
         quit.addActionListener(e -> System.exit(0));
-
-        sound.addActionListener(e -> {
-            if (AudioManager.getInstance().isMuted()) {
-                AudioManager.getInstance().setMuted(false);
-                sound.setText("Sound ON");
-            } else {
-                AudioManager.getInstance().setMuted(true);
-                sound.setText("Sound OFF");
-            }
-        });
     }
 }
