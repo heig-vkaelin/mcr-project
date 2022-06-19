@@ -13,6 +13,7 @@ import java.awt.*;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public abstract class AbstractView extends JPanel {
     private final MainFrame parent;

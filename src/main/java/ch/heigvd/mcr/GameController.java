@@ -24,6 +24,7 @@ import java.util.Stack;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class GameController {
     private static GameController instance;

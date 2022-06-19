@@ -12,6 +12,7 @@ import java.util.EventListener;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public interface CommandListener extends EventListener {
     void commandExecuted(Command command);

@@ -2,6 +2,12 @@ package ch.heigvd.mcr.entities.types;
 
 /**
  * Enum représentant les différentes catégories de types d'entités
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public enum TypeCategory {
     OBSTACLE("obstacles"), PEDESTRIAN("pedestrians"), VEHICLE("cars");

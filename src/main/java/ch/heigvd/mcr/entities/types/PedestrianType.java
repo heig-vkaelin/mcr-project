@@ -10,6 +10,7 @@ import java.util.Arrays;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public enum PedestrianType implements EntityType {
     BOY("boy"),

@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public abstract class DragListener implements MouseListener, MouseMotionListener {
     protected int offsetX;

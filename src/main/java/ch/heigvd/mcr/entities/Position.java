@@ -10,6 +10,7 @@ import java.util.List;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public record Position(int x, int y) {
     public static final Position UP = new Position(0, -1);

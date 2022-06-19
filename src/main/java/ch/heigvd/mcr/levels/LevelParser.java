@@ -19,6 +19,7 @@ import java.nio.file.Paths;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class LevelParser {
     private final static int MIN_LEVEL_SIZE = 6;

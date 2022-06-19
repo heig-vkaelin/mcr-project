@@ -10,6 +10,7 @@ import ch.heigvd.mcr.entities.types.EntityType;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public abstract class MovableEntity extends Entity {
     /**

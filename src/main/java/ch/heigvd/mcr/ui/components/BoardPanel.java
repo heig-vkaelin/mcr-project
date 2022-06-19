@@ -17,6 +17,7 @@ import java.util.List;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class BoardPanel extends JPanel {
     private final List<DrawableEntity> drawables;

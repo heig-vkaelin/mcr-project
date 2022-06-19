@@ -14,6 +14,7 @@ import java.awt.*;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class DrawableEntity extends JLabel {
     private final Entity entity;

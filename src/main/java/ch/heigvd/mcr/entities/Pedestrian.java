@@ -13,6 +13,7 @@ import ch.heigvd.mcr.entities.types.PedestrianType;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class Pedestrian extends MovableEntity {
     /**

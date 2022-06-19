@@ -15,6 +15,7 @@ import java.awt.*;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class MainFrame extends JFrame {
     private static final int INITIAL_WIDTH = 640;

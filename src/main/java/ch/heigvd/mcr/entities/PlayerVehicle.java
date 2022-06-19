@@ -10,6 +10,7 @@ import ch.heigvd.mcr.entities.types.VehicleType;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class PlayerVehicle extends Vehicle {
     /**

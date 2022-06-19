@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class LevelState {
     private final int id;
