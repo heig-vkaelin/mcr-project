@@ -2,6 +2,7 @@ package ch.heigvd.mcr.entities;
 
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.AudioManager;
+import ch.heigvd.mcr.entities.types.VehicleType;
 
 /**
  * Classe représentant un véhicule pouvant se déplacer sur le board

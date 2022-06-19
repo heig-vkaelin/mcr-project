@@ -4,8 +4,8 @@ import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
 import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Entity;
-import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
+import ch.heigvd.mcr.entities.types.TypeCategory;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -53,9 +53,9 @@ public class DraggableEntity extends DrawableEntity {
             @Override
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
-                // TODO: enlever avant dimanche
-                // Perdu => reset
-                if (state.collidedEntity() instanceof Pedestrian) {
+                Entity collided = state.collidedEntity();
+                if (collided != null && collided.getType().getCategory() == TypeCategory.PEDESTRIAN) {
+                    // Perdu → reset du niveau
                     new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
                 } else {
                     getEntity().setPosition(startX, startY);

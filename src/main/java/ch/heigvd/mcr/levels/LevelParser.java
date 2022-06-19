@@ -1,6 +1,9 @@
 package ch.heigvd.mcr.levels;
 
 import ch.heigvd.mcr.entities.*;
+import ch.heigvd.mcr.entities.types.ObstacleType;
+import ch.heigvd.mcr.entities.types.PedestrianType;
+import ch.heigvd.mcr.entities.types.VehicleType;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

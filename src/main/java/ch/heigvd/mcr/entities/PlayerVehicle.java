@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.entities;
 
+import ch.heigvd.mcr.entities.types.VehicleType;
+
 /**
  * Entité de type véhicule
  *

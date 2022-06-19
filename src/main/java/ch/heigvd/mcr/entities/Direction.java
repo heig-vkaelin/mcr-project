@@ -16,20 +16,30 @@ public enum Direction {
 
     private final String key;
 
+    /**
+     * Crée une nouvelle orientation
+     *
+     * @param key : clé associée à l'orientation
+     */
     Direction(String key) {
         this.key = key;
     }
 
-    public static boolean isVertical(Direction direction) {
-        return direction == Direction.UP || direction == Direction.DOWN;
+    /**
+     * Vérifie si l'orientation est verticale
+     *
+     * @return true si l'orientation est verticale, false sinon
+     */
+    public boolean isVertical() {
+        return this == Direction.UP || this == Direction.DOWN;
     }
 
     /**
-     * Récupère une direction en fonction de sa clé
+     * Récupère une orientation en fonction de sa clé
      *
-     * @param key clé de la direction, non sensible a la casse
-     * @return Direction liée à la clé
-     * @throws IllegalArgumentException si clé invalide
+     * @param key : clé de l'ortientation, non sensible à la casse
+     * @return la direction liée à la clé
+     * @throws IllegalArgumentException si la clé est invalide
      */
     public static Direction getFromKey(String key) {
         return Arrays.stream(Direction.values())

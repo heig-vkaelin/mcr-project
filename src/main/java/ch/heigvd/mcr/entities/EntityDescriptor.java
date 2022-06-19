@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.entities;
 
+import ch.heigvd.mcr.entities.types.EntityType;
+
 /**
  * Record permettant de créer une nouvelle entité du type souhaité
  *
@@ -14,6 +16,11 @@ public record EntityDescriptor<T extends Entity>(Class<T> entityClass,
                                                  Position position,
                                                  Direction direction,
                                                  EntityType type) {
+    /**
+     * Crée une nouvelle entité
+     *
+     * @return l'entité créée avec les données précédemment sauvegardées
+     */
     public T createEntity() {
         try {
             return entityClass

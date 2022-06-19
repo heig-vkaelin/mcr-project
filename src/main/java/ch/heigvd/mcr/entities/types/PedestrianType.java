@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.entities;
+package ch.heigvd.mcr.entities.types;
 
 import java.util.Arrays;
 
@@ -38,6 +38,11 @@ public enum PedestrianType implements EntityType {
     private final int width;
     private final int length;
 
+    /**
+     * Crée un nouveau type de piétons
+     *
+     * @param key : clé associée au type
+     */
     PedestrianType(String key) {
         this.key = key;
         this.width = 1;
@@ -45,11 +50,11 @@ public enum PedestrianType implements EntityType {
     }
 
     /**
-     * Récupère un type en fonction de sa clé
+     * Récupère un type de piétons en fonction de sa clé
      *
-     * @param key clé du type, non sensible a la casse
-     * @return Direction liée au type
-     * @throws IllegalArgumentException si clé invalide
+     * @param key : clé du type, non sensible à la casse
+     * @return le type de piétons souhaité
+     * @throws IllegalArgumentException si la clé est invalide
      */
     public static PedestrianType getFromKey(String key) {
         return Arrays.stream(PedestrianType.values())
@@ -64,8 +69,8 @@ public enum PedestrianType implements EntityType {
     }
 
     @Override
-    public String getCategoryKey() {
-        return "pedestrians";
+    public TypeCategory getCategory() {
+        return TypeCategory.PEDESTRIAN;
     }
 
     @Override

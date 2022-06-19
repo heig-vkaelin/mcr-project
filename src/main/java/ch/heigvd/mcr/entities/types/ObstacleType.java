@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.entities;
+package ch.heigvd.mcr.entities.types;
 
 import java.util.Arrays;
 
@@ -25,6 +25,11 @@ public enum ObstacleType implements EntityType {
     private final int width;
     private final int length;
 
+    /**
+     * Crée un nouveau type d'obstacle
+     *
+     * @param key : clé associée au type
+     */
     ObstacleType(String key) {
         this.key = key;
         this.width = 1;
@@ -32,11 +37,11 @@ public enum ObstacleType implements EntityType {
     }
 
     /**
-     * Récupère un type en fonction de sa clé
+     * Récupère un type d'obstacle en fonction de sa clé
      *
-     * @param key clé du type, non sensible a la casse
-     * @return Direction liée au type
-     * @throws IllegalArgumentException si clé invalide
+     * @param key : clé du type, non sensible à la casse
+     * @return le type d'obstacles souhaité
+     * @throws IllegalArgumentException si la clé est invalide
      */
     public static ObstacleType getFromKey(String key) {
         return Arrays.stream(ObstacleType.values())
@@ -51,8 +56,8 @@ public enum ObstacleType implements EntityType {
     }
 
     @Override
-    public String getCategoryKey() {
-        return "obstacles";
+    public TypeCategory getCategory() {
+        return TypeCategory.OBSTACLE;
     }
 
     @Override

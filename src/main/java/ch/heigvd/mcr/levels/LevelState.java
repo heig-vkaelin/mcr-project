@@ -1,10 +1,15 @@
 package ch.heigvd.mcr.levels;
 
 import ch.heigvd.mcr.entities.*;
+import ch.heigvd.mcr.entities.types.TypeCategory;
+import ch.heigvd.mcr.entities.types.ObstacleType;
+import ch.heigvd.mcr.entities.types.PedestrianType;
+import ch.heigvd.mcr.entities.types.VehicleType;
 
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Classe représentant l'état actuel d'un niveau
@@ -19,7 +24,6 @@ public class LevelState {
     private final int id;
     private final LinkedList<EntityDescriptor<?>> descriptors;
     private final LinkedList<Entity> entities;
-    private final List<Pedestrian> pedestrians;
 
     private int sideSize;
     private Difficulty difficulty;
@@ -36,7 +40,6 @@ public class LevelState {
         this.id = id;
         entities = new LinkedList<>();
         descriptors = new LinkedList<>();
-        pedestrians = new LinkedList<>();
         nbMoves = 0;
     }
 
@@ -81,9 +84,7 @@ public class LevelState {
      * @param type      : type de piéton
      */
     public void addPedestrian(Position position, Direction direction, PedestrianType type) {
-        Pedestrian p = new Pedestrian(position, direction, type);
-        addEntity(p);
-        pedestrians.add(p);
+        addEntity(new Pedestrian(position, direction, type));
     }
 
     /**
@@ -208,8 +209,10 @@ public class LevelState {
     /**
      * @return la liste des piétons du niveau
      */
-    public List<Pedestrian> getPedestrians() {
-        return pedestrians;
+    public List<Entity> getPedestrians() {
+        return entities.stream()
+                .filter(e -> e.getType().getCategory() == TypeCategory.PEDESTRIAN)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -248,15 +251,9 @@ public class LevelState {
      */
     public void loadState() {
         entities.clear();
-        pedestrians.clear();
         for (EntityDescriptor<?> d : descriptors) {
             Entity e = d.createEntity();
             entities.add(e);
-
-            // TODO: cacher avant dimanche
-            if (e.getType() instanceof PedestrianType) {
-                pedestrians.add((Pedestrian) e);
-            }
         }
         nbMoves = 0;
     }

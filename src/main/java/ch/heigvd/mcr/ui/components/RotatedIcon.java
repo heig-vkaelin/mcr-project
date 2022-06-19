@@ -36,7 +36,7 @@ public class RotatedIcon implements Icon {
      */
     @Override
     public int getIconWidth() {
-        if (direction == Direction.DOWN || direction == Direction.UP)
+        if (direction.isVertical())
             return icon.getIconWidth();
 
         return icon.getIconHeight();
@@ -47,7 +47,7 @@ public class RotatedIcon implements Icon {
      */
     @Override
     public int getIconHeight() {
-        if (direction == Direction.UP || direction == Direction.DOWN)
+        if (direction.isVertical())
             return icon.getIconHeight();
 
         return icon.getIconWidth();

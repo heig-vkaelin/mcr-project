@@ -1,6 +1,6 @@
 package ch.heigvd.mcr.ui.components;
 
-import ch.heigvd.mcr.entities.Difficulty;
+import ch.heigvd.mcr.levels.Difficulty;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +18,6 @@ public class LevelButton extends JButton {
     private static final int WIDTH = 120;
     private static final int HEIGHT = 160;
     private static final Color RED = new Color(220, 38, 38);
-    private static final Color YELLOW = new Color(250, 204, 21);
-    private static final Color GREEN = new Color(34, 197, 94);
     private static final int CIRCLE_DIAMETER = 30;
     private static final int HEIGHT_RECTANGLE = 30;
 
@@ -64,7 +62,7 @@ public class LevelButton extends JButton {
         // Difficulté
         int widthRectangle = originalSize.width;
         int yRectangle = originalSize.height - HEIGHT_RECTANGLE;
-        String difficultyLabel = getDifficultyText(difficulty);
+        String difficultyLabel = difficulty.getName();
         int widthDifficulty = fontMetrics.stringWidth(String.valueOf(difficultyLabel));
         int xDifficulty = center.width - widthDifficulty / 2;
         int yDifficulty = originalSize.height - 10;
@@ -74,37 +72,9 @@ public class LevelButton extends JButton {
         g.fillOval(xCircle, yCircle, CIRCLE_DIAMETER, CIRCLE_DIAMETER);
         g.setColor(Color.WHITE);
         g.drawString(String.valueOf(number), xLevel, yLevel);
-        g.setColor(getDifficultyColor(difficulty));
+        g.setColor(difficulty.getColor());
         g.fillRect(0, yRectangle, widthRectangle, HEIGHT_RECTANGLE);
         g.setColor(Color.WHITE);
         g.drawString(difficultyLabel, xDifficulty, yDifficulty);
-    }
-
-    /**
-     * Retourne la couleur correspondante à la difficulté
-     *
-     * @param difficulty : la difficulté
-     * @return la couleur correspondante à la difficulté
-     */
-    private Color getDifficultyColor(Difficulty difficulty) {
-        return switch (difficulty) {
-            case EASY -> GREEN;
-            case MEDIUM -> YELLOW;
-            case HARD -> RED;
-        };
-    }
-
-    /**
-     * Retourne le texte correspondant à la difficulté
-     *
-     * @param difficulty : la difficulté
-     * @return le texte correspondant à la difficulté
-     */
-    private String getDifficultyText(Difficulty difficulty) {
-        return switch (difficulty) {
-            case EASY -> "Easy";
-            case MEDIUM -> "Medium";
-            case HARD -> "Difficult";
-        };
     }
 }

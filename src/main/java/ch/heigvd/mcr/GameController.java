@@ -159,7 +159,7 @@ public class GameController {
         TurnCommand turn = new TurnCommand();
         turn.addCommand(command);
 
-        for (Pedestrian pedestrian : state.getPedestrians()) {
+        for (Entity pedestrian : state.getPedestrians()) {
             MoveCommand move = new MoveCommand(
                     pedestrian,
                     Position.add(pedestrian.getPosition(), Position.randomDirection())

@@ -87,7 +87,12 @@ public class DrawableEntity extends JLabel {
      * Met à jour l'image de l'entité
      */
     private void updateImage() {
-        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
-        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
+        Image tmp = AssetManager.sprites.get(entity.getType().getCategory().getKey())
+                .get(entity.getType().getKey());
+
+        image = tmp.getScaledInstance(
+                ratio * entity.getType().getWidth(),
+                ratio * entity.getType().getLength(), Image.SCALE_DEFAULT
+        );
     }
 }

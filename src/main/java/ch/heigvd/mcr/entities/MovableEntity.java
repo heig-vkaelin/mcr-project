@@ -1,5 +1,7 @@
 package ch.heigvd.mcr.entities;
 
+import ch.heigvd.mcr.entities.types.EntityType;
+
 /**
  * Classe abstraite représentant une entité déplaçable
  *
@@ -10,6 +12,13 @@ package ch.heigvd.mcr.entities;
  * @author Valentin Kaelin
  */
 public abstract class MovableEntity extends Entity {
+    /**
+     * Crée une entité se déplaçant
+     *
+     * @param position  : position initiale de l'entité
+     * @param direction : direction de déplacement de l'entité
+     * @param type      : type de l'entité
+     */
     public MovableEntity(Position position, Direction direction, EntityType type) {
         super(position, direction, type);
     }

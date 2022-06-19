@@ -2,6 +2,7 @@ package ch.heigvd.mcr.entities;
 
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.assets.AudioManager;
+import ch.heigvd.mcr.entities.types.ObstacleType;
 
 /**
  * Classe représentant un obstacle qui est une pièce immobile dans le jeu

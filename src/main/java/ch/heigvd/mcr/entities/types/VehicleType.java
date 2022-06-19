@@ -1,4 +1,4 @@
-package ch.heigvd.mcr.entities;
+package ch.heigvd.mcr.entities.types;
 
 import java.util.Arrays;
 
@@ -28,6 +28,13 @@ public enum VehicleType implements EntityType {
     private final int width;
     private final int length;
 
+    /**
+     * Crée un nouveau type de véhicule
+     *
+     * @param key    : clé associée au type
+     * @param width  : largeur du type de véhicules
+     * @param length : longueur du type de véhicules
+     */
     VehicleType(String key, int width, int length) {
         this.key = key;
         this.width = width;
@@ -35,11 +42,11 @@ public enum VehicleType implements EntityType {
     }
 
     /**
-     * Récupère un type en fonction de sa clé
+     * Récupère un type de véhicules en fonction de sa clé
      *
-     * @param key clé du type, non sensible a la casse
-     * @return Direction liée au type
-     * @throws IllegalArgumentException si clé invalide
+     * @param key : clé du type, non sensible à la casse
+     * @return le type de véhicule souhaité
+     * @throws IllegalArgumentException si la clé est invalide
      */
     public static VehicleType getFromKey(String key) {
         return Arrays.stream(VehicleType.values())
@@ -54,8 +61,8 @@ public enum VehicleType implements EntityType {
     }
 
     @Override
-    public String getCategoryKey() {
-        return "cars";
+    public TypeCategory getCategory() {
+        return TypeCategory.VEHICLE;
     }
 
     @Override
