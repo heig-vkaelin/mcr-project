@@ -11,6 +11,7 @@ import java.util.List;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class MacroCommand implements Command {
     private final List<Command> subCommands;

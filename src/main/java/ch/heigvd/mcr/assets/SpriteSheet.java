@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +19,7 @@ import java.util.Map;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class SpriteSheet {
     private final Map<String, Image> sprites = new HashMap<>();

@@ -10,6 +10,7 @@ import ch.heigvd.mcr.GameController;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class UndoCommand implements Command {
     @Override
