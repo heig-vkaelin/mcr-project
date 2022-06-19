@@ -19,6 +19,7 @@ import java.nio.file.Paths;
  */
 public class LevelParser {
     private final static int MIN_LEVEL_SIZE = 6;
+    private final static int MAX_LEVEL_SIZE = 20;
 
     /**
      * Récupère la configuration d'un niveau depuis un fichier
@@ -51,8 +52,9 @@ public class LevelParser {
                     case 0 -> {
                         // Taille grille
                         final int size = Integer.parseInt(values[0]);
-                        if (size < MIN_LEVEL_SIZE) {
-                            throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE);
+                        if (size < MIN_LEVEL_SIZE || size > MAX_LEVEL_SIZE) {
+                            throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE +
+                                    " or greater than " + MAX_LEVEL_SIZE);
                         }
                         state.setSideSize(size);
                     }
