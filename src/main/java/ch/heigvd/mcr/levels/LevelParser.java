@@ -54,7 +54,7 @@ public class LevelParser {
                     case 0 -> { // Taille grille
                         final int size = Integer.parseInt(values[0]);
                         if (size < MIN_LEVEL_SIZE || size > MAX_LEVEL_SIZE) {
-                            throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE +
+                            throw new RuntimeException("Level size cannot be less than " + MIN_LEVEL_SIZE +
                                     " or greater than " + MAX_LEVEL_SIZE);
                         }
                         state.setSideSize(size);

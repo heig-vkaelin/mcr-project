@@ -20,6 +20,7 @@ public record EntityDescriptor<T extends Entity>(Class<T> entityClass,
      * Crée une nouvelle entité
      *
      * @return l'entité créée avec les données précédemment sauvegardées
+     * @throws RuntimeException si l'entité n'a pas pu être créée
      */
     public T createEntity() {
         try {
