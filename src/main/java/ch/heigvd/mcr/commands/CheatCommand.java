@@ -12,20 +12,26 @@ public class CheatCommand implements Command {
 
     @Override
     public void execute() {
-        final LinkedList<Entity> entities = GameController.getInstance().getState().getEntities();
-        int j = rand.nextInt(entities.size());
-        ListIterator<Entity> it = entities.listIterator(j);
+        List<Entity> entities = GameController.getInstance().getState().getEntities();
+        if (entities.size() < 2) return;
 
-        while (it.hasNext()) {
-            final Entity e = it.next();
-            if (!e.isThePlayer()) {
-                deletedEntity = e;
-            } else if (it.nextIndex() - 1 != j) {
-                deletedEntity = it.next();
+        Entity[] array = new Entity[entities.size()];
+        entities.toArray(array);
+
+        int j = rand.nextInt(array.length);
+
+        for (int i = 0; i < array.length; ++i) {
+            if (i == j) {
+                if (!array[i].isThePlayer()) {
+                    deletedEntity = array[i];
+                } else  {
+                    deletedEntity = array[i + 1];
+                }
             }
         }
 
         if (deletedEntity != null) {
+            System.out.println(deletedEntity.getType());
             GameController.getInstance().getState().removeEntity(deletedEntity);
             deletedEntity.kill();
             MainFrame.getInstance().refreshPlayView();
@@ -34,8 +40,6 @@ public class CheatCommand implements Command {
 
     @Override
     public void rollback() {
-        // TODO: implement rollback psk les entités crevées ne reviennent po lors
-        //  d'un undo d'un move par ex
     }
 
     @Override
