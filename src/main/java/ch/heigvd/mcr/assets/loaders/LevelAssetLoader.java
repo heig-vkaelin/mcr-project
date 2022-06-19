@@ -15,12 +15,17 @@ import java.net.URL;
  * @author Valentin Kaelin
  */
 public class LevelAssetLoader implements AssetLoader<LevelState> {
-    private final URL path;
+    private final URL url;
     private LevelState level;
     boolean loaded;
 
+    /**
+     * Crée un nouveau charger de niveau
+     *
+     * @param path
+     */
     public LevelAssetLoader(String path) {
-        this.path = ClassLoader.getSystemResource(path);
+        url = ClassLoader.getSystemResource(path);
         loaded = false;
     }
 
@@ -32,7 +37,7 @@ public class LevelAssetLoader implements AssetLoader<LevelState> {
     @Override
     public void load() {
         if (loaded) return;
-        level = LevelParser.parseLevelFile(path);
+        level = LevelParser.parseLevelFile(url);
         loaded = true;
     }
 

@@ -20,6 +20,11 @@ public class ImageAssetLoader implements AssetLoader<Image> {
     private BufferedImage image;
     boolean loaded;
 
+    /**
+     * Crée un nouveau chargeur d'image
+     *
+     * @param path : chemin de l'image à charger
+     */
     public ImageAssetLoader(String path) {
         url = ClassLoader.getSystemResource(path);
         loaded = false;

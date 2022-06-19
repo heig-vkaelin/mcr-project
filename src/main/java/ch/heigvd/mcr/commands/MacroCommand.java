@@ -15,6 +15,9 @@ import java.util.List;
 public class MacroCommand implements Command {
     private final List<Command> subCommands;
 
+    /**
+     * Crée une nouvelle macro (aggregation de commandes)
+     */
     public MacroCommand() {
         subCommands = new LinkedList<>();
     }
@@ -33,6 +36,11 @@ public class MacroCommand implements Command {
         }
     }
 
+    /**
+     * Ajoute une commande à la macro
+     *
+     * @param command : commande à ajouter
+     */
     public void addCommand(Command command) {
         subCommands.add(command);
     }

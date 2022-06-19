@@ -13,5 +13,10 @@ import ch.heigvd.mcr.assets.AssetManager;
  * @author Valentin Kaelin
  */
 public interface Register<A> {
+    /**
+     * Enregistre un asset
+     *
+     * @param assetManager : manager des assets à utiliser
+     */
     void register(AssetManager<A> assetManager);
 }

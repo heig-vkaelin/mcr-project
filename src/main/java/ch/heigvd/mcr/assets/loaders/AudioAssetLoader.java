@@ -19,6 +19,11 @@ public class AudioAssetLoader implements AssetLoader<Audio> {
     private Audio audio;
     private boolean loaded;
 
+    /**
+     * Crée un nouveau chargeur d'un fichier audio
+     *
+     * @param path : chemin du fichier audio à charger
+     */
     public AudioAssetLoader(String path) {
         url = ClassLoader.getSystemResource(path);
         loaded = false;

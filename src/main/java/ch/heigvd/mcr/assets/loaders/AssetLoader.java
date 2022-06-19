@@ -12,21 +12,17 @@ package ch.heigvd.mcr.assets.loaders;
  */
 public interface AssetLoader<T> {
     /**
-     * Returns whether the asset has been loaded.
-     *
-     * @return true if the asset has been loaded, false otherwise.
+     * @return true si l'asset a été chargé, false sinon
      */
     boolean isLoaded();
 
     /**
-     * Loads the asset.
+     * Charge l'asset
      */
     void load();
 
     /**
-     * Returns the loaded asset.
-     *
-     * @return The loaded asset.
+     * @return l'asset chargé
      */
     T get();
 }

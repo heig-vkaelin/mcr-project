@@ -20,6 +20,12 @@ public class Audio {
     private final Clip clip;
     private boolean isPlaying;
 
+    /**
+     * Crée un nouveau son
+     *
+     * @param file : url du fichier à jouer
+     * @throws IOException si le fichier n'est pas trouvé
+     */
     public Audio(URL file) throws IOException {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
@@ -31,7 +37,7 @@ public class Audio {
     }
 
     /**
-     * Plays the audio file.
+     * Joue le fichier du son
      */
     public void play() {
         clip.setFramePosition(0);
@@ -39,13 +45,18 @@ public class Audio {
         isPlaying = true;
     }
 
+    /**
+     * Joue le fichier du son à un volume donné
+     *
+     * @param volume : volume souhaité
+     */
     public void play(double volume) {
         setVolume(volume);
         play();
     }
 
     /**
-     * Stops the audio file
+     * Arrête de jouer le fichier du son
      */
     public void stop() {
         if (isPlaying) {
@@ -54,11 +65,12 @@ public class Audio {
         }
     }
 
-    public float getVolume() {
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        return (float) Math.pow(10f, gainControl.getValue() / 20f);
-    }
-
+    /**
+     * Modifie le volume du son
+     *
+     * @param volume : volume souhaité dans l'intervalle [0, 1]
+     * @throws IllegalArgumentException si le volume est invalide
+     */
     public void setVolume(double volume) {
         if (volume < 0f || volume > 1f)
             throw new IllegalArgumentException("Volume not valid: " + volume);
@@ -66,10 +78,11 @@ public class Audio {
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
 
-    public boolean isPlaying() {
-        return isPlaying;
-    }
-
+    /**
+     * Joue un son en boucle
+     *
+     * @param volume : volume souhaité
+     */
     public void loop(double volume) {
         setVolume(volume);
         clip.loop(Clip.LOOP_CONTINUOUSLY);

@@ -2,6 +2,8 @@ package ch.heigvd.mcr.assets.loaders;
 
 import ch.heigvd.mcr.assets.SpriteSheet;
 
+import java.net.URL;
+
 /**
  * Classe permettant de charger des SpriteSheets
  *
@@ -12,12 +14,17 @@ import ch.heigvd.mcr.assets.SpriteSheet;
  * @author Valentin Kaelin
  */
 public class SpriteSheetAssetLoader implements AssetLoader<SpriteSheet> {
-    private final String path;
+    private final URL url;
     private SpriteSheet spriteSheet;
     private boolean loaded;
 
+    /**
+     * Crée un nouveau chargeur de SpriteSheet
+     *
+     * @param path : chemin de la SpriteSheet à charger
+     */
     public SpriteSheetAssetLoader(String path) {
-        this.path = path;
+        url = ClassLoader.getSystemResource(path);
         loaded = false;
     }
 
@@ -29,7 +36,7 @@ public class SpriteSheetAssetLoader implements AssetLoader<SpriteSheet> {
     @Override
     public void load() {
         try {
-            spriteSheet = new SpriteSheet(ClassLoader.getSystemResource(path));
+            spriteSheet = new SpriteSheet(url);
             loaded = true;
         } catch (Exception e) {
             e.printStackTrace();

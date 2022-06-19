@@ -10,9 +10,18 @@ package ch.heigvd.mcr.commands;
  * @author Valentin Kaelin
  */
 public interface Command {
+    /**
+     * Exécute la commande
+     */
     void execute();
 
+    /**
+     * Annule la commande
+     */
     void rollback();
 
+    /**
+     * @return true si la commande est annulable, false sinon
+     */
     boolean isUndoable();
 }

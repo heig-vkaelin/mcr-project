@@ -19,19 +19,31 @@ import java.util.*;
  */
 public class AssetManager<A> {
     private static final List<AssetManager<?>> ASSET_MANAGERS = new LinkedList<>();
-    public static AssetManager<Image> images = createAsset("image");
-    public static AssetManager<SpriteSheet> sprites = createAsset("sprite");
-    public static AssetManager<Audio> audios = createAsset("audio");
-    public static AssetManager<LevelState> levels = createAsset("level");
+    public static final AssetManager<Image> images = createAsset("image");
+    public static final AssetManager<SpriteSheet> sprites = createAsset("sprite");
+    public static final AssetManager<Audio> audios = createAsset("audio");
+    public static final AssetManager<LevelState> levels = createAsset("level");
 
     private final HashMap<String, AssetLoader<A>> assets;
     private final String name;
 
+    /**
+     * Crée un nouveau manager d'assets
+     *
+     * @param name : nom du manager
+     */
     private AssetManager(String name) {
         this.name = name;
         assets = new HashMap<>();
     }
 
+    /**
+     * Crée un nouveau manager d'assets et l'ajoute à la liste des managers
+     *
+     * @param name : nom du manager
+     * @param <A>  : type des assets
+     * @return : le manager créé
+     */
     private static <A> AssetManager<A> createAsset(String name) {
         AssetManager<A> assetManager = new AssetManager<>(name);
         ASSET_MANAGERS.add(assetManager);
@@ -39,9 +51,9 @@ public class AssetManager<A> {
     }
 
     /**
-     * Load all assets.
+     * Charge toutes les assets dans un thread séparé
      *
-     * @param listener The listener to notify when the assets are loaded.
+     * @param listener : listener à informer de l'avancement du chargement
      */
     public static void loadAll(ProgressListener listener) {
         new Thread(() -> {
@@ -56,6 +68,9 @@ public class AssetManager<A> {
         }).start();
     }
 
+    /**
+     * @return : la liste des loaders d'assets
+     */
     private static Collection<AssetLoader<?>> getAllLoaders() {
         Collection<AssetLoader<?>> loaders = new LinkedList<>();
         for (AssetManager<?> assetManager : ASSET_MANAGERS) {
@@ -65,10 +80,10 @@ public class AssetManager<A> {
     }
 
     /**
-     * Register an asset loader.
+     * Enregistre un loader pour un asset
      *
-     * @param key   The key to register the loader with.
-     * @param asset The asset to load.
+     * @param key   : la clé à utiliser pour identifier l'asset
+     * @param asset : l'asset à charger
      */
     public void register(String key, AssetLoader<A> asset) {
         System.out.println("Registering in " + name + ": " + key);
@@ -76,19 +91,21 @@ public class AssetManager<A> {
     }
 
     /**
-     * Register an asset with Register interface.
+     * Enregistre un register pour un type d'assets
      *
-     * @param register The register to register the asset with.
+     * @param register : le register à utiliser
      */
     public void register(Register<A> register) {
         register.register(this);
     }
 
     /**
-     * Get the asset with the given key.
+     * Récpère un asset selon sa clé
      *
-     * @param key The key of the asset to get.
-     * @return The asset with the given key.
+     * @param key : la clé de l'assets à récupérer
+     * @return l'asset souhaité
+     * @throws IllegalArgumentException si la clé est invalide
+     * @throws IllegalStateException    si l'asset n'a pas été chargé
      */
     public A get(String key) {
         if (!assets.containsKey(key)) {
@@ -101,11 +118,10 @@ public class AssetManager<A> {
     }
 
     /**
-     * Get all the assets registered in this asset manager.
-     * Order by key.
-     * Get only the loaded assets.
+     * Récupère toutes les assets enregistrées (et chargées) dans ce manager
+     * ordonnées par clé
      *
-     * @return A list of assets.
+     * @return la liste des assets
      */
     public Collection<A> getAll() {
         Collection<A> assets = new LinkedList<>();
@@ -120,9 +136,15 @@ public class AssetManager<A> {
     }
 
     /**
-     * Progress listener for the AssetManager.
+     * Listener pour l'avancement du chargement des assets
      */
     public interface ProgressListener extends EventListener {
+        /**
+         * Informe de l'avancement du chargement
+         *
+         * @param progress : l'avancement du chargement (0 à 1)
+         * @param done     : si le chargement est terminé
+         */
         void onProgress(double progress, boolean done);
     }
 }

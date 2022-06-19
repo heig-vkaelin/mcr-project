@@ -17,6 +17,11 @@ import ch.heigvd.mcr.ui.MainFrame;
 public class LoadLevelCommand implements Command {
     private final int levelId;
 
+    /**
+     * Crée une nouvelle commande de chargement de niveau
+     *
+     * @param id : id du niveau à charger
+     */
     public LoadLevelCommand(int id) {
         this.levelId = id;
     }

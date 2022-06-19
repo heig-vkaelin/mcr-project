@@ -7,7 +7,6 @@ import ch.heigvd.mcr.ui.MainFrame;
 import java.util.*;
 
 public class CheatCommand implements Command {
-
     private static final Random rand = new Random();
     private Entity deletedEntity;
 

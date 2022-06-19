@@ -23,9 +23,17 @@ import java.util.Map;
  */
 public class SpriteSheet {
     private final Map<String, Image> sprites = new HashMap<>();
-    private BufferedImage source = null;
 
+    /**
+     * Crée une nouvelle SpriteSheet à partir d'une image et extrait les
+     * différents sprites
+     *
+     * @param spriteSheetFile : chemin vers la spritesheet
+     * @throws IOException si le fichier n'est pas trouvé ou est invalide
+     */
     public SpriteSheet(URL spriteSheetFile) throws IOException {
+        BufferedImage source = null;
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(spriteSheetFile.openStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -55,22 +63,13 @@ public class SpriteSheet {
         }
     }
 
-    public Image source() {
-        return source;
-    }
-
+    /**
+     * Récupère l'image correspondant à la clé donnée
+     *
+     * @param name : nom de l'image
+     * @return l'image souhaitée
+     */
     public Image get(String name) {
         return sprites.get(name);
-    }
-
-    public Collection<Image> getAll() {
-        return sprites.values();
-    }
-
-    @Override
-    public String toString() {
-        return "SpriteSheet{" +
-                sprites.keySet() +
-                '}';
     }
 }

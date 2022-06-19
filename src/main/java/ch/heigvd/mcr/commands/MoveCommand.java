@@ -20,6 +20,12 @@ public class MoveCommand implements Command {
     private final int newX;
     private final int newY;
 
+    /**
+     * Crée une nouvelle commande de déplacement d'une entité
+     *
+     * @param entity      : entité à déplacer
+     * @param newPosition : nouvelle position de l'entité
+     */
     public MoveCommand(Entity entity, Position newPosition) {
         this.entity = entity;
         this.oldX = entity.getX();
