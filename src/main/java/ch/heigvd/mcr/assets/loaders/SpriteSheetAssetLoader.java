@@ -2,6 +2,7 @@ package ch.heigvd.mcr.assets.loaders;
 
 import ch.heigvd.mcr.assets.SpriteSheet;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -13,38 +14,18 @@ import java.net.URL;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class SpriteSheetAssetLoader implements AssetLoader<SpriteSheet> {
-    private final URL url;
-    private SpriteSheet spriteSheet;
-    private boolean loaded;
-
+public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
     /**
      * Crée un nouveau chargeur de SpriteSheet
      *
      * @param path : chemin de la SpriteSheet à charger
      */
     public SpriteSheetAssetLoader(String path) {
-        url = ClassLoader.getSystemResource(path);
-        loaded = false;
+        super(path);
     }
 
     @Override
-    public boolean isLoaded() {
-        return loaded;
-    }
-
-    @Override
-    public void load() {
-        try {
-            spriteSheet = new SpriteSheet(url);
-            loaded = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public SpriteSheet get() {
-        return spriteSheet;
+    protected SpriteSheet loadAsset() throws IOException {
+        return new SpriteSheet(getUrl());
     }
 }

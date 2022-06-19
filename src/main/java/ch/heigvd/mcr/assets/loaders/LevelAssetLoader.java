@@ -3,6 +3,7 @@ package ch.heigvd.mcr.assets.loaders;
 import ch.heigvd.mcr.levels.LevelParser;
 import ch.heigvd.mcr.levels.LevelState;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -14,35 +15,18 @@ import java.net.URL;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class LevelAssetLoader implements AssetLoader<LevelState> {
-    private final URL url;
-    private LevelState level;
-    boolean loaded;
-
+public class LevelAssetLoader extends AssetLoader<LevelState> {
     /**
      * Crée un nouveau charger de niveau
      *
-     * @param path
+     * @param path : chemin du niveau à charger
      */
     public LevelAssetLoader(String path) {
-        url = ClassLoader.getSystemResource(path);
-        loaded = false;
+        super(path);
     }
 
     @Override
-    public boolean isLoaded() {
-        return loaded;
-    }
-
-    @Override
-    public void load() {
-        if (loaded) return;
-        level = LevelParser.parseLevelFile(url);
-        loaded = true;
-    }
-
-    @Override
-    public LevelState get() {
-        return level;
+    protected LevelState loadAsset() {
+        return LevelParser.parseLevelFile(getUrl());
     }
 }

@@ -1,7 +1,10 @@
 package ch.heigvd.mcr.assets.loaders;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
- * Interface commune à tous les loaders d'assets
+ * Classe abstraite permettant de charger les différents types d'assets
  *
  * @param <T> : le type de l'asset à charger
  * @author Jonathan Friedli
@@ -10,19 +13,60 @@ package ch.heigvd.mcr.assets.loaders;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public interface AssetLoader<T> {
+public abstract class AssetLoader<T> {
+    private final URL url;
+    private boolean loaded;
+    private T asset;
+
+    /**
+     * Crée un nouveau chargeur pour un type de fichier donné
+     *
+     * @param path : chemin du fichier à charger
+     */
+    public AssetLoader(String path) {
+        url = ClassLoader.getSystemResource(path);
+        loaded = false;
+    }
+
     /**
      * @return true si l'asset a été chargé, false sinon
      */
-    boolean isLoaded();
+    public boolean isLoaded() {
+        return loaded;
+    }
 
     /**
      * Charge l'asset
      */
-    void load();
+    public void load() {
+        if (loaded) return;
+        try {
+            asset = loadAsset();
+            loaded = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @return l'asset chargé
      */
-    T get();
+    public T get() {
+        return asset;
+    }
+
+    /**
+     * @return l'URL de l'asset
+     */
+    protected URL getUrl() {
+        return url;
+    }
+
+    /**
+     * Charge l'asset à partir de l'URL
+     *
+     * @return l'asset chargé
+     * @throws IOException si une erreur survient lors du chargement
+     */
+    protected abstract T loadAsset() throws IOException;
 }

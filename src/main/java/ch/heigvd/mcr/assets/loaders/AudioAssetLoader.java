@@ -14,39 +14,18 @@ import java.net.URL;
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
  */
-public class AudioAssetLoader implements AssetLoader<Audio> {
-    private final URL url;
-    private Audio audio;
-    private boolean loaded;
-
+public class AudioAssetLoader extends AssetLoader<Audio> {
     /**
      * Crée un nouveau chargeur d'un fichier audio
      *
      * @param path : chemin du fichier audio à charger
      */
     public AudioAssetLoader(String path) {
-        url = ClassLoader.getSystemResource(path);
-        loaded = false;
+        super(path);
     }
 
     @Override
-    public boolean isLoaded() {
-        return loaded;
-    }
-
-    @Override
-    public void load() {
-        if (loaded) return;
-        try {
-            audio = new Audio(url);
-            loaded = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public Audio get() {
-        return audio;
+    protected Audio loadAsset() throws IOException {
+        return new Audio(getUrl());
     }
 }
