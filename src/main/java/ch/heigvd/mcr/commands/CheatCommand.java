@@ -31,7 +31,7 @@ public class CheatCommand implements Command {
         }
 
         if (deletedEntity != null) {
-            GameController.getInstance().removeEntity(deletedEntity);
+            GameController.getInstance().getState().removeEntity(deletedEntity);
             deletedEntity.kill();
             MainFrame.getInstance().refreshPlayView();
         }

@@ -40,8 +40,6 @@ public class DraggableEntity extends DrawableEntity {
             @Override
             public void dragEnded(MouseEvent e) {
                 if (state == null) return;
-                // On remet les coordonées d'origine pour les avoir pour le rollback.. on peut surement mieux faire
-
                 // TODO: enlever avant dimanche
                 // Perdu => reset
                 if (state.collidedEntity() instanceof Pedestrian) {
@@ -54,8 +52,6 @@ public class DraggableEntity extends DrawableEntity {
                         GameController.getInstance().endGame();
                     }
                 }
-
-
             }
 
             @Override

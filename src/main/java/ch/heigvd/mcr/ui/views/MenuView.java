@@ -9,7 +9,6 @@ import ch.heigvd.mcr.ui.components.LevelButton;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,19 +25,19 @@ public class MenuView extends AbstractView {
     private static final int PADDING = 20;
 
     /**
-     * Constructeur permettant de construire la vue
+     * Crée une nouvelle vue de menu de sélection de niveau
+     *
+     * @param parent : la fenêtre parente
      */
     public MenuView(MainFrame parent) {
         super(parent);
 
         JPanel cards = new JPanel(new GridLayout(0, COLUMNS, PADDING, PADDING));
-
         cards.setOpaque(false);
 
         List<LevelState> levels = AssetManager.levels.getAll().stream()
                 .sorted(Comparator.comparingInt(LevelState::getId))
                 .toList();
-
         for (LevelState level : levels) {
             JButton btn = new LevelButton(
                     "Niveau",

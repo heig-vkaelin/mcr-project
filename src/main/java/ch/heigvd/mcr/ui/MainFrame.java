@@ -26,12 +26,14 @@ public class MainFrame extends JFrame {
     private final MenuView menuView;
     private PlayView currentPlayView;
 
+    /**
+     * Crée la fenêtre principale du jeu
+     */
     private MainFrame() {
         setMinimumSize(new Dimension(INITIAL_WIDTH, INITIAL_HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         currentView = new CardLayout();
-        // Init with start panel
         mainPanel = new JPanel(currentView);
 
         HomeView homeView = new HomeView(this);
@@ -47,6 +49,9 @@ public class MainFrame extends JFrame {
         pack();
     }
 
+    /**
+     * @return l'instance unique de la fenêtre principale du jeu
+     */
     public static MainFrame getInstance() {
         if (instance == null) {
             instance = new MainFrame();
@@ -54,11 +59,17 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
+    /**
+     * Ouvre le menu de sélection des niveaux
+     */
     public void openMenuView() {
         currentView.show(mainPanel, "menu");
         setTitle(menuView.getTitle());
     }
 
+    /**
+     * Ouvre la vue du niveau souhaité
+     */
     public void openLevelView() {
         if (currentPlayView != null) {
             currentPlayView.onHide();
@@ -69,6 +80,9 @@ public class MainFrame extends JFrame {
         setTitle(currentPlayView.getTitle());
     }
 
+    /**
+     * Met à jour la vue du niveau courant
+     */
     public void refreshPlayView() {
         if (currentPlayView != null) {
             currentPlayView.refresh();

@@ -2,8 +2,6 @@ package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.Event;
 import ch.heigvd.mcr.GameController;
-import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.commands.CheatCommand;
 import ch.heigvd.mcr.commands.Command;
 import ch.heigvd.mcr.commands.LoadLevelCommand;
@@ -40,11 +38,12 @@ public class PlayView extends AbstractView {
     private final List<Event> events;
 
     /**
-     * Constructeur permettant de pour construire la vue
+     * Crée une nouvelle vue de jeu dans un niveau spécifique
+     *
+     * @param parent : la fenêtre parente
      */
     public PlayView(MainFrame parent) {
         super(parent, new BorderLayout());
-
 
         setBackground(Color.WHITE);
 
@@ -53,12 +52,11 @@ public class PlayView extends AbstractView {
 
         nbMovesLabel = new JLabel("Number of moves : 0");
 
-        final Color RED = new Color(180, 32, 42);
-        btnUndo = new FlatButton("Undo", RED, Color.WHITE);
-        btnMenu = new FlatButton("Menu", RED, Color.WHITE);
-        btnRestart = new FlatButton("Restart", RED, Color.WHITE);
-        btnCheat = new FlatButton("Cheat", RED, Color.WHITE);
-        JButton btnSound = new MuteButton(RED, Color.WHITE);
+        btnUndo = new FlatButton("Undo", getBtnColor(), Color.WHITE);
+        btnMenu = new FlatButton("Menu", getBtnColor(), Color.WHITE);
+        btnRestart = new FlatButton("Restart", getBtnColor(), Color.WHITE);
+        btnCheat = new FlatButton("Cheat", getBtnColor(), Color.WHITE);
+        JButton btnSound = new MuteButton(getBtnColor(), Color.WHITE);
 
         events = new LinkedList<>();
 
@@ -83,11 +81,17 @@ public class PlayView extends AbstractView {
         return "DISIT - Level " + GameController.getInstance().getState().getId();
     }
 
+    /**
+     * Met à jour les éléments dynamiques de la vue
+     */
     public void update() {
         updateNbMoves();
         updateUndoBtn();
     }
 
+    /**
+     * Enregistre les handlers sur les éléments de l'UI
+     */
     private void registerHandlers() {
         btnMenu.addActionListener(e -> getFrame().openMenuView());
 
@@ -102,19 +106,31 @@ public class PlayView extends AbstractView {
         updateUndoBtn();
     }
 
+    /**
+     * Se désabonne des événements une fois la vue supprimée
+     */
     public void onHide() {
         for (Event e : events)
             e.unsubscribe();
     }
 
+    /**
+     * Met à jour le contenu de la grille de jeu
+     */
     public void refresh() {
         boardPanel.refresh();
     }
 
+    /**
+     * Met à jour le nombre de mouvements
+     */
     private void updateNbMoves() {
         nbMovesLabel.setText("Number of moves : " + GameController.getInstance().getState().getNbMoves());
     }
 
+    /**
+     * Met à jour le bouton undo
+     */
     private void updateUndoBtn() {
         btnUndo.setEnabled(GameController.getInstance().getState().getNbMoves() > 0);
     }

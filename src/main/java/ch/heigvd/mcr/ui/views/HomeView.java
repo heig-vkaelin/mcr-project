@@ -1,7 +1,6 @@
 package ch.heigvd.mcr.ui.views;
 
 import ch.heigvd.mcr.assets.AssetManager;
-import ch.heigvd.mcr.assets.Audio;
 import ch.heigvd.mcr.assets.AudioManager;
 import ch.heigvd.mcr.ui.MainFrame;
 import ch.heigvd.mcr.ui.components.FlatButton;
@@ -20,21 +19,27 @@ import java.awt.*;
  * @author Valentin Kaelin
  */
 public class HomeView extends AbstractView {
+    private final JLabel logoLabel;
     private final JButton play;
     private final JButton quit;
     private final JButton sound;
 
+    /**
+     * Crée la vue de la page d'accueil du jeu
+     *
+     * @param parent : la fenêtre parente
+     */
     public HomeView(MainFrame parent) {
         super(parent, new BorderLayout());
 
         setBackground(Color.BLACK);
 
-        JLabel picLabel = new JLabel(new ImageIcon(AssetManager.images.get("logo")));
+        logoLabel = new JLabel(new ImageIcon(AssetManager.images.get("logo")));
         JPanel btnPanel = new JPanel();
 
-        play = new FlatButton("Play !", new Color(180, 32, 42), Color.WHITE);
-        quit = new FlatButton("Quit", new Color(180, 32, 42), Color.WHITE);
-        sound = new MuteButton(new Color(180, 32, 42), Color.WHITE);
+        play = new FlatButton("Play !", getBtnColor(), Color.WHITE);
+        quit = new FlatButton("Quit", getBtnColor(), Color.WHITE);
+        sound = new MuteButton(getBtnColor(), Color.WHITE);
 
         play.setPreferredSize(new Dimension(200, 40));
         quit.setPreferredSize(new Dimension(200, 40));
@@ -48,18 +53,12 @@ public class HomeView extends AbstractView {
         btnPanel.add(quit);
         btnPanel.add(play);
         btnPanel.add(sound);
-        add(picLabel, BorderLayout.NORTH);
+        add(logoLabel, BorderLayout.NORTH);
         add(btnPanel, BorderLayout.SOUTH);
 
         registerHandlers();
 
         AudioManager.getInstance().loop(AssetManager.audios.get("menu"));
-        picLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AudioManager.getInstance().stop(AssetManager.audios.get("menu"));
-                AudioManager.getInstance().loop(AssetManager.audios.get("sw"));
-            }
-        });
     }
 
     @Override
@@ -67,9 +66,19 @@ public class HomeView extends AbstractView {
         return "DISIT";
     }
 
+    /**
+     * Enregistre les handlers sur les éléments de l'UI
+     */
     private void registerHandlers() {
         play.addActionListener(e -> getFrame().openMenuView());
 
         quit.addActionListener(e -> System.exit(0));
+
+        logoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AudioManager.getInstance().stop(AssetManager.audios.get("menu"));
+                AudioManager.getInstance().loop(AssetManager.audios.get("sw"));
+            }
+        });
     }
 }

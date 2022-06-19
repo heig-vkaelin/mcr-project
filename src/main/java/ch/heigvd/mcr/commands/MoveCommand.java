@@ -30,7 +30,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void execute() {
-        GameController.getInstance().setNewPosition(entity, newX, newY);
+        GameController.getInstance().setSafePosition(entity, newX, newY);
     }
 
     @Override
