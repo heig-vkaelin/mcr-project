@@ -18,6 +18,9 @@ public abstract class DragListener implements MouseListener, MouseMotionListener
     protected int offsetY;
     protected boolean isDragged;
 
+    /**
+     * Arrête le drag and drop
+     */
     public void stopDragging() {
         isDragged = false;
     }

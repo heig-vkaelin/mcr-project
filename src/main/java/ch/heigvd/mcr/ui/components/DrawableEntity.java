@@ -1,6 +1,5 @@
 package ch.heigvd.mcr.ui.components;
 
-import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.*;
 
@@ -22,28 +21,49 @@ public class DrawableEntity extends JLabel {
     private int ratio;
     private int offset;
 
+    /**
+     * Crée une nouvelle entité pouvant être dessinée
+     *
+     * @param entity    : entité de base
+     * @param baseRatio : ratio initial de l'affichage
+     */
     public DrawableEntity(Entity entity, int baseRatio) {
         this.entity = entity;
         this.ratio = baseRatio;
 
-        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
-        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
+        updateImage();
 
         setIcon(new ImageIcon(image));
     }
 
+    /**
+     * @return le ratio actuel de l'affichage
+     */
     public int getRatio() {
         return ratio;
     }
 
+    /**
+     * Modifie le ratio actuel de l'affichage
+     *
+     * @param ratio : nouveau ratio
+     */
     public void setRatio(int ratio) {
         this.ratio = ratio;
     }
 
+    /**
+     * Modifie le décalage à gauche de l'affichage
+     *
+     * @param offset : nouveau décalage
+     */
     public void setOffset(int offset) {
         this.offset = offset;
     }
 
+    /**
+     * @return l'entité associée
+     */
     public Entity getEntity() {
         return entity;
     }
@@ -52,16 +72,22 @@ public class DrawableEntity extends JLabel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
+        updateImage();
 
-        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
-
-        if (entity.getDirection() == Direction.UP || entity.getDirection() == Direction.DOWN)
-            setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getWidth(), ratio * entity.getType().getLength());
-        else
-            setBounds(offset + entity.getX() * ratio, ratio + entity.getY() * ratio, ratio * entity.getType().getLength(), ratio * entity.getType().getWidth());
+        setBounds(offset + entity.getX() * ratio,
+                ratio + entity.getY() * ratio, ratio * entity.getWidth(),
+                ratio * entity.getHeight()
+        );
 
         Icon icon = new RotatedIcon(new ImageIcon(image), entity.getDirection());
         icon.paintIcon(this, g, 0, 0);
+    }
+
+    /**
+     * Met à jour l'image de l'entité
+     */
+    private void updateImage() {
+        Image tmp = AssetManager.sprites.get(entity.getType().getCategoryKey()).get(entity.getType().getKey());
+        this.image = tmp.getScaledInstance(ratio * entity.getType().getWidth(), ratio * entity.getType().getLength(), Image.SCALE_DEFAULT);
     }
 }

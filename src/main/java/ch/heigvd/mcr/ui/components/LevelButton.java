@@ -20,6 +20,8 @@ public class LevelButton extends JButton {
     private static final Color RED = new Color(220, 38, 38);
     private static final Color YELLOW = new Color(250, 204, 21);
     private static final Color GREEN = new Color(34, 197, 94);
+    private static final int CIRCLE_DIAMETER = 30;
+    private static final int HEIGHT_RECTANGLE = 30;
 
     private final int number;
     private final Difficulty difficulty;
@@ -50,9 +52,8 @@ public class LevelButton extends JButton {
         Dimension originalSize = super.getSize();
         Dimension center = new Dimension(originalSize.width / 2, originalSize.height / 2);
 
-        int diameterCircle = 30;
-        int xCircle = center.width - diameterCircle / 2;
-        int yCircle = center.height - diameterCircle / 2;
+        int xCircle = center.width - CIRCLE_DIAMETER / 2;
+        int yCircle = center.height - CIRCLE_DIAMETER / 2;
 
         // Numéro du niveau
         FontMetrics fontMetrics = g.getFontMetrics();
@@ -62,9 +63,7 @@ public class LevelButton extends JButton {
 
         // Difficulté
         int widthRectangle = originalSize.width;
-        int heightRectangle = 30;
-        int xRectangle = 0;
-        int yRectangle = originalSize.height - heightRectangle;
+        int yRectangle = originalSize.height - HEIGHT_RECTANGLE;
         String difficultyLabel = getDifficultyText(difficulty);
         int widthDifficulty = fontMetrics.stringWidth(String.valueOf(difficultyLabel));
         int xDifficulty = center.width - widthDifficulty / 2;
@@ -72,11 +71,11 @@ public class LevelButton extends JButton {
 
         // Dessine tout
         g.setColor(RED);
-        g.fillOval(xCircle, yCircle, diameterCircle, diameterCircle);
+        g.fillOval(xCircle, yCircle, CIRCLE_DIAMETER, CIRCLE_DIAMETER);
         g.setColor(Color.WHITE);
         g.drawString(String.valueOf(number), xLevel, yLevel);
         g.setColor(getDifficultyColor(difficulty));
-        g.fillRect(xRectangle, yRectangle, widthRectangle, heightRectangle);
+        g.fillRect(0, yRectangle, widthRectangle, HEIGHT_RECTANGLE);
         g.setColor(Color.WHITE);
         g.drawString(difficultyLabel, xDifficulty, yDifficulty);
     }

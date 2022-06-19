@@ -6,7 +6,6 @@ import ch.heigvd.mcr.commands.MoveCommand;
 import ch.heigvd.mcr.entities.Entity;
 import ch.heigvd.mcr.entities.Pedestrian;
 import ch.heigvd.mcr.entities.Position;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -21,20 +20,34 @@ import java.awt.event.MouseEvent;
  * @author Valentin Kaelin
  */
 public class DraggableEntity extends DrawableEntity {
+    /**
+     * Crée une nouvelle entité déplacable par le joueur
+     *
+     * @param entity    : entité de base
+     * @param baseRatio : ratio initial de l'affichage
+     */
     public DraggableEntity(Entity entity, int baseRatio) {
         super(entity, baseRatio);
-
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        DragListener dragListener = new DragListener() {
-            @Nullable() ValidateState state;
+        DragListener dragListener = createDragListener();
+        addMouseListener(dragListener);
+        addMouseMotionListener(dragListener);
+    }
+
+    /**
+     * @return un nouveau listener pour le drag and drop sur l'entité
+     */
+    private DragListener createDragListener() {
+        return new DragListener() {
+            ValidateState state;
 
             int startX, startY;
 
             @Override
             public void dragStarted(MouseEvent e) {
-                startX = entity.getX();
-                startY = entity.getY();
+                startX = getEntity().getX();
+                startY = getEntity().getY();
             }
 
             @Override
@@ -45,8 +58,8 @@ public class DraggableEntity extends DrawableEntity {
                 if (state.collidedEntity() instanceof Pedestrian) {
                     new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
                 } else {
-                    entity.setPosition(startX, startY);
-                    GameController.getInstance().playTurn(new MoveCommand(entity, state.position()));
+                    getEntity().setPosition(startX, startY);
+                    GameController.getInstance().playTurn(new MoveCommand(getEntity(), state.position()));
 
                     if (state.hasReachedExit()) {
                         GameController.getInstance().endGame();
@@ -57,23 +70,19 @@ public class DraggableEntity extends DrawableEntity {
             @Override
             public void dragMoved(MouseEvent e) {
                 Position position = new Position(
-                        (int) Math.round((e.getX() - offsetX) / (double) getRatio() + entity.getX()),
-                        (int) Math.round((e.getY() - offsetY) / (double) getRatio() + entity.getY())
+                        (int) Math.round((e.getX() - offsetX) / (double) getRatio() + getEntity().getX()),
+                        (int) Math.round((e.getY() - offsetY) / (double) getRatio() + getEntity().getY())
                 );
-                if (position.x() != entity.getX() || position.y() != entity.getY()) {
-                    state = GameController.getInstance().validatePosition(entity, position);
-                    entity.setPosition(state.position());
+                if (position.x() != getEntity().getX() || position.y() != getEntity().getY()) {
+                    state = GameController.getInstance().validatePosition(getEntity(), position);
+                    getEntity().setPosition(state.position());
                     if (state.collidedEntity() != null) {
-                        stopDragging(); // to avoid infinite calls
+                        stopDragging(); // pour éviter les calls infinis
                         state.collidedEntity().onCrash();
-                        System.out.println("Entity[" + entity.getType() + "] Colliding with " + state.collidedEntity().getType());
                     }
                     repaint();
                 }
             }
         };
-
-        addMouseListener(dragListener);
-        addMouseMotionListener(dragListener);
     }
 }

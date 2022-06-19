@@ -1,6 +1,5 @@
 package ch.heigvd.mcr.ui.components;
 
-import ch.heigvd.mcr.GameController;
 import ch.heigvd.mcr.assets.AssetManager;
 import ch.heigvd.mcr.entities.Direction;
 import ch.heigvd.mcr.entities.Entity;
@@ -20,29 +19,30 @@ import java.util.List;
  * @author Valentin Kaelin
  */
 public class BoardPanel extends JPanel {
-    private final int size;
     private final List<DrawableEntity> drawables;
+    private final int size;
     private final int exitPos;
     private final Direction exitSide;
+
     private int ratio;
     private int offset;
 
     /**
      * Construit une nouvelle grille
      *
-     * @param size     taille du coté de la grille (carrée)
-     * @param entities entités à afficher sur la grille
-     * @param exitPos  position de la sortie de la grille
-     * @param exitSide coté de la sortie de la grille
+     * @param size     : taille du côté de la grille (carrée)
+     * @param entities : entités à afficher sur la grille
+     * @param exitPos  : position de la sortie de la grille
+     * @param exitSide : côté de la sortie de la grille
      */
     public BoardPanel(int size, List<Entity> entities, int exitPos, Direction exitSide) {
-        this.size = size;
         this.drawables = new ArrayList<>();
-        this.offset = 1;
-        this.ratio = 1;
-
+        this.size = size;
         this.exitPos = exitPos;
         this.exitSide = exitSide;
+
+        this.offset = 1;
+        this.ratio = 1;
 
         for (Entity e : entities) {
             DrawableEntity drawable = e.isInteractive() ?
@@ -54,7 +54,11 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * Redessine la grille
+     */
     public void refresh() {
+        updateDrawables();
         repaint();
     }
 
@@ -72,23 +76,9 @@ public class BoardPanel extends JPanel {
         drawHSide(g, Direction.DOWN, "B", size + 1);
 
         // Affiche les cases normales
-        for (int i = 1; i <= size; ++i) {
-            for (int j = 1; j <= size; ++j) {
+        for (int i = 1; i <= size; ++i)
+            for (int j = 1; j <= size; ++j)
                 drawSprite(g, "C", i, j);
-            }
-        }
-
-        // TODO: refactor this shit
-        // Supprime les drawables non utilisés
-        for (int i = 0; i < drawables.size(); ) {
-            DrawableEntity e = drawables.get(i);
-            if (!e.getEntity().isAlive()) {
-                remove(e);
-                drawables.remove(e);
-            } else {
-                i++;
-            }
-        }
 
         // Met à jour les dimensions des entités
         for (DrawableEntity e : drawables) {
@@ -98,12 +88,27 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * Supprime les drawables non utilisés
+     */
+    private void updateDrawables() {
+        for (int i = 0; i < drawables.size(); ) {
+            DrawableEntity e = drawables.get(i);
+            if (!e.getEntity().isAlive()) {
+                remove(e);
+                drawables.remove(e);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    /**
      * Affiche un bord horizontal de la grille, affiche également les coins
      *
-     * @param g               utilitaire d'affichage
-     * @param side            coté à afficher (haut ou bas)
-     * @param assetKey        clé pour l'affichage d'assets
-     * @param fixedCoordinate valeur de la coordonnée fixe (ici y)
+     * @param g               : utilitaire d'affichage
+     * @param side            : côté à afficher (haut ou bas)
+     * @param assetKey        : clé pour l'affichage d'assets
+     * @param fixedCoordinate : valeur de la coordonnée fixe (ici y)
      */
     private void drawHSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
         drawSprite(g, assetKey + "L", 0, fixedCoordinate);
@@ -116,10 +121,10 @@ public class BoardPanel extends JPanel {
     /**
      * Affiche un bord vertical de la grille, n'affiche pas les coins
      *
-     * @param g               utilitaire d'affichage
-     * @param side            coté à afficher (gauche ou droite)
-     * @param assetKey        clé pour l'affichage de sprites
-     * @param fixedCoordinate valeur de la coordonnée fixe (ici x)
+     * @param g               : utilitaire d'affichage
+     * @param side            : côté à afficher (gauche ou droite)
+     * @param assetKey        : clé pour l'affichage de sprites
+     * @param fixedCoordinate : valeur de la coordonnée fixe (ici x)
      */
     private void drawVSide(Graphics g, Direction side, String assetKey, int fixedCoordinate) {
         for (int i = 1; i <= size; ++i) {
@@ -130,12 +135,12 @@ public class BoardPanel extends JPanel {
     /**
      * Affiche un bord ou une sortie sur les coordonnées souhaitées
      *
-     * @param g        utilitaire d'affichage
-     * @param side     coté du bord
-     * @param assetKey clé pour l'affichage de sprites
-     * @param x        position x
-     * @param y        position y
-     * @param exit     position à vérifier pour placer une sortie
+     * @param g        : utilitaire d'affichage
+     * @param side     : côté du bord
+     * @param assetKey : clé pour l'affichage de sprites
+     * @param x        : position x
+     * @param y        : position y
+     * @param exit     : position à vérifier pour placer une sortie
      */
     private void drawBorders(Graphics g, Direction side, String assetKey, int x, int y, int exit) {
         if (exitSide == side) {

@@ -16,6 +16,12 @@ import java.awt.*;
  * @author Valentin Kaelin
  */
 public class MuteButton extends JButton {
+    /**
+     * Crée un bouton permettant d'activer / désactiver le son du jeu
+     *
+     * @param bgColor  : couleur de fond
+     * @param txtColor : couleur du texte
+     */
     public MuteButton(Color bgColor, Color txtColor) {
         super("");
         refreshIcon();
@@ -31,8 +37,11 @@ public class MuteButton extends JButton {
         });
     }
 
+    /**
+     * Met à jour l'icone du bouton
+     */
     private void refreshIcon() {
-        String text = AudioManager.getInstance().isMuted() ? "sound_off" : "sound_on";
-        setIcon(new ImageIcon(AssetManager.sprites.get("icons").get(text)));
+        String name = AudioManager.getInstance().isMuted() ? "sound_off" : "sound_on";
+        setIcon(new ImageIcon(AssetManager.sprites.get("icons").get(name)));
     }
 }
