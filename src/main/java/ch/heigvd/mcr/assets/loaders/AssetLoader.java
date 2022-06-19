@@ -43,7 +43,7 @@ public abstract class AssetLoader<T> {
         try {
             asset = loadAsset();
             loaded = true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
