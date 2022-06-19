@@ -57,8 +57,8 @@ public class DraggableEntity extends DrawableEntity {
                 if (collided != null && collided.getType().getCategory() == TypeCategory.PEDESTRIAN) {
                     // Perdu → reset du niveau
                     new LoadLevelCommand(GameController.getInstance().getState().getId()).execute();
-                } else {
-                    getEntity().setPosition(startX, startY);
+                } else if (getEntity().getPosition().x() != startX || getEntity().getPosition().y() != startY) {
+                    getEntity().setPosition(startX, startY); // Pour pouvoir rollback
                     GameController.getInstance().playTurn(new MoveCommand(getEntity(), state.position()));
 
                     if (state.hasReachedExit()) {
