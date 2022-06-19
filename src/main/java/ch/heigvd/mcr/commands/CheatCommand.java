@@ -12,21 +12,17 @@ public class CheatCommand implements Command {
 
     @Override
     public void execute() {
-        int it = rand.nextInt(GameController.getInstance().getState().getEntities().size());
-        int i = 0;
+        final LinkedList<Entity> entities = GameController.getInstance().getState().getEntities();
+        int j = rand.nextInt(entities.size());
+        ListIterator<Entity> it = entities.listIterator(j);
 
-        for (Entity e : GameController.getInstance().getState().getEntities()) {
-            if (it == i) {
-                if (!e.isThePlayer()) {
-                    System.out.println("delete" + e);
-                    deletedEntity = e;
-                } else {
-                    // si c'est le player
-                    System.out.println("c'est le player");
-                    // todo: prendre le suivante ou celui
-                }
+        while (it.hasNext()) {
+            final Entity e = it.next();
+            if (!e.isThePlayer()) {
+                deletedEntity = e;
+            } else if (it.nextIndex() - 1 != j) {
+                deletedEntity = it.next();
             }
-            ++i;
         }
 
         if (deletedEntity != null) {

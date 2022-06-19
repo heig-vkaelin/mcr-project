@@ -86,7 +86,6 @@ public class AssetManager<A> {
      * @param asset : l'asset à charger
      */
     public void register(String key, AssetLoader<A> asset) {
-        System.out.println("Registering in " + name + ": " + key);
         assets.put(key, asset);
     }
 
