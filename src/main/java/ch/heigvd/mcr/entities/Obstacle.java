@@ -14,6 +14,13 @@ import ch.heigvd.mcr.entities.types.ObstacleType;
  * @author Valentin Kaelin
  */
 public class Obstacle extends Entity {
+    /**
+     * Crée un obstacle
+     *
+     * @param position  : position de l'obstacle
+     * @param direction : direction de l'obstacle
+     * @param type      : type de l'obstacle
+     */
     public Obstacle(Position position, Direction direction, ObstacleType type) {
         super(position, direction, type);
     }

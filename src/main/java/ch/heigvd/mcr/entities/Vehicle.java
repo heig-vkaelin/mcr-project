@@ -14,6 +14,13 @@ import ch.heigvd.mcr.entities.types.VehicleType;
  * @author Valentin Kaelin
  */
 public class Vehicle extends MovableEntity {
+    /**
+     * Crée un véhicule
+     *
+     * @param position  : position initiale du véhicule
+     * @param direction : direction du véhicule
+     * @param type      : type de véhicule
+     */
     public Vehicle(Position position, Direction direction, VehicleType type) {
         super(position, direction, type);
     }

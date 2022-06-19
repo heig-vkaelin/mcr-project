@@ -24,10 +24,20 @@ public record Position(int x, int y) {
     public static final List<Position> DIRECTIONS =
             List.of(UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT);
 
+    /**
+     * @return une position représentant direction aléatoire
+     */
     public static Position randomDirection() {
         return DIRECTIONS.get((int) (Math.random() * DIRECTIONS.size()));
     }
 
+    /**
+     * Additionne deux positions
+     *
+     * @param p1 : première position
+     * @param p2 : deuxième position
+     * @return la somme des deux positions
+     */
     public static Position add(Position p1, Position p2) {
         return new Position(p1.x + p2.x, p1.y + p2.y);
     }

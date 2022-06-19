@@ -15,6 +15,13 @@ import ch.heigvd.mcr.entities.types.PedestrianType;
  * @author Valentin Kaelin
  */
 public class Pedestrian extends MovableEntity {
+    /**
+     * Crée un piéton
+     *
+     * @param position  : position initiale du piéton
+     * @param direction : direction du piéton
+     * @param type      : type de piéton
+     */
     public Pedestrian(Position position, Direction direction, PedestrianType type) {
         super(position, direction, type);
     }
