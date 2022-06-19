@@ -1,59 +1,14 @@
-20
-2
-9 10 r red
-p 3 10 d boy
-p 4 9 d girl
-p 5 8 d dog
-p 6 7 d cat
-p 7 6 d bird
-p 8 5 d man
-p 9 4 d man2
-p 10 4 d man3
-p 11 5 d grandpa
-p 12 6 d bigman
-p 13 7 d woman
-p 14 8 d man4
-p 15 9 d weirdman
-p 16 10 d fatdog
-p 4 11 d gandalf
-p 5 12 d girl2
-p 6 13 d grandma
-p 7 14 d grandma2
-p 8 15 d grandma3
-p 9 16 d fitgirl
-p 10 16 d bird
-p 11 15 d cat
-p 12 14 d fatdog
-p 13 13 d woman
-p 14 12 d man3
-p 15 11 d bird
-p 2 3 d gandalf
-p 2 4 d gandalf
-p 2 5 d gandalf
-p 2 6 d gandalf
-p 2 7 d gandalf
-p 2 8 d gandalf
-p 2 9 d gandalf
-p 2 10 d gandalf
-p 2 11 d gandalf
-p 2 12 d gandalf
-p 2 13 d gandalf
-p 2 14 d gandalf
-p 2 15 d gandalf
-p 2 16 d gandalf
-p 2 17 d gandalf
-p 17 3 d gandalf
-p 17 4 d gandalf
-p 17 5 d gandalf
-p 17 6 d gandalf
-p 17 7 d gandalf
-p 17 8 d gandalf
-p 17 9 d gandalf
-p 17 10 d gandalf
-p 17 11 d gandalf
-p 17 12 d gandalf
-p 17 13 d gandalf
-p 17 14 d gandalf
-p 17 15 d gandalf
-p 17 16 d gandalf
-p 17 17 d gandalf
+6
+3
+1 2 r red
+v 0 0 r truck
+v 0 1 d yellow
+v 0 4 l taxi
+v 2 3 u van
+o 2 5 d cone
+v 3 0 d school_bus
+v 3 3 l striped
+v 4 0 r gray
+v 4 5 l police
+v 5 1 d yellow
+v 5 3 u yellow

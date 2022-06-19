@@ -1,11 +1,10 @@
 6
-2
-0 3 r red
-v 0 0 r blue
-v 2 0 r striped
-v 4 1 u yellow
-v 1 2 r truck
-v 1 4 u van
-v 2 3 u truck
+1
+1 2 r red
+v 0 0 d truck
+v 0 3 u blue
+v 1 0 l taxi
+v 1 4 r police
+v 2 5 l truck
+v 3 1 d school_bus
 v 5 3 u truck
-p 4 4 d gandalf
