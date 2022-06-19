@@ -2,6 +2,10 @@
 
 # Dodo is stuck in traffic
 
+Remake du jeu d’énigme bien connu **Rush Hour** en Java avec la librairie Swing.
+
+![Example](docs/examples/playView.png)
+
 ## Auteurs
 - Maxime Scharwath
 - Nicolas Crausaz
