@@ -6,6 +6,17 @@ import ch.heigvd.mcr.ui.MainFrame;
 
 import java.util.*;
 
+/**
+ * Commande permettant de tricher en supprimant une entité aléatoirement
+ * (ne peut pas supprimer la voiture du joueur)
+ *
+ * @author Jonathan Friedli
+ * @author Lazar Pavicevic
+ * @author Maxime Scharwath
+ * @author Nicolas Crausaz
+ * @author Valentin Kaelin
+ * @version 2022-06-19
+ */
 public class CheatCommand implements Command {
     private static final Random rand = new Random();
     private Entity deletedEntity;
@@ -24,7 +35,7 @@ public class CheatCommand implements Command {
             if (i == j) {
                 if (!array[i].isThePlayer()) {
                     deletedEntity = array[i];
-                } else  {
+                } else {
                     deletedEntity = array[i + 1];
                 }
             }

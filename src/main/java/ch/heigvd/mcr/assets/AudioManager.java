@@ -10,6 +10,7 @@ import java.util.HashSet;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class AudioManager {
     private static AudioManager instance;

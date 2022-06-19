@@ -16,6 +16,7 @@ import java.util.*;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class AssetManager<A> {
     private static final List<AssetManager<?>> ASSET_MANAGERS = new LinkedList<>();

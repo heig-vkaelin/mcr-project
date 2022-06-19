@@ -14,6 +14,7 @@ import java.net.URL;
  * @author Maxime Scharwath
  * @author Nicolas Crausaz
  * @author Valentin Kaelin
+ * @version 2022-06-19
  */
 public class ImageAssetLoader extends AssetLoader<Image> {
     /**
