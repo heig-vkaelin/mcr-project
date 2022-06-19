@@ -27,3 +27,7 @@ test {
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
