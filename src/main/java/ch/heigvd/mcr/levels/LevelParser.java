@@ -29,12 +29,11 @@ public class LevelParser {
      * @throws RuntimeException en cas de fichier non conforme
      */
     public static LevelState parseLevelFile(URL levelPath) throws RuntimeException {
-
         LevelState state = new LevelState(getIdFromFilename(levelPath));
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(levelPath.openStream()))) {
             String line;
-            int count = 0;
+            int lineNumber = 0;
 
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(" ");
@@ -48,9 +47,8 @@ public class LevelParser {
                     throw new RuntimeException("Malformed file");
                 }
 
-                switch (count) {
-                    case 0 -> {
-                        // Taille grille
+                switch (lineNumber) {
+                    case 0 -> { // Taille grille
                         final int size = Integer.parseInt(values[0]);
                         if (size < MIN_LEVEL_SIZE || size > MAX_LEVEL_SIZE) {
                             throw new IllegalArgumentException("Level size cannot be less than " + MIN_LEVEL_SIZE +
@@ -58,17 +56,13 @@ public class LevelParser {
                         }
                         state.setSideSize(size);
                     }
-                    case 1 -> {
-                        // Difficulté
+                    case 1 -> { // Difficulté
                         int enumIndex = Integer.parseInt(values[0]) - 1;
                         state.setDifficulty(Difficulty.values()[enumIndex]);
                     }
-                    case 2 -> {
-                        // Voiture du joueur
+                    case 2 -> { // Voiture du joueur
                         final Position position = new Position(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
-
                         final Direction direction = Direction.getFromKey(values[2]);
-
                         state.addPlayer(position, direction, VehicleType.getFromKey(values[3]));
 
                         if (direction == Direction.UP || direction == Direction.DOWN) {
@@ -79,7 +73,6 @@ public class LevelParser {
                     }
                     default -> {
                         final Position position = new Position(Integer.parseInt(values[1]), Integer.parseInt(values[2]));
-
                         final Direction direction = Direction.getFromKey(values[3]);
 
                         // Type d'entité
@@ -91,7 +84,7 @@ public class LevelParser {
                         }
                     }
                 }
-                ++count;
+                ++lineNumber;
             }
         } catch (Exception e) {
             throw new RuntimeException(e.toString());
@@ -104,7 +97,7 @@ public class LevelParser {
      * Récupère l'id du niveau depuis le nom du fichier
      *
      * @param levelPath : chemin du fichier de niveau
-     * @return id du niveau
+     * @return l'id du niveau
      * @throws RuntimeException si le nom du fichier n'est pas dans le format attentu
      */
     private static int getIdFromFilename(URL levelPath) throws RuntimeException {
